@@ -3,43 +3,90 @@
     <head>
         <meta charset=utf-8 />
         <base href="<?= base_url() ?>" />
-        <title>IndexedDB TODO List</title>
+        <title>OffCalendar</title>
         <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap-theme.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap-responsive.css">
         <link rel="stylesheet" type="text/css" media="screen" href="static/style.css" />
-        <script type="text/javascript" src="static/js/jquery.js"></script>
-        <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
-        <script type="text/javascript" src="static/js/todo.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="static/calendar.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     </head>
+
     <body>
-        <div style="width:300px; margin: 15px auto;">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <span class="logo" style="font-size: 35px;">OffCalendar</span>
+                    </a>
+                </div>
 
-            <h3 class="text-center">IndexedDB Todo List</h3>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Your Profile</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-            <p id="buttons">
-                <a href="<?= current_url() ?>#" data-ajaxurl="<?= base_url() ?>todos/synchronize" id="synchronize" class="btn btn-primary btn-block">Synchronize</a>
-            </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li class="active"><a href="#">Calendar</a></li>
+                        <li><a href="#">Notifications <span class="badge">3</span></a></li>
+                        <li><a href="#">Upcoming Events</a></li>
+                        <li><a href="#">Past Events</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
 
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Todo</th>
-                        <th style="width:100px;">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="todoItems"></tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <form action="#" method="POST" id="addtodo">
-                                <input type="text" id="todo" name="todo" placeholder="What do you need to do?" class="form-control" style="margin-bottom:8px;">
-                                <input type="submit" value="Add Todo Item" class="btn btn-default btn-block">
-                            </form>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    Current state: <span class="label label-danger">OFFLINE</span>
+
+                    <div class="container">
+                        <div class="page-header">
+                            <div class="pull-right form-inline">
+                                <div class="btn-group">
+                                    <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
+                                    <button class="btn" data-calendar-nav="today">Today</button>
+                                    <button class="btn btn-primary" data-calendar-nav="next">Next >></button>
+                                </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-warning" data-calendar-view="year">Year</button>
+                                    <button class="btn btn-warning active" data-calendar-view="month">Month</button>
+                                    <button class="btn btn-warning" data-calendar-view="week">Week</button>
+                                    <button class="btn btn-warning" data-calendar-view="day">Day</button>
+                                </div>
+                            </div>
+
+                            <h3></h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="span9">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
+            <script type="text/javascript" src="static/js/components/underscore/underscore-min.js"></script>
+            <script type="text/javascript" src="static/js/components/bootstrap2/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="static/js/components/jstimezonedetect/jstz.min.js"></script>
+
+            <script type="text/javascript" src="static/js/calendar.js"></script>
+            <script type="text/javascript" src="static/js/app.js"></script>
+
+            <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
+            <script type="text/javascript" src="static/js/OffCalendar.js"></script>
 
         </div>
     </body>
