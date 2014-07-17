@@ -1,0 +1,30 @@
+\select@language {polish}
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{7}
+\contentsline {section}{\numberline {1.1}Cel pracy}{7}
+\contentsline {section}{\numberline {1.2}Dziedzina problemu}{8}
+\contentsline {chapter}{\numberline {2}Analiza techniczna i analiza wymaga\IeC {\'n}}{9}
+\contentsline {section}{\numberline {2.1}Lokalne przechowywanie danych}{9}
+\contentsline {section}{\numberline {2.2}Mechanizmy lokalnego przechowywania danych}{10}
+\contentsline {subsection}{\numberline {2.2.1}HTML5 WebSQL Database}{10}
+\contentsline {subsection}{\numberline {2.2.2}HTML5 Web Storage}{11}
+\contentsline {subsection}{\numberline {2.2.3}HTML5 IndexedDB}{12}
+\contentsline {subsection}{\numberline {2.2.4}HTML5 Filesystem API}{13}
+\contentsline {section}{\numberline {2.3}Aplikacje webowe trybu offline}{14}
+\contentsline {subsection}{\numberline {2.3.1}Pami\IeC {\k e}\IeC {\'c} cache}{15}
+\contentsline {subsection}{\numberline {2.3.2}Detekcja po\IeC {\l }\IeC {\k a}czenia sieciowego}{16}
+\contentsline {section}{\numberline {2.4}Replikacja i synchronizacja danych}{16}
+\contentsline {subsection}{\numberline {2.4.1}Podstawowe poj\IeC {\k e}cia}{17}
+\contentsline {subsection}{\numberline {2.4.2}Klasyfikacja technik replikacji}{18}
+\contentsline {subsection}{\numberline {2.4.3}Replikacja danych w aplikacji www wspieraj\IeC {\k a}cej tryb offline}{19}
+\contentsline {section}{\numberline {2.5}Analiza wymaga\IeC {\'n}}{20}
+\contentsline {subsection}{\numberline {2.5.1}Wymagania funkcjonalne}{20}
+\contentsline {subsection}{\numberline {2.5.2}Wymagania niefunkcjonalne}{21}
+\contentsline {section}{\numberline {2.6}Wykorzystane technologie i narz\IeC {\k e}dzia}{21}
+\contentsline {subsection}{\numberline {2.6.1}Netbeans IDE}{22}
+\contentsline {subsection}{\numberline {2.6.2}Adobe Photoshop CS3}{22}
+\contentsline {subsection}{\numberline {2.6.3}HTML5}{23}
+\contentsline {subsection}{\numberline {2.6.4}Kaskadowe arkusze styl\IeC {\'o}w}{23}
+\contentsline {subsection}{\numberline {2.6.5}JavaScript - skryptowy j\IeC {\k e}zyk programowania}{23}
+\contentsline {subsection}{\numberline {2.6.6}Apache 2.4.9}{24}
+\contentsline {subsection}{\numberline {2.6.7}PHP 5.5}{24}
+\contentsline {subsection}{\numberline {2.6.8}MySQL 5.6.17}{25}

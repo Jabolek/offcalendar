@@ -1,0 +1,46 @@
+\chapter{Wstęp}
+\label{cha:wstep}
+
+Pozycja sieci Internet jako podstawowego i powszechnego medium komunikacyjnego jest niezachwiana od momentu jej powstania. Obecnie niemal wszystkie aplikacje dokonują synchronizacji za pomocą protokołów internetowych bez względu na platformę, na którą są przeznaczone. Dynamicznie rozwijające się standardy związane z protokołem HTTP (Hypertext Transfer Protocol) czyniące przeglądanie zasobów globalnej sieci łatwym i intuicyjnym za pośrednictwem każdego rodzaju urządzenia, potężne rozwiązania chmurowe oferujące platformy (PaaS), infrastruktury (IaaS) lub oprogramowanie (SaaS) jako usługi, czy szybka i przenośna bankowość elektroniczna to wybrane powody niesłabnącego zainteresowania rozwiązaniami internetowymi.
+
+Tendencje rozwoju współczesnego oprogramowania warunkują konieczność znalezienia rozwiązania w sytuacjach braku dostępu do sieci Internet. Obejmuje ono metody przechowywania danych lokalnie z użyciem przeglądarki internetowej, sposoby ich replikacji i synchronizacji oraz detekcję połączenia.
+
+Niniejsza praca dokonuje przeglądu wiodących metod lokalnego gromadzenia i przetwarzania danych użytkownika oraz obejmuje stworzenie aplikacji umożliwiającej pracę w trybach online oraz offline wraz z pełną synchronizacją danych pomiędzy klientem a serwerem wraz z bazą danych.
+
+Postaramy się ustalić które z nowoczesnych technologii najlepiej radzą sobie z zachowaniem integralności w razie braku dostępu do sieci Internet.
+
+Struktura niniejszej pracy jest następująca. Rozdział 1 przedstawia koncepcję i cele projektu. W rozdziale 2 dokonano analizy wymagań składowych projektu i przedstawiono wykorzystane technologie oraz paradygmaty. Rozdział 3 przedstawia założenia projektowe poszczególnych komponentów wraz z objaśnieniem wykorzystanych algorytmów. Rozdział 4 poświęcony jest przedstawieniu szczegółów implementacji. W rozdziale 5 zamieszczono krótką instrukcję instalacji i obsługi aplikacji. Rozdział 6 stanowi podsumowanie osiągniętych rezultatów.
+
+%---------------------------------------------------------------------------
+
+\section{Cel pracy}
+\label{sec:celPracy}
+
+
+Celem niniejszej pracy jest przegląd metod lokalnego przechowywania danych z użyciem pamięci podręcznej przeglądarki oraz projekt i implementacja aplikacji wspierającej tryby offline oraz online w oparciu o technologię HTML5.
+
+\section{Dziedzina problemu}
+\label{sec:dziedzinaProblemu}
+
+Aplikacja OffCalendar stanowi przykład praktycznego wykorzystania trybu offline i metod przechowywania lokalnego oraz synchronizacji. Wiodącą technologią zastosowaną w projekcie jest HTML5 oraz JavaScript po stronie aplikacji klienckiej oraz PHP i MySQL po stronie serwerowej.
+
+Głównym celem projektu jest dostarczenie praktycznego i intuicyjnego rozwiązania będącego owocem gruntownej analizy dostępnych technologii lokalnego przechowywania danych użytkownika.
+
+Dane gromadzone lokalnie przez użytkownika pozbawionego dostępu do sieci Internet będą automatycznie synchronizowane z wersją bazy danych na serwerze w momencie poprawnej detekcji i ustalenia połączenia ponownie. Całość systemu opiera się na założeniach architektury REST (\emph{Representational State Transfer}) wywodzonej ze specyfikacji protokołu HTTP.
+
+Działanie aplikacji klienckiej polega na organizowaniu danych w formie wydarzeń w obrębie przestrzeni roboczej przedstawionej w postaci dni miesiąca z podziałem godzinowym. Użytkownik będzie miał możliwość dodawania kolejnych pozycji wraz z tytułem, opisem, czasem rozpoczęcia oraz czasem zakończenia. Zbliżające się terminy wydarzeń będą sygnalizowane za pomocą systemu powiadomień (notyfikacji), który jest w pełni personalizowalny (częstość otrzymywania powiadomień, ich treść, wyprzedzenie czasowe etc.).
+
+Zadaniem części serwerowej systemu będzie walidacja oraz przechowywanie/pobieranie danych z bazy danych MySQL.
+
+Aplikacja OffCalendar z założenia stanowi intuicyjny i niezawodny system umożliwiający organizowanie wydarzeń na różnych urządzeniach oraz bez względu na stan połączenia internetowego. Zapewniają to technologie przechowywania danych lokalnie, które zostały wyłonione na drodze wnikliwej analizy oraz algorytmy synchronizacji, detekcji oraz replikacji opracowane na potrzeby niniejszej pracy.
+
+
+
+
+
+
+
+
+
+
+
