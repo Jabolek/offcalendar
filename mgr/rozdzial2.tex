@@ -235,7 +235,7 @@ Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz n
 
 W przypadku braku dostępu do nagłówków HTTP możliwa jest edycja ustawień pamięci cache za pomocą znaczników \textbf{meta} zawartych w sekcji head definicji dokumentu HTML.
 
-Proces zapisywania w pamięci podręcznej jest w dużej mierze zautomatyzowany i związany z wyświetleniem witryny. Należy rozgraniczyć na czym polegać, w kontekście projektu OffCalendar, będzie przechowywanie lokalne.
+Proces zapisywania w pamięci podręcznej jest w dużej mierze zautomatyzowany i związany z wyświetleniem witryny. Należy rozgraniczyć na czym polegać, w kontekście projektu, będzie przechowywanie lokalne.
 
 Użytkownik manualnie wywoła proces zapisu danych wykonując akcje na interfejsie aplikacji jak na przykład dodanie/edycja/usunięcie wydarzenia, edycja ustawień etc. Bez ingerencji dane nie trafią do pamięci podręcznej w odróżnieniu od cache-owania wykonywanego automatycznie podczas wyświetlenia dokumentu HTML.
 
@@ -341,13 +341,13 @@ Zastosowanie replikacji posiadającej powyższe cechy może doprowadzić do sytu
 \section{Analiza wymagań}
 \label{sec:analizaWymagan}
 
-OffCalendar jest systemem do zarządzania wydarzeniami użytkownika. Zgodnie z nazwą zorganizowany jest w formie interaktywnego kalendarza. Główną zaletą aplikacji jest pełne wsparcie zarówno trybu online jak i offline co uniezależnia ją od stałego dostępu do sieci Internet. Poniższa analiza sugeruje jedynie możliwe zastosowanie systemu zgodnie z jego
+Tworzony system służy do zarządzania wydarzeniami użytkownika. Zorganizowany jest on w formie interaktywnego kalendarza. Główną zaletą aplikacji jest pełne wsparcie zarówno trybu online jak i offline co uniezależnia ją od stałego dostępu do sieci Internet. Poniższa analiza sugeruje jedynie możliwe zastosowanie systemu zgodnie z jego
 pierwotnymi założeniami, aczkolwiek nie wyklucza innej aktywności. Szczegółowy opis możliwości systemu zawarty jest w treści poniższych podrozdziałów.
 
 \subsection{Wymagania funkcjonalne}
 \label{sec:wymFunkcj}
 
-Zadaniem aplikacji OffCalendar jest dodawanie, edycja oraz usuwanie wydarzeń. Przez wydarzenie rozumiemy notatkę składającą się z nazwy, czasu trwania oraz treści. Dzięki zaimplementowanemu systemowi autentykacji każdy użytkownik posiada konto, co jednoznacznie identyfikuje wprowadzone przez niego dane. Ponadto użytkownik ma do dyspozycji system powiadomień o nadchodzących wydarzeniach. Jest on w pełni konfigurowalny.
+Zadaniem aplikacji jest dodawanie, edycja oraz usuwanie wydarzeń. Przez wydarzenie rozumiemy notatkę składającą się z nazwy, czasu trwania oraz treści. Dzięki zaimplementowanemu systemowi autentykacji każdy użytkownik posiada konto, co jednoznacznie identyfikuje wprowadzone przez niego dane. Ponadto użytkownik ma do dyspozycji system powiadomień o nadchodzących wydarzeniach. Jest on w pełni konfigurowalny.
 
 Podane akcje mogą być wykonywane zarówno w trybie offline jak i przy aktywnym połączeniu z siecią Internet. Dane gromadzone lokalnie zostają zsynchronizowane z tymi obecnymi w bazie danych serwera aplikacji w momencie wykrycia połączenia. Sam proces synchronizacji może zakończyć się niepowodzeniem, co zostanie obsłużone automatycznie przez zaimplementowane algorytmy lub manualnie, po uprzednim poinformowaniu użytkownika o problemie.
 
@@ -360,15 +360,19 @@ Z uwagi na zastosowanie optymistycznej replikacji bazy danych należy zwrócić 
 
 Projektowany system składa się z dwóch zasadniczych części: aplikacji klienckiej stworzonej w technologii HTML5 oraz części serwerowej złożonej z serwera www oraz bazy danych. Poszczególne komponenty stawiają określone wymagania z uwagi na specyfikę projektu.
 
-Część serwerowa została zaimplementowana w języku PHP (\emph{PHP Hypertext Preprocessor}) w wersji 5.5 z wykorzystaniem frameworka MVC (\emph{Model View Controller}) CodeIgniter. Relacyjna baza danych wykorzystana w projekcie to MySQL.
-
-Aplikacja kliencka z założenia dedykowana jest przeglądarkom internetowym. Interfejs programu zbudowany został w oparciu o język znaczników HTML5. Za warstwę wizualną odpowiada język kaskadowych arkuszy stylów CSS. Asynchroniczna obsługa systemu możliwa jest dzięki zastosowaniu języka skryptowego JavaScript. Wspomniane rozwiązania umożliwiają stworzenie przejrzystego i responsywnego interfejsu przystosowanego zarówno do przeglądarek desktopowych jak i mobilnych.
+Aplikacja kliencka z założenia dedykowana jest przeglądarkom internetowym. Interfejs programu zbudowany został w oparciu o język znaczników HTML5. Za warstwę wizualną odpowiada język kaskadowych arkuszy stylów CSS. Asynchroniczna obsługa systemu możliwa jest dzięki zastosowaniu języka skryptowego JavaScript. Wspomniane rozwiązania umożliwiają stworzenie przejrzystego i responsywnego interfejsu przystosowanego zarówno do przeglądarek desktopowych jak i mobilnych, co stanowi obecnie standard i gwarant wygodnego korzystania z systemu.
 
 Wymogiem dla technologii lokalnego przechowywania danych wprowadzanych przez użytkownika jest możliwość przechowywania stosunkowo złożonych rekordów bez konieczności ich serializacji, szerokie wsparcie wśród przeglądarek oraz szybkie wyszukiwanie. IndexedDB łączy wszystkie wymienione wymagania i stanowi najlepszy wybór wśród obecnie stosowanych technologii. Dodatkowym atutem jest bogata i aktualizowana dokumentacja.
 
-Komunikacja pomiędzy częściami systemu opiera się na architekturze REST. Wybór podyktowany został niewielkim narzutem obliczeniowym dzięki zastosowaniu lekkiego formatu JSON (\emph{JavaScript Object Notation}) oraz braku konieczności opakowywania komunikatów (jak w przypadku protokołu SOAP). Wystarczy wyspecyfikować adres zasobu oraz metodę dostępu (GET, POST, PUT) a także wersję protkołu HTTP.
+Aplikacja kliencka winna działać na przeglądarkach internetowych oferujących wsparcie dla mechanizmu IndexedDB. Ich lista wraz z minimalnymi wersjami oferującymi wsparcie znajduje się w \textbf{Sekcji 2.2.3}.
 
-Wyselekcjonowany zestaw technologii i języków programowania ma na celu zapewnienie bezpieczeństwa, zwiększenie szybkości aplikacji i minimalizację zasobów potrzebnych do komunikacji między klientem a serwerem. Zastosowanie frameworków tj. CodeIgniter oraz jQuery wpływa z kolei na skrócenie czasu implementacji do niezbędnego minimum.
+Serwer aplikacji wraz z bazą danych gwarantują nieprzerwaną obsługę żądań użytkowników. Dane synchronizowane pomiędzy klientem a serwerem powinny zachować spójność i integralność. W przypadku braku połączenia internetowego komplet wprowadzonych przez użytkownika informacji powinien być dostępny w pamięci podręcznej przeglądarki.
+
+Platforma zapewnia bezpieczną autentykację dla użytkowników posiadających konta.
+
+Komunikacja pomiędzy częściami systemu powinna minimalizować narzut danych celem ograniczenia kosztów transmisji, co motywuje zastosowanie architektury REST wykorzystującej lekki format JSON (JavaScript Object Notation).
+
+Detekcja połączenia sieciowego winna następować automatycznie wraz z przełączeniem się systemu na tryb offline/online.
 
 \section{Wykorzystane technologie i narzędzia}
 \label{sec:wykoTechnINarz}

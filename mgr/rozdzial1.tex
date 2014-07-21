@@ -17,30 +17,17 @@ Struktura niniejszej pracy jest następująca. Rozdział 1 przedstawia koncepcj�
 \label{sec:celPracy}
 
 
-Celem niniejszej pracy jest przegląd metod lokalnego przechowywania danych z użyciem pamięci podręcznej przeglądarki oraz projekt i implementacja aplikacji wspierającej tryby offline oraz online w oparciu o technologię HTML5.
+Celem niniejszej pracy jest przegląd metod lokalnego przechowywania danych z użyciem przeglądarki internetowej oraz projekt i implementacja aplikacji wspierającej tryby offline oraz online w oparciu o technologię HTML5.
 
 \section{Dziedzina problemu}
 \label{sec:dziedzinaProblemu}
 
-Aplikacja OffCalendar stanowi przykład praktycznego wykorzystania trybu offline i metod przechowywania lokalnego oraz synchronizacji. Wiodącą technologią zastosowaną w projekcie jest HTML5 oraz JavaScript po stronie aplikacji klienckiej oraz PHP i MySQL po stronie serwerowej.
+Przeważająca część tworzonych obecnie aplikacji internetowych nie obsługuje sytuacji braku dostępu do sieci Internet. 
 
-Głównym celem projektu jest dostarczenie praktycznego i intuicyjnego rozwiązania będącego owocem gruntownej analizy dostępnych technologii lokalnego przechowywania danych użytkownika.
+Dynamicznie rozwijające się przeglądarki oferują różne wsparcie dla technologii lokalnego przechowywania danych. Wspomniane mechanizmy stoją na zróżnicowanym poziomie standaryzacji, nierzadko procesy ich rozwijania zostają zawieszone. Różnią się one także stopniem złożoności obsługiwanych struktur danych.
 
-Dane gromadzone lokalnie przez użytkownika pozbawionego dostępu do sieci Internet będą automatycznie synchronizowane z wersją bazy danych na serwerze w momencie poprawnej detekcji i ustalenia połączenia ponownie. Całość systemu opiera się na założeniach architektury REST (\emph{Representational State Transfer}) wywodzonej ze specyfikacji protokołu HTTP.
+Poważnym ograniczeniem są również limity przesyłanych danych na urządzeniach mobilnych a także koszty transmisji.
 
-Działanie aplikacji klienckiej polega na organizowaniu danych w formie wydarzeń w obrębie przestrzeni roboczej przedstawionej w postaci dni miesiąca z podziałem godzinowym. Użytkownik będzie miał możliwość dodawania kolejnych pozycji wraz z tytułem, opisem, czasem rozpoczęcia oraz czasem zakończenia. Zbliżające się terminy wydarzeń będą sygnalizowane za pomocą systemu powiadomień (notyfikacji), który jest w pełni personalizowalny (częstość otrzymywania powiadomień, ich treść, wyprzedzenie czasowe etc.).
+Utrudnienia związane z utrzymaniem stałego połączenia internetowego niosą ze sobą problemy z zachowaniem spójności i integralności synchronizowanych danych.
 
-Zadaniem części serwerowej systemu będzie walidacja oraz przechowywanie/pobieranie danych z bazy danych MySQL.
-
-Aplikacja OffCalendar z założenia stanowi intuicyjny i niezawodny system umożliwiający organizowanie wydarzeń na różnych urządzeniach oraz bez względu na stan połączenia internetowego. Zapewniają to technologie przechowywania danych lokalnie, które zostały wyłonione na drodze wnikliwej analizy oraz algorytmy synchronizacji, detekcji oraz replikacji opracowane na potrzeby niniejszej pracy.
-
-
-
-
-
-
-
-
-
-
-
+Istotną kwestią jest również dobór metod replikacji bazy danych celem minimalizacji liczby powstających konfliktów i ich poprawna obsługa.
