@@ -30,6 +30,7 @@ class CI_DB_active_record extends CI_DB_driver {
 
 	var $ar_select				= array();
 	var $ar_distinct			= FALSE;
+        var $ar_ignore                          = FALSE;
 	var $ar_from				= array();
 	var $ar_join				= array();
 	var $ar_where				= array();
@@ -98,6 +99,11 @@ class CI_DB_active_record extends CI_DB_driver {
 		}
 		return $this;
 	}
+        
+        function ignore($val = TRUE) {
+            $this->ar_ignore = (is_bool($val)) ? $val : TRUE;
+            return $this;
+        }
 
 	// --------------------------------------------------------------------
 
@@ -255,7 +261,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function from($from)
 	{
-		foreach ((array) $from as $val)
+		foreach ((array)$from as $val)
 		{
 			if (strpos($val, ',') !== FALSE)
 			{
@@ -660,12 +666,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$prefix = (count($this->ar_like) == 0) ? '' : $type;
 
 			$v = $this->escape_like_str($v);
-			
-			if ($side == 'none')
-			{
-				$like_statement = $prefix." $k $not LIKE '{$v}'";
-			}
-			elseif ($side == 'before')
+
+			if ($side == 'before')
 			{
 				$like_statement = $prefix." $k $not LIKE '%{$v}'";
 			}
@@ -1404,7 +1406,7 @@ class CI_DB_active_record extends CI_DB_driver {
 				}
 				else
 				{
-					$not[] = $k2.'-'.$v2;
+					$not[] = $k.'-'.$v;
 				}
 
 				if ($escape === FALSE)
@@ -1647,7 +1649,7 @@ class CI_DB_active_record extends CI_DB_driver {
 		if (strpos($table, " ") !== FALSE)
 		{
 			// if the alias is written with the AS keyword, remove it
-			$table = preg_replace('/\s+AS\s+/i', ' ', $table);
+			$table = preg_replace('/ AS /i', ' ', $table);
 
 			// Grab the alias
 			$table = trim(strrchr($table, " "));

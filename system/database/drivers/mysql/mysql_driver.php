@@ -546,11 +546,12 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @param	array	the insert keys
 	 * @param	array	the insert values
 	 * @return	string
-	 */
-	function _insert($table, $keys, $values)
-	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
-	}
+	 */        
+        function _insert($table, $keys, $values)
+        {
+            $sql = (!$this->ar_ignore) ? 'INSERT ' : 'INSERT IGNORE ';
+            return "$sql INTO " . $table . " (" . implode(', ', $keys) . ") VALUES (" . implode(', ', $values) . ")";
+        }
 
 	// --------------------------------------------------------------------
 
@@ -586,7 +587,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _insert_batch($table, $keys, $values)
 	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
+                $sql = (!$this->ar_ignore) ? 'INSERT ' : 'INSERT IGNORE ';
+		return "$sql INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
 	}
 
 	// --------------------------------------------------------------------
