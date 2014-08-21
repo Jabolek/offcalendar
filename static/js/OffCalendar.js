@@ -9,36 +9,36 @@ OffCalendar.user = {
 
 /**
  * Updates event stored in the db. IMPORTANT: make sure toUpdate properties are of correct types
- * @param eventRemoteId int 
- * @param toUpdate object, event properties to update
- * @returns undefined
+ * @param {int} eventRemoteId  
+ * @param {object} toUpdate event properties to update
+ * @returns {undefined}
  */
-OffCalendar.updateEvent = function(eventRemoteId, toUpdate){
-    
+OffCalendar.updateEvent = function(eventRemoteId, toUpdate) {
+
     eventRemoteId = parseInt(eventRemoteId, 10);
-    
+
     toUpdate.remote_timestamp = currentTimestamp();
-    
-    IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event){
-        
+
+    IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+
         // TODO KO: insert correct logic
-        
+
     });
-    
+
 };
 
 /**
- * @param userId int
- * @param startTimestamp int
- * @param endTimestamp int
- * @param description string
- * @param sendNotification int 1 = yes, 0 = no
- * @returns undefined
+ * @param {int} userId
+ * @param {int} startTimestamp
+ * @param {int} endTimestamp
+ * @param {string} description
+ * @param {int} sendNotification 1 = yes, 0 = no
+ * @returns {undefined}
  */
 OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, description, sendNotification) {
 
     var currTimestamp = currentTimestamp();
-    
+
     // TODO KO: remove if unneccesary
     userId = parseInt(userId, 10);
     startTimestamp = parseInt(startTimestamp, 10);
@@ -56,13 +56,14 @@ OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, descriptio
         remote_timestamp: currTimestamp
     };
 
-    IndexedDB.addEvent(Event, function(remoteEventId){
-        
+    IndexedDB.addEvent(Event, function(remoteEventId) {
+
         // TODO KO: insert correct logic
-        
+
     });
-    
+
 };
+
 
 
 // TODO KO: Where to put helper functions ?
@@ -70,5 +71,5 @@ OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, descriptio
 function currentTimestamp() {
 
     return Math.round(new Date().getTime() / 1000);
-    
+
 }

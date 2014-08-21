@@ -1,5 +1,5 @@
 var DB_NAME = 'offcalendar';
-var DB_VERSION = 2;
+var DB_VERSION = 3;
 var DB_STORE_NAME = 'events';
 var DB_TRANS_MODE_READ_WRITE = 'readwrite';
 var DB_TRANS_MODE_READ_ONLY = 'readonly';
@@ -8,8 +8,8 @@ var IndexedDB = {};
 
 /**
  * Opens connection to the db.
- * @param callback function to call after execution
- * @returns undefined
+ * @param {function} callback function to call after execution
+ * @returns {bool} true on success, false otherwise
  */
 IndexedDB.open = function(callback) {
 
@@ -35,21 +35,26 @@ IndexedDB.open = function(callback) {
     };
 
     request.onsuccess = function(e) {
+        
         IndexedDB.db = e.target.result;
 
         console.log('IndexedDB opened successfully.');
 
-        callback();
+        callback(true);
     };
 
-    request.onerror = IndexedDB.onerror;
+    request.onerror = function(event){
+        
+        callback(false);
+        
+    };
 };
 
 /**
  * Adds Event to database.
- * @param Event eventObject
- * @param callback function to call after execution
- * @returns int callback with remote_id value or null on failure
+ * @param {Event} eventObject
+ * @param {function} callback to call after execution
+ * @returns {mixed} remote_id of created event on success, null otherwise
  */
 IndexedDB.addEvent = function(Event, callback) {
 
@@ -82,7 +87,13 @@ IndexedDB.addEvent = function(Event, callback) {
     };
 };
 
-
+/**
+ * Updates event in database.
+ * @param {int} eventRemoteId
+ * @param {object} eventPropertiesToUpdate
+ * @param {function} callback
+ * @returns {mixed} Event on success, null otherwise
+ */
 IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callback) {
 
     console.log('Updating event #' + eventRemoteId + ' properties:');
@@ -124,6 +135,12 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
     };
 };
 
+/**
+ * Get all user events.
+ * @param {int} userId
+ * @param {function} callback
+ * @returns {mixed} array of Events on success, null otherwise
+ */
 IndexedDB.getUserEvents = function(userId, callback) {
 
     var resultSet = [];
@@ -131,8 +148,6 @@ IndexedDB.getUserEvents = function(userId, callback) {
     var transaction = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_ONLY);
 
     var store = transaction.objectStore(DB_STORE_NAME);
-
-//    var keyRange = IDBKeyRange.lowerBound(0);
 
     var keyRange = IDBKeyRange.only(userId);
 
@@ -162,6 +177,8 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
     };
 };
+
+// OLD STUFF TO UPDATE BELOW
 
 IndexedDB.sync = function() {
 

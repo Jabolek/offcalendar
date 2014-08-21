@@ -26,7 +26,8 @@ function base_url() {
                 var sendNotification = 0;
 
                 OffCalendar.addEvent(userId, start, end, description, sendNotification);
-                
+
+
                 // GET EVENTS TEST
 
                 IndexedDB.getUserEvents(userId, function(events) {
@@ -37,7 +38,27 @@ function base_url() {
                         console.log("Returned events:");
                         console.log(events);
                     }
-                    
+
+                });
+
+
+                // UPDATE EVENT TEST
+
+                var remoteEventId = 1;
+
+                var toUpdate = {
+                    description: "This is not so cool event!"
+                };
+
+                IndexedDB.updateEvent(remoteEventId, toUpdate, function(Event) {
+
+                    if (Event === null) {
+                        console.error("Error updating event");
+                    } else {
+                        console.log("Updated event:");
+                        console.log(Event);
+                    }
+
                 });
 
             });
