@@ -3,7 +3,6 @@
 class Users {
 
     /**
-     *
      * @var CI_Controller
      */
     private $ci;

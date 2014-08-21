@@ -43,11 +43,11 @@ class Events_api extends Api_Controller {
 
             $currTimestamp = time();
 
-            $dbEvents = $this->events->getEventsForSynchronization($userId, $lastSyncTimestamp);
+            $dbEvents = $this->events->getDbEventsForSynchronization($userId, $lastSyncTimestamp);
 
-            $userEvents = $this->events->getEventsFromPostData($this->input->post('events'));
+            $remoteEvents = $this->events->getEventsFromPostData($this->input->post('events'));
 
-            $userEventsToUpdate = $this->events->synchronize($dbEvents, $userEvents, $currTimestamp);
+            $userEventsToUpdate = $this->events->synchronize($remoteEvents, $dbEvents, $currTimestamp);
 
             $response = array(
                 'sync_timestamp' => $currTimestamp,

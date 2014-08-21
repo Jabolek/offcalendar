@@ -3,7 +3,6 @@
 class Events {
 
     /**
-     *
      * @var CI_Controller
      */
     private $ci;
@@ -21,80 +20,117 @@ class Events {
         'update' => array(),
     );
 
-    private function getEventsFromPostData($data, $userId) {
-        
+    /**
+     * @param int $userId
+     * @param int $lastSyncTimestamp
+     * @return Event[]
+     */
+    public function getDbEventsForSynchronization($userId, $lastSyncTimestamp) {
+
+        $eventsArr = $this->ci->events_model->getEventsByUserId($userId, array('last_sync_timestamp' > $lastSyncTimestamp));
+
         $events = array();
-        
-        $data = json_decode($data, true);
-        
-        if(!$data){
-            return $events;
-        }
-        
-        
-        
-        foreach($data as $d){
-            
-            
-            
+
+        foreach ($eventsArr as $e) {
+
+            $event = Event::fromRowArray($e);
+
+            $events[$event->getId()] = $event;
         }
 
-        
-
-        if (!is_array($data)) {
-            $err = true;
-        } else {
-            foreach ($data as &$a) {
-                $a['timeStamp'] = (string) $a['timeStamp'];
-            }
-        }
-
-        if ($err) {
-            show_error('Invalid request data', 500);
-            die;
-        }
-
-        return $data;
+        return $events;
     }
 
-    private function getTodosSynchronizationData(&$userTodos, &$dbTodos) {
+    /**
+     * @param [] $postEvents
+     * @param User $user
+     * @return Event[]
+     */
+    public function getEventsFromPostData($postEvents, User $user) {
 
-        $data = $this->syncData;
+        $events = array();
 
-        $userTodos = $this->sortById($userTodos);
+        $postEvents = json_decode($postEvents, true);
 
-        $dbTodos = $this->sortById($dbTodos);
+        if (!$postEvents) {
+            return $events;
+        }
 
-        foreach ($userTodos as &$t) {
+        $userId = $user->getId();
 
-            $id = $t['timeStamp'];
+        $this->ci->form_validation->set_rules($this->validationRules);
 
-            if (!isset($dbTodos[$id])) {
+        foreach ($postEvents as $e) {
 
-                $this->todos_model->addTodo($t);
-            } else {
+            $e['user_id'] = $userId;
 
-                if ($t['last_update'] > $dbTodos[$id]['last_update']) {
+            $_POST = $e;
 
-                    $this->todos_model->updateTodo($t);
-                } else if ($t['last_update'] < $dbTodos[$id]['last_update']) {
-                    
-                    $data['update'][] = $dbTodos[$id];
+            if (!$this->ci->form_validation->run()) {
+                continue;
+            }
 
+            $eventRow = array();
+
+            foreach (array_keys($this->validationRules) as $fieldName) {
+                $eventRow[$fieldName] = $this->ci->form_validation->set_value($fieldName);
+            }
+
+            $events[] = Event::fromRowArray($eventRow);
+        }
+
+        return $events;
+    }
+
+    /**
+     * @param Event[] $remoteEvents
+     * @param Event[] $dbEvents
+     * @param int $currTimestamp
+     * @return Event[]
+     */
+    public function synchronize($remoteEvents, $dbEvents, $currTimestamp, &$toAdd, &$toUpdate) {
+
+        foreach ($remoteEvents as $remoteEvent) {
+
+            if (!$remoteEvent->hasId()) {
+
+                $remoteEvent->setLastUpdateTimestamp($currTimestamp);
+
+                $remoteEvent->persist();
+
+                $toUpdate[] = $remoteEvent;
+
+                continue;
+            }
+
+            $remoteEventId = $remoteEvent->getId();
+
+            if (isset($dbEvents[$remoteEventId])) {
+
+                $dbEvent = $dbEvents[$remoteEventId];
+
+                if ($dbEvent->getRemoteTimestamp() > $remoteEvent->getRemoteTimestamp()) {
+
+                    $dbEvent->setRemoteId($remoteEvent->getRemoteId());
+
+                    $toUpdate[] = $dbEvent;
+                } else {
+
+                    $remoteEvent->setLastUpdateTimestamp($currTimestamp);
+
+                    $remoteEvent->persist();
+
+                    $toUpdate[] = $remoteEvent;
                 }
+
+                unset($dbEvents[$remoteEventId]);
             }
         }
 
-        foreach ($dbTodos as &$t) {
+        foreach ($dbEvents as $dbEvent) {
 
-            $id = $t['timeStamp'];
-
-            if (!isset($userTodos[$id])) {
-                $data['add'][] = $t;
-            }
+            $toAdd[] = $dbEvent;
         }
-
-        return $data;
     }
 
     private function sortById(&$todos) {
@@ -110,7 +146,7 @@ class Events {
 
         return $data;
     }
-    
+
     public function getFieldsValidationRules($fields) {
 
         $config = array();
@@ -123,23 +159,60 @@ class Events {
     }
 
     private $validationRules = array(
-        'name' => array(
-            'field' => 'name',
-            'label' => 'Name',
-            'rules' => 'trim|required|xss_clean|min_length[3]|max_length[60]',
-            'exception_code' => 1001,
+        'user_id' => array(
+            'field' => 'user_id',
+            'label' => 'User ID',
+            'rules' => 'trim|required|is_natural',
         ),
-        'email' => array(
-            'field' => 'email',
-            'label' => 'Email',
-            'rules' => 'trim|xss_clean|required|valid_email',
-            'exception_code' => 1002,
+        'start_timestamp' => array(
+            'field' => 'start_timestamp',
+            'label' => 'Start Timestamp',
+            'rules' => 'trim|required|is_natural',
         ),
-        'password' => array(
-            'field' => 'password',
-            'label' => 'Password',
-            'rules' => 'trim|xss_clean|required|min_length[8]|max_length[20]',
-            'exception_code' => 1003,
+        'end_timestamp' => array(
+            'field' => 'end_timestamp',
+            'label' => 'End Timestamp',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'duration_seconds' => array(
+            'field' => 'duration_seconds',
+            'label' => 'Duration Seconds',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'description' => array(
+            'field' => 'description',
+            'label' => 'Description',
+            'rules' => 'trim|required',
+        ),
+        'send_notification' => array(
+            'field' => 'send_notification',
+            'label' => 'Send Notification',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'voided' => array(
+            'field' => 'voided',
+            'label' => 'Voided',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'created_timestamp' => array(
+            'field' => 'created_timestamp',
+            'label' => 'Created Timestamp',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'remote_id' => array(
+            'field' => 'remote_id',
+            'label' => 'Remote ID',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'remote_timestamp' => array(
+            'field' => 'remote_timestamp',
+            'label' => 'Remote Timestamp',
+            'rules' => 'trim|required|is_natural',
+        ),
+        'last_update_timestamp' => array(
+            'field' => 'last_update_timestamp',
+            'label' => 'Last Update Timestamp',
+            'rules' => 'trim|required|is_natural',
         ),
     );
 
