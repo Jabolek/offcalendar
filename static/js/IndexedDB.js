@@ -52,7 +52,7 @@ IndexedDB.open = function(callback) {
 
 /**
  * Adds Event to database.
- * @param {Event} eventObject
+ * @param {Event} Event event to add
  * @param {function} callback to call after execution
  * @returns {mixed} remote_id of created event on success, null otherwise
  */
