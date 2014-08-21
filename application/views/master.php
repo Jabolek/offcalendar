@@ -57,36 +57,38 @@
                         <?php if (isset($view)) : ?><?php $this->load->view($view); ?><?php endif ?>
 
                     </div>
-                </div>
-
-                <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
-                <script type="text/javascript" src="static/js/components/underscore/underscore-min.js"></script>
-                <script type="text/javascript" src="static/js/components/bootstrap2/js/bootstrap.min.js"></script>
-                <script type="text/javascript" src="static/js/components/jstimezonedetect/jstz.min.js"></script>
-
-                <script type="text/javascript" src="static/js/calendar.js"></script>
-                <script type="text/javascript" src="static/js/app.js"></script>
-
-                <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
-                <script type="text/javascript" src="static/js/OffCalendar.js"></script>
-
-                <script src="static/js/offline/offline.js" type="text/javascript"></script>
-                <script src="static/js/offline/reconnect.js" type="text/javascript"></script>
-                <script src="static/js/offline/requests.js" type="text/javascript"></script>
-                <script src="static/js/offline/simulate.js" type="text/javascript"></script>
-                <script src="static/js/offline/ui.js" type="text/javascript"></script>
-
-                <script type="text/javascript">
-                    Offline.options = {
-                        checks: {
-                            image: {
-                                url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
-                            },
-                            active: 'image'
-                        },
-                        reconnect: false
-                    }
-                </script>
+                </div>                
             </div>
+        </div>
+
+        <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="static/js/components/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="static/js/components/bootstrap2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="static/js/components/jstimezonedetect/jstz.min.js"></script>
+
+        <script type="text/javascript" src="static/js/calendar.js"></script>
+        <script type="text/javascript" src="static/js/app.js"></script>
+
+        <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendar.js"></script>
+
+        <script src="static/js/offline/offline.js" type="text/javascript"></script>
+        <script src="static/js/offline/requests.js" type="text/javascript"></script>
+        <script src="static/js/offline/ui.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+
+            Offline.options = {
+                checks: {
+                    image: {
+                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
+                    },
+                    active: 'image'
+                },
+                reconnect: false
+            };
+
+        </script>
     </body>
+
 </html>
