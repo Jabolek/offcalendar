@@ -33,10 +33,13 @@ function base_url() {
                 IndexedDB.getUserEvents(userId, function(events) {
 
                     if (events === null) {
-                        console.error("Error getting events");
+                        
+                        // TODO KO: ERROR
+                        
                     } else {
-                        console.log("Returned events:");
-                        console.log(events);
+                        
+                        // TODO KO: SUCCESS
+                        
                     }
 
                 });
@@ -50,16 +53,7 @@ function base_url() {
                     description: "This is not so cool event!"
                 };
 
-                IndexedDB.updateEvent(remoteEventId, toUpdate, function(Event) {
-
-                    if (Event === null) {
-                        console.error("Error updating event");
-                    } else {
-                        console.log("Updated event:");
-                        console.log(Event);
-                    }
-
-                });
+                OffCalendar.updateEvent(remoteEventId, toUpdate);
 
             });
 

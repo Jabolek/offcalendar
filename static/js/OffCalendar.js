@@ -21,7 +21,15 @@ OffCalendar.updateEvent = function(eventRemoteId, toUpdate) {
 
     IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
 
-        // TODO KO: insert correct logic
+        if (Event === null) {
+            
+            // TODO KO: insert correct logic
+            
+        } else {
+            
+            // TODO KO: insert correct logic
+            
+        }
 
     });
 
@@ -58,7 +66,15 @@ OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, descriptio
 
     IndexedDB.addEvent(Event, function(remoteEventId) {
 
-        // TODO KO: insert correct logic
+        if (remoteEventId === null) {
+            
+            // TODO KO: insert correct logic
+            
+        } else {
+            
+            // TODO KO: insert correct logic
+            
+        }
 
     });
 

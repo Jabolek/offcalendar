@@ -121,14 +121,17 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
         request.onerror = function(e) {
 
-            console.error('Event update failed');
+            console.error('Event update failed.');
+            
             callback(null);
 
         };
 
         request.onsuccess = function(e) {
 
-            console.log('Event updated successfully.');
+            console.log('Event updated successfully:');
+            console.log(Event);
+            
             callback(Event);
 
         };
@@ -167,11 +170,16 @@ IndexedDB.getUserEvents = function(userId, callback) {
     
     transaction.oncomplete = function(event) {
         
+        console.log('User events returned:');
+        console.log(resultSet);
+        
         callback(resultSet);
         
     };
 
     cursorRequest.onerror = function(event) {
+
+        console.error('Error getting user events');
 
         callback(null);
 
