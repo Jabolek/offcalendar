@@ -49,11 +49,11 @@ class Users_api extends Api_Controller {
     function login() {
 
         try {
-            
+
             $email = (string) $this->input->post('email');
-            
+
             $password = (string) $this->input->post('password');
-            
+
             $user = $this->users->login($email, $password);
 
             return $this->jsonResponse($user->toApiResponse());

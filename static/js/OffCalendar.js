@@ -1,1 +1,2 @@
-var OffCalendar = {};
+var OffCalendar = {
+};
