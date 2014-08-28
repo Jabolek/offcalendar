@@ -1,3 +1,36 @@
+<div id="add-event-window" style="display: none;">
+
+    <span id="add-event-window-dismiss" class="window-dismiss">&times;</span>
+
+    <form id="add-event-form">
+        <h3>Add event</h3><br>
+
+        <fieldset>
+            <label>From:</label><input type="datetime-local" class="form-control" required="" autofocus="" name="start_time"><br>
+            <label>To:</label><input type="datetime-local" class="form-control" required="" autofocus="" name="end_time"><br>
+            <textarea class="form-control" rows="5" placeholder="Event description" name="description" required=""></textarea><br>
+            <input type="url" class="form-control" placeholder="External url" autofocus="" name="external_url"><br>
+
+            <select name="event-class" class="form-control" required=""><br>
+                <option class="event-inverse">regular</option>
+                <option class="event-important">important</option>
+                <option class="event-success">celebration</option>
+                <option class="event-warning">warning</option>
+                <option class="event-special">party</option>
+            </select>
+
+            <br>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="send_notifications">Send notifications?
+                </label>
+            </div>
+
+            <br><button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+        </fieldset>
+    </form>
+</div>
+
 <div id="cal-day-box">
     <div class="row-fluid cal-row-head">
         <div class="span1 col-xs-1 cal-cell"><%= cal.locale.time %></div>
@@ -48,7 +81,10 @@
                 <% for(l = 0; l < in_hour; l++){ %>
                 <div class="row-fluid cal-day-hour-part">
                     <div class="span1 col-xs-1"><b><%= cal._hour(i, l) %></b></div>
-                    <div class="span11 col-xs-11"></div>
+                    <div class="span11 col-xs-11">
+                        <div class="add-event-text" data-event-start="<%= cal.getCurrentDateFormattedForInput() %>T<%= cal._hour(i, l) %>">Add event</div>
+                    </div>
+
                 </div>
                 <% }; %>
             </div>
@@ -71,3 +107,31 @@
     </div>
     <% }; %>
 </div>
+
+<script type="text/javascript">
+
+    OffCalendar.initEventAdd();
+
+    $('.add-event-text').click(function() {
+
+        var start = $(this).attr('data-event-start');
+
+        $('#add-event-window input[name=start_time]').val(start);
+        $('#add-event-window').fadeIn();
+
+    });
+
+    $('#add-event-window-dismiss').click(function() {
+
+        $('#add-event-window').fadeOut();
+
+    });
+
+    $(document).keyup(function(e) {
+
+        if (e.keyCode === 27)
+            $('#add-event-window').fadeOut();
+
+    });
+
+</script>

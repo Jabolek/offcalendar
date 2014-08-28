@@ -1,10 +1,10 @@
 var OffCalendar = {};
 
 OffCalendar.user = {
-    id: null,
-    name: '',
-    email: '',
-    password: ''
+    id: parseInt(localStorage.getItem('user_id'), 10),
+    name: localStorage.getItem('user_name'),
+    email: localStorage.getItem('user_email'),
+    password: localStorage.getItem('user_password')
 };
 
 OffCalendar.homeUrl = '/';
@@ -12,6 +12,7 @@ OffCalendar.dashboardUrl = '/welcome/dashboard';
 OffCalendar.loginApiUrl = '/apis/users_api/login';
 OffCalendar.registerApiUrl = '/apis/users_api/register';
 OffCalendar.isAuthorizedApiUrl = '/apis/users_api/is_authorized';
+OffCalendar.unauthorizedUrl = '/welcome/unauthorized';
 
 /**
  * Get email and password from inputs and sends to auth API.
@@ -130,14 +131,14 @@ OffCalendar.initRegister = function() {
  */
 OffCalendar.isAuthorized = function() {
 
-    var user_email = localStorage.user_email;
-    var user_password = localStorage.user_password;
+    var userEmail = localStorage.user_email;
+    var userPassword = localStorage.user_password;
 
-    if (typeof user_email === undefined)
-        OffCalendar.unauthorizedRedirect();
+    if (typeof userEmail === undefined)
+        window.location = OffCalendar.unauthorizedUrl;
 
-    if (typeof user_password === undefined)
-        OffCalendar.unauthorizedRedirect();
+    if (typeof userPassword === undefined)
+        window.location = OffCalendar.unauthorizedUrl;
 
     $.ajax({
         type: 'POST',
@@ -145,15 +146,22 @@ OffCalendar.isAuthorized = function() {
         async: false,
         url: OffCalendar.isAuthorizedApiUrl,
         data: ({
-            email: user_email,
-            password: user_password
+            email: userEmail,
+            password: userPassword
         }),
         success: function(result) {
 
             if (!result)
-                OffCalendar.unauthorizedRedirect();
+                window.location = OffCalendar.unauthorizedUrl;
+
+        },
+        error: function() {
+
+            window.location = OffCalendar.unauthorizedUrl;
+
         }
     });
+
 };
 
 /**
@@ -162,18 +170,9 @@ OffCalendar.isAuthorized = function() {
 OffCalendar.logout = function() {
 
     localStorage.clear();
-    window.redirect = OffCalendar.homeUrl;
+    window.location = OffCalendar.homeUrl;
 
 };
-
-/**
- * Redirect unauthorized user to specific view.
- */
-OffCalendar.unauthorizedRedirect = function() {
-
-    window.location = '/welcome/unauthorized';
-
-}
 
 /**
  * Saves credentials returned from API to LocalStorage.
@@ -181,22 +180,22 @@ OffCalendar.unauthorizedRedirect = function() {
  */
 OffCalendar.saveCredentialsToLocalStorage = function(apiData) {
 
-    var user_id = apiData.id;
-    var user_email = apiData.email;
-    var user_password = apiData.password;
-    var user_name = apiData.name;
+    var userId = apiData.id;
+    var userEmail = apiData.email;
+    var userPassword = apiData.password;
+    var userName = apiData.name;
 
-    if (typeof user_id !== undefined)
-        localStorage.setItem('user_id', user_id);
+    if (typeof userId !== undefined)
+        localStorage.setItem('user_id', userId);
 
-    if (typeof user_email !== undefined)
-        localStorage.setItem('user_email', user_email);
+    if (typeof userEmail !== undefined)
+        localStorage.setItem('user_email', userEmail);
 
-    if (typeof user_password !== undefined)
-        localStorage.setItem('user_password', user_password);
+    if (typeof userPassword !== undefined)
+        localStorage.setItem('user_password', userPassword);
 
-    if (typeof user_name !== undefined)
-        localStorage.setItem('user_name', user_name);
+    if (typeof userName !== undefined)
+        localStorage.setItem('user_name', userName);
 
 };
 
@@ -229,53 +228,68 @@ OffCalendar.updateEvent = function(eventRemoteId, toUpdate) {
 };
 
 /**
- * @param {int} userId
  * @param {int} startTimestamp
  * @param {int} endTimestamp
  * @param {string} description
  * @param {int} sendNotification 1 = yes, 0 = no
+ * @param {strin} eventClass
+ * @param {string} url
  * @returns {undefined}
  */
-OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, description, sendNotification) {
+OffCalendar.initEventAdd = function() {
 
-    var currTimestamp = currentTimestamp();
+    var $form = $('#add-event-form');
 
-    // TODO KO: remove if unneccesary
-    userId = parseInt(userId, 10);
-    startTimestamp = parseInt(startTimestamp, 10);
-    endTimestamp = parseInt(endTimestamp, 10);
+    $form.submit(function(event) {
 
-    var Event = {
-        id: null,
-        user_id: userId,
-        start_timestamp: startTimestamp,
-        end_timestamp: endTimestamp,
-        description: description,
-        send_notification: sendNotification,
-        voided: 0,
-        created_timestamp: currTimestamp,
-        remote_timestamp: currTimestamp
-    };
+        event.preventDefault();
 
-    IndexedDB.addEvent(Event, function(remoteEventId) {
+        var formData = $form.serializeArray();
 
-        if (remoteEventId === null) {
+        var currTimestamp = OffCalendarHelper.currentTimestamp();
+        var userId = OffCalendar.user.id;
 
-            // TODO KO: insert correct logic
+        var startTimestamp = formData[0]['value'];
+        startTimestamp = startTimestamp.replace('T', ' ');
+        startTimestamp = new Date(startTimestamp).getTime();
+        startTimestamp = parseInt(startTimestamp, 10);
 
-        } else {
+        var endTimestamp = formData[1]['value'];
+        endTimestamp = endTimestamp.replace('T', ' ');
+        endTimestamp = new Date(endTimestamp).getTime();
+        endTimestamp = parseInt(endTimestamp, 10);
 
-            // TODO KO: insert correct logic
+        var description = formData[2]['value'];
 
-        }
+        var url = formData[3]['value'];
+
+        var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
+
+        var sendNotification = 0;
+
+        var Event = {
+            id: 2, //todo
+            user_id: userId,
+            start: startTimestamp,
+            end: endTimestamp,
+            title: description,
+            url: url,
+            class: eventClass,
+            send_notification: sendNotification,
+            voided: 0,
+            created_timestamp: currTimestamp,
+            remote_timestamp: currTimestamp
+        };
+
+        IndexedDB.addEvent(Event, function(remoteEventId) {
+
+            if (remoteEventId !== null) {
+
+                window.location = OffCalendar.dashboardUrl;
+
+            }
+
+        });
 
     });
-
-};
-
-OffCalendar.showLocalStorage = function() {
-
-    console.log('User local data:');
-    console.log(localStorage);
-
 };

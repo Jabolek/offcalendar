@@ -22,12 +22,12 @@
         <script type="text/javascript" src="static/js/components/jstimezonedetect/jstz.min.js"></script>
 
         <script type="text/javascript" src="static/js/calendar.js"></script>
-        <script type="text/javascript" src="static/js/app.js"></script>
 
-        <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
         <script type="text/javascript" src="static/js/OffCalendar.js"></script>
         <script type="text/javascript" src="static/js/IndexedDB.js"></script>
-        <script type="text/javascript" src="static/js/offcalendar_helper.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendarHelper.js"></script>
+
+        <script type="text/javascript" src="static/js/app.js"></script>
 
         <script src="static/js/offline/offline.js" type="text/javascript"></script>
         <script src="static/js/offline/requests.js" type="text/javascript"></script>
@@ -36,18 +36,6 @@
         <script type="text/javascript">
 
             OffCalendar.isAuthorized();
-
-            Offline.options = {
-                checks: {
-                    image: {
-                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
-                    },
-                    active: 'image'
-                },
-                reconnect: false
-            };
-
-            OffCalendar.showLocalStorage();
 
         </script>
     </head>
@@ -90,27 +78,28 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div class="container">
                         <div id="main-cont" class="offcalendar-container">
-                            <div class = "page-header">
-                                <div class = "pull-right form-inline">
-                                    <div class = "btn-group">
-                                        <button class = "btn btn-primary" data-calendar-nav = "prev"><< Prev</button>
-                                        <button class = "btn" data-calendar-nav = "today">Today</button>
-                                        <button class = "btn btn-primary" data-calendar-nav = "next">Next >></button>
+                            <div class="page-header">
+                                <div class="pull-right form-inline">
+                                    <div class="btn-group">
+                                        <button class="btn btn-success" data-calendar-view="day">Add event</button>
+                                        <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
+                                        <button class="btn" data-calendar-nav="today">Today</button>
+                                        <button class="btn btn-primary" data-calendar-nav="next">Next >></button>
                                     </div>
-                                    <div class = "btn-group">
-                                        <button class = "btn btn-warning" data-calendar-view = "year">Year</button>
-                                        <button class = "btn btn-warning active" data-calendar-view = "month">Month</button>
-                                        <button class = "btn btn-warning" data-calendar-view = "week">Week</button>
-                                        <button class = "btn btn-warning" data-calendar-view = "day">Day</button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-warning" data-calendar-view="year">Year</button>
+                                        <button class="btn btn-warning active" data-calendar-view="month">Month</button>
+                                        <button class="btn btn-warning" data-calendar-view="week">Week</button>
+                                        <button class="btn btn-warning" data-calendar-view="day">Day</button>
                                     </div>
                                 </div>
 
                                 <h3></h3>
                             </div>
 
-                            <div class = "row">
-                                <div class = "span9">
-                                    <div id = "calendar"></div>
+                            <div class="row">
+                                <div class="span9">
+                                    <div id="calendar"></div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +123,6 @@
         <script type="text/javascript" src="static/js/calendar.js"></script>
         <script type="text/javascript" src="static/js/app.js"></script>
 
-        <script type="text/javascript" src="static/js/jquery.jeditable.js"></script>
         <script type="text/javascript" src="static/js/OffCalendar.js"></script>
 
         <script src="static/js/offline/offline.js" type="text/javascript"></script>
@@ -143,15 +131,15 @@
 
         <script type="text/javascript">
 
-                            Offline.options = {
-                                checks: {
-                                    image: {
-                                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
-                                    },
-                                    active: 'image'
-                                },
-                                reconnect: false
-                            };
+            Offline.options = {
+                checks: {
+                    image: {
+                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
+                    },
+                    active: 'image'
+                },
+                reconnect: false
+            };
 
         </script>
     </body>

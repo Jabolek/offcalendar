@@ -35,7 +35,7 @@ IndexedDB.open = function(callback) {
     };
 
     request.onsuccess = function(e) {
-        
+
         IndexedDB.db = e.target.result;
 
         console.log('IndexedDB opened successfully.');
@@ -43,10 +43,10 @@ IndexedDB.open = function(callback) {
         callback(true);
     };
 
-    request.onerror = function(event){
-        
+    request.onerror = function(event) {
+
         callback(false);
-        
+
     };
 };
 
@@ -122,7 +122,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
         request.onerror = function(e) {
 
             console.error('Event update failed.');
-            
+
             callback(null);
 
         };
@@ -131,7 +131,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
             console.log('Event updated successfully:');
             console.log(Event);
-            
+
             callback(Event);
 
         };
@@ -167,14 +167,14 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
         result.continue();
     };
-    
+
     transaction.oncomplete = function(event) {
-        
+
         console.log('User events returned:');
         console.log(resultSet);
-        
+
         callback(resultSet);
-        
+
     };
 
     cursorRequest.onerror = function(event) {

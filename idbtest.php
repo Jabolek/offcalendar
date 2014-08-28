@@ -13,6 +13,7 @@ function base_url() {
         <script type="text/javascript" src="static/js/jquery.js"></script>
         <script type="text/javascript" src="static/js/IndexedDB.js"></script>
         <script type="text/javascript" src="static/js/OffCalendar.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendarHelper.js"></script>
         <script type="text/javascript">
 
             IndexedDB.open(function() {
@@ -20,7 +21,7 @@ function base_url() {
                 // EVENT ADD TEST
 
                 var userId = 4;
-                var start = currentTimestamp();
+                var start = OffCalendarHelper.currentTimestamp();
                 var end = start + 3600;
                 var description = "This is cool event";
                 var sendNotification = 0;
@@ -33,13 +34,13 @@ function base_url() {
                 IndexedDB.getUserEvents(userId, function(events) {
 
                     if (events === null) {
-                        
+
                         // TODO KO: ERROR
-                        
+
                     } else {
-                        
+
                         // TODO KO: SUCCESS
-                        
+
                     }
 
                 });
