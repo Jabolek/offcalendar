@@ -37,7 +37,7 @@ function base_url() {
                 // EVENT ADD TEST
 
                 
-                var start = currentTimestamp();
+                var start = OffCalendarHelper.currentTimestamp();
                 var end = start + 3600;
                 var description = "This is cool event";
                 var sendNotification = 0;
@@ -47,7 +47,7 @@ function base_url() {
 
                 // EVENT DIRECT ADD TEST
 
-//                var currTimestamp = currentTimestamp();
+//                var currTimestamp = OffCalendarHelper.currentTimestamp();
 //
 //                var Event = {
 //                    id: 5,

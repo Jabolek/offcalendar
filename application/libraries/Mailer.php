@@ -23,8 +23,8 @@ class Mailer {
 
         $this->mail->Host = 'smtp.gmail.com';
         $this->mail->Port = 587;
-        $this->mail->Username = 'olek17';
-        $this->mail->Password = 'aN17blek21';
+        $this->mail->Username = 'username';
+        $this->mail->Password = 'password';
     }
 
     function sendMessage($to, $subject, $message, $senderName = false) {
