@@ -16,10 +16,26 @@ function base_url() {
         <script type="text/javascript">
 
             IndexedDB.open(function() {
+                
+                var userId = 1;
+                var userEmail = 'lorem@ipsum.com';
+                var userPassword = 'lorem123';
+                var eventsSyncApiUrl = '<?= base_url() ?>apis/events_api/synchronize';
+                
+                <?php if(isset($_GET['sync'])) : ?>
+                    
+                    IndexedDB.synchronize(userId, userEmail, userPassword, eventsSyncApiUrl, function(){
+                        
+                        console.log('Synchronization finished.');
+                        
+                    });
+                    
+                <?php else : ?>
+                
 
                 // EVENT ADD TEST
 
-                var userId = 4;
+                
                 var start = currentTimestamp();
                 var end = start + 3600;
                 var description = "This is cool event";
@@ -28,32 +44,72 @@ function base_url() {
                 OffCalendar.addEvent(userId, start, end, description, sendNotification);
 
 
-                // GET EVENTS TEST
+                // EVENT DIRECT ADD TEST
 
-                IndexedDB.getUserEvents(userId, function(events) {
+//                var currTimestamp = currentTimestamp();
+//
+//                var Event = {
+//                    id: 5,
+//                    user_id: userId,
+//                    start_timestamp: start,
+//                    end_timestamp: end,
+//                    description: description,
+//                    send_notification: sendNotification,
+//                    voided: 0,
+//                    created_timestamp: currTimestamp,
+//                    remote_timestamp: currTimestamp,
+//                    last_update_timestamp: 0,
+//                };
+//
+//                IndexedDB.addEvent(Event, function(remoteEventId) {
+//
+//                    var Event = {
+//                        id: 14,
+//                        user_id: userId,
+//                        start_timestamp: start,
+//                        end_timestamp: end,
+//                        description: "newest description",
+//                        send_notification: sendNotification,
+//                        voided: 0,
+//                        created_timestamp: currTimestamp,
+//                        remote_timestamp: currTimestamp,
+//                        last_update_timestamp: 0,
+//                    };
+//                    
+//                    IndexedDB.updateEventById(Event.id, Event, function(){
+//                    });
+//
+//                });
 
-                    if (events === null) {
-                        
-                        // TODO KO: ERROR
-                        
-                    } else {
-                        
-                        // TODO KO: SUCCESS
-                        
-                    }
 
-                });
+//                // GET EVENTS TEST
+//
+//                IndexedDB.getUserEvents(userId, function(events) {
+//
+//                    if (events === null) {
+//
+//                        // TODO KO: ERROR
+//
+//                    } else {
+//
+//                        // TODO KO: SUCCESS
+//
+//                    }
+//
+//                });
+//
+//
+//                // UPDATE EVENT TEST
+//
+//                var remoteEventId = 1;
+//
+//                var toUpdate = {
+//                    description: "This is not so cool event!"
+//                };
+//
+//                OffCalendar.updateEvent(remoteEventId, toUpdate);
 
-
-                // UPDATE EVENT TEST
-
-                var remoteEventId = 1;
-
-                var toUpdate = {
-                    description: "This is not so cool event!"
-                };
-
-                OffCalendar.updateEvent(remoteEventId, toUpdate);
+                <?php endif; ?>
 
             });
 

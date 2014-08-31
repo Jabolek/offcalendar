@@ -61,7 +61,8 @@ OffCalendar.addEvent = function(userId, startTimestamp, endTimestamp, descriptio
         send_notification: sendNotification,
         voided: 0,
         created_timestamp: currTimestamp,
-        remote_timestamp: currTimestamp
+        remote_timestamp: currTimestamp,
+        last_update_timestamp: 0
     };
 
     IndexedDB.addEvent(Event, function(remoteEventId) {

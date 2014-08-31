@@ -1,5 +1,5 @@
 var DB_NAME = 'offcalendar';
-var DB_VERSION = 3;
+var DB_VERSION = 8;
 var DB_STORE_NAME = 'events';
 var DB_TRANS_MODE_READ_WRITE = 'readwrite';
 var DB_TRANS_MODE_READ_ONLY = 'readonly';
@@ -29,13 +29,15 @@ IndexedDB.open = function(callback) {
 
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "remote_id", autoIncrement: true});
 
+        store.createIndex('id', 'id', {unique: true});
         store.createIndex('user_id', 'user_id', {unique: false});
         store.createIndex('voided', 'voided', {unique: false});
+        store.createIndex('remote_timestamp', 'remote_timestamp', {unique: false});
 
     };
 
     request.onsuccess = function(e) {
-        
+
         IndexedDB.db = e.target.result;
 
         console.log('IndexedDB opened successfully.');
@@ -43,16 +45,16 @@ IndexedDB.open = function(callback) {
         callback(true);
     };
 
-    request.onerror = function(event){
-        
+    request.onerror = function(event) {
+
         callback(false);
-        
+
     };
 };
 
 /**
  * Adds Event to database.
- * @param {Event} Event event to add
+ * @param {eventToUpdate} Event event to add
  * @param {function} callback to call after execution
  * @returns {mixed} remote_id of created event on success, null otherwise
  */
@@ -80,7 +82,7 @@ IndexedDB.addEvent = function(Event, callback) {
     request.onerror = function(e) {
 
         console.error('IndexedDB event add error:');
-        console.error(e.value);
+        console.error(e);
 
         callback(null);
 
@@ -99,7 +101,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
     console.log('Updating event #' + eventRemoteId + ' properties:');
     console.log(eventPropertiesToUpdate);
 
-    var trans = IndexedDB.db.transaction([DB_STORE_NAME], "readwrite");
+    var trans = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_WRITE);
 
     var store = trans.objectStore(DB_STORE_NAME);
 
@@ -122,7 +124,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
         request.onerror = function(e) {
 
             console.error('Event update failed.');
-            
+
             callback(null);
 
         };
@@ -131,11 +133,63 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
             console.log('Event updated successfully:');
             console.log(Event);
-            
+
             callback(Event);
 
         };
     };
+};
+
+IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
+
+    console.log('Updating event by ID #' + eventId + ':');
+    console.log(eventToUpdate);
+
+    var trans = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_WRITE);
+
+    var store = trans.objectStore(DB_STORE_NAME);
+
+    var cursorRequest = store.index('id').openCursor(IDBKeyRange.only(eventId));
+
+    cursorRequest.onsuccess = function(e) {
+
+        var cursor = cursorRequest.result || e.result;
+
+        if (cursor === undefined) {
+
+            IndexedDB.addEvent(eventToUpdate, callback);
+
+        } else {
+
+            var Event = cursor.value;
+
+            for (var property in eventToUpdate) {
+                Event[property] = eventToUpdate[property];
+            }
+
+            var request = cursor.update(Event);
+
+            request.onerror = function(e) {
+
+                console.error('Event update failed.');
+
+                callback(null);
+
+            };
+
+            request.onsuccess = function(e) {
+
+                console.log('Event updated successfully:');
+                console.log(Event);
+
+                callback(Event);
+
+            };
+
+        }
+
+    };
+
 };
 
 /**
@@ -167,14 +221,14 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
         result.continue();
     };
-    
+
     transaction.oncomplete = function(event) {
-        
-        console.log('User events returned:');
+
+        console.log('IndexedDB events sent to sync:');
         console.log(resultSet);
-        
+
         callback(resultSet);
-        
+
     };
 
     cursorRequest.onerror = function(event) {
@@ -186,82 +240,209 @@ IndexedDB.getUserEvents = function(userId, callback) {
     };
 };
 
-// OLD STUFF TO UPDATE BELOW
+IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callback) {
 
-IndexedDB.sync = function() {
+    var resultSet = [];
 
-    var items = OffCalendar.events;
+    var transaction = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_ONLY);
 
-    var el = $("#synchronize");
+    var store = transaction.objectStore(DB_STORE_NAME);
 
-    var url = el.attr('data-ajaxurl');
+    var keyRange = IDBKeyRange.only(userId);
 
-    // fire off the request to /form.php
+    var cursorRequest = store.index('user_id').openCursor(keyRange);
+
+    cursorRequest.onsuccess = function(e) {
+
+        var result = e.target.result;
+
+        if (!!result === false)
+            return;
+
+        if (result.value.remote_timestamp > lastRemoteSyncTimestamp) {
+            resultSet.push(result.value);
+        }
+
+        result.continue();
+    };
+
+    transaction.oncomplete = function(event) {
+
+        console.log('IndexedDB events to sync:');
+        console.log(resultSet);
+
+        callback(resultSet);
+
+    };
+
+    cursorRequest.onerror = function(event) {
+
+        console.error('Error getting user events');
+
+        callback(null);
+
+    };
+};
+
+
+// --------------------- IndexedDB Synchronize methods --------------------- //
+
+IndexedDB.sync = {};
+
+IndexedDB.sync.inProgress = false;
+IndexedDB.sync.email = '';
+IndexedDB.sync.password = '';
+IndexedDB.sync.url = '';
+IndexedDB.sync.eventsToUpdate = [];
+IndexedDB.sync.itemsSynced = 0;
+IndexedDB.sync.callback = function() {
+};
+
+IndexedDB.sync.getLastRemoteSyncTimestamp = function() {
+
+    var timestamp = localStorage.getItem('last_remote_sync_timestamp');
+
+    if (timestamp) {
+        return parseInt(timestamp, 10);
+    }
+    
+    return 0;
+
+};
+
+IndexedDB.sync.setLastRemoteSyncTimestamp = function(timestamp) {
+
+    localStorage.setItem('last_remote_sync_timestamp', timestamp);
+    
+};
+
+/**
+ * 
+ * @param {int} userId
+ * @param {string} userEmail
+ * @param {string} userPassword
+ * @param {string} eventsSyncApiUrl
+ * @param {function} callback
+ * @returns {undefined}
+ */
+IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiUrl, callback) {
+
+    if (IndexedDB.sync.inProgress === true) {
+        console.log('IndexedDB sync already in progress');
+        return;
+    }
+
+    IndexedDB.sync.inProgress = true;
+    IndexedDB.sync.itemsSynced = 0;
+    IndexedDB.sync.email = userEmail;
+    IndexedDB.sync.password = userPassword;
+    IndexedDB.sync.url = eventsSyncApiUrl;
+    IndexedDB.sync.callback = callback;
+
+    var lastRemoteSyncTimestamp = IndexedDB.sync.getLastRemoteSyncTimestamp();
+    
+    console.log('Last remote sync timestamp: ' + lastRemoteSyncTimestamp);
+
+    IndexedDB.getUserEventsForSync(userId, lastRemoteSyncTimestamp, IndexedDB.sync.eventsFetched);
+
+
+};
+
+IndexedDB.sync.failed = function(msg) {
+
+    console.error('IndexedDB sync error: ' + msg);
+
+    IndexedDB.sync.inProgress = false;
+
+    IndexedDB.sync.callback(null);
+
+};
+
+IndexedDB.sync.eventsFetched = function(events) {
+
+    if (events === null) {
+        IndexedDB.sync.failed('Error fetching events from db.');
+    }
+
+    var lastSyncTimestamp = localStorage.getItem('last_sync_timestamp') || 0;
+
     var request = $.ajax({
-        url: url,
+        url: IndexedDB.sync.url,
+        dataType: "json",
         type: "POST",
-        data: {todos: JSON.stringify(items)}
+        data: {
+            email: IndexedDB.sync.email,
+            password: IndexedDB.sync.password,
+            last_sync_timestamp: lastSyncTimestamp,
+            events: JSON.stringify(events)
+        }
     });
 
     request.done(function(response, textStatus, jqXHR) {
 
-        IndexedDB.processSyncData(JSON.parse(response));
+        console.log('Response from the server received:');
+        console.log(response);
+
+        IndexedDB.sync.processData(response);
+
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
 
-        OffCalendar.renderingEnabled = true;
+        var msg;
 
-        if (errorThrown === 'Not Found') {
-            alert('Invalid URL to Synchronize service.');
+        if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+            msg = jqXHR.responseJSON.error;
         } else {
-            alert('Unknown error');
+            msg = jqXHR.status + ' - ' + errorThrown;
         }
+
+        IndexedDB.sync.failed(msg);
+
     });
 
-    request.always(function() {
-
-        el.removeAttr('data-ajaxdisabled');
-    });
 };
 
-IndexedDB.processSyncData = function(data) {
+IndexedDB.sync.processData = function(data) {
 
-    for (var index in data.add) {
+    IndexedDB.sync.eventsToUpdate = data.events_to_update;
 
-        IndexedDB.addEvent(data.add[index]);
-    }
+    console.log("Updating events in DB.");
 
-    for (var index in data.update) {
-
-        var timeStamp = data.update[index].timeStamp;
-
-        IndexedDB.updateTodo(timeStamp, data.update[index]);
-    }
-
-    setTimeout(function() {
-        IndexedDB.getActiveUserEvents(function() {
-        }, true);
-    }, 300);
-};
-
-IndexedDB.synchronize = function(event) {
-
-    if ($(this).attr('data-ajaxdisabled') === 'yes')
-        return;
-
-    $(this).attr('data-ajaxdisabled', 'yes');
-
-    // abort any pending request
-    if (request) {
-        request.abort();
-    }
-
-    OffCalendar.renderingEnabled = false;
-
-    IndexedDB.getActiveUserEvents(IndexedDB.sync);
-
-    event.preventDefault();
+    IndexedDB.sync.updateEvents();
 
 };
 
+IndexedDB.sync.success = function() {
+
+    IndexedDB.sync.inProgress = false;
+
+    // TODO: update last sync timestamp and 
+
+    console.log(IndexedDB.sync.itemsSynced + ' events updated.');
+
+    IndexedDB.sync.callback(IndexedDB.sync.itemsSynced);
+
+};
+
+IndexedDB.sync.updateEvents = function() {
+
+    if (IndexedDB.sync.eventsToUpdate.length > 0) {
+
+        var Event = IndexedDB.sync.eventsToUpdate.pop();
+
+        if (Event.id) {
+            IndexedDB.updateEventById(Event.id, Event, IndexedDB.sync.updateEvents);
+        } else {
+            IndexedDB.updateEvent(Event.remote_id, Event, IndexedDB.sync.updateEvents);
+        }
+
+        IndexedDB.sync.itemsSynced++;
+
+    } else {
+
+        IndexedDB.sync.success();
+
+    }
+
+};

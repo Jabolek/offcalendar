@@ -332,7 +332,7 @@ class CI_Form_validation {
 			}
 			else
 			{
-				if (isset($_POST[$field]) AND $_POST[$field] != "")
+				if (isset($_POST[$field]) AND $_POST[$field] !== "")
 				{
 					$this->_field_data[$field]['postdata'] = $_POST[$field];
 				}
@@ -888,6 +888,10 @@ class CI_Form_validation {
 	{
 		if ( ! is_array($str))
 		{
+                        if($str === 0){
+                            return true;
+                        }
+                        
 			return (trim($str) == '') ? FALSE : TRUE;
 		}
 		else

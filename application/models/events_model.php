@@ -42,11 +42,9 @@ class Event {
     private $userId;
     private $startTimestamp;
     private $endTimestamp;
-    private $durationSeconds;
     private $description;
     private $sendNotification;
     private $voided;
-    private $createdTimestamp;
     private $remoteId = null;
     private $remoteTimestamp;
     private $lastUpdateTimestamp;
@@ -100,11 +98,9 @@ class Event {
             'user_id' => $this->userId,
             'start_timestamp' => $this->startTimestamp,
             'end_timestamp' => $this->endTimestamp,
-            'duration_seconds' => $this->durationSeconds,
             'description' => $this->description,
             'send_notification' => $this->sendNotification,
             'voided' => $this->voided,
-            'created_timestamp' => $this->createdTimestamp,
             'remote_timestamp' => $this->remoteTimestamp,
             'last_update_timestamp' => $this->lastUpdateTimestamp,
         );
@@ -114,7 +110,15 @@ class Event {
 
         $arr = $this->toDbArray();
 
-        return array_merge(array('id' => $this->id), $arr);
+        $additional = array(
+            'id' => $this->id,
+        );
+
+        if ($this->remoteId) {
+            $additional['remote_id'] = $this->remoteId;
+        }
+
+        return array_merge($additional, $arr);
     }
 
     public function __construct($properties = array()) {
@@ -133,18 +137,14 @@ class Event {
 
             $this->endTimestamp = (int) $properties['end_timestamp'];
 
-            $this->durationSeconds = (int) $properties['duration_seconds'];
-
             $this->description = (string) $properties['description'];
 
             $this->sendNotification = (int) $properties['send_notification'];
 
             $this->voided = (int) $properties['voided'];
 
-            $this->createdTimestamp = (int) $properties['created_timestamp'];
-
             $this->remoteTimestamp = (int) $properties['remote_timestamp'];
-            
+
             if (isset($properties['remote_id']) && $properties['remote_id']) {
                 $this->remoteId = (int) $properties['remote_id'];
             }
@@ -174,10 +174,6 @@ class Event {
         return $this->endTimestamp;
     }
 
-    public function getDurationSeconds() {
-        return $this->durationSeconds;
-    }
-
     public function getDescription() {
         return $this->description;
     }
@@ -190,10 +186,6 @@ class Event {
         return $this->voided;
     }
 
-    public function getCreatedTimestamp() {
-        return $this->createdTimestamp;
-    }
-    
     public function getRemoteId() {
         return $this->remoteId;
     }
@@ -214,10 +206,6 @@ class Event {
         $this->endTimestamp = $endTimestamp;
     }
 
-    public function setDurationSeconds($durationSeconds) {
-        $this->durationSeconds = $durationSeconds;
-    }
-
     public function setDescription($description) {
         $this->description = $description;
     }
@@ -230,10 +218,6 @@ class Event {
         $this->voided = $voided;
     }
 
-    public function setCreatedTimestamp($createdTimestamp) {
-        $this->createdTimestamp = $createdTimestamp;
-    }
-    
     public function setRemoteId($remoteId) {
         $this->remoteId = $remoteId;
     }

@@ -15,11 +15,6 @@ class Events {
         $this->ci = &get_instance();
     }
 
-    private $syncData = array(
-        'add' => array(),
-        'update' => array(),
-    );
-
     /**
      * @param int $userId
      * @param int $lastSyncTimestamp
@@ -27,7 +22,7 @@ class Events {
      */
     public function getDbEventsForSynchronization($userId, $lastSyncTimestamp) {
 
-        $eventsArr = $this->ci->events_model->getEventsByUserId($userId, array('last_sync_timestamp' > $lastSyncTimestamp));
+        $eventsArr = $this->ci->events_model->getEventsByUserId($userId, array('last_update_timestamp >' => $lastSyncTimestamp));
 
         $events = array();
 
@@ -67,6 +62,7 @@ class Events {
             $_POST = $e;
 
             if (!$this->ci->form_validation->run()) {
+                $err = validation_errors();
                 continue;
             }
 
@@ -88,7 +84,9 @@ class Events {
      * @param int $currTimestamp
      * @return Event[]
      */
-    public function synchronize($remoteEvents, $dbEvents, $currTimestamp, &$toAdd, &$toUpdate) {
+    public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
+        
+        $toUpdate = array();
 
         foreach ($remoteEvents as $remoteEvent) {
 
@@ -103,11 +101,11 @@ class Events {
                 continue;
             }
 
-            $remoteEventId = $remoteEvent->getId();
+            $eventId = $remoteEvent->getId();
 
-            if (isset($dbEvents[$remoteEventId])) {
+            if (isset($dbEvents[$eventId])) {
 
-                $dbEvent = $dbEvents[$remoteEventId];
+                $dbEvent = $dbEvents[$eventId];
 
                 if ($dbEvent->getRemoteTimestamp() > $remoteEvent->getRemoteTimestamp()) {
 
@@ -123,28 +121,16 @@ class Events {
                     $toUpdate[] = $remoteEvent;
                 }
 
-                unset($dbEvents[$remoteEventId]);
+                unset($dbEvents[$eventId]);
             }
         }
 
         foreach ($dbEvents as $dbEvent) {
 
-            $toAdd[] = $dbEvent;
+            $toUpdate[] = $dbEvent;
         }
-    }
-
-    private function sortById(&$todos) {
-
-        $data = array();
-
-        foreach ($todos as &$t) {
-            $t['timeStamp'] = (int) $t['timeStamp'];
-            $t['last_update'] = (int) $t['last_update'];
-            $t['active'] = (int) $t['active'];
-            $data[(int) $t['timeStamp']] = $t;
-        }
-
-        return $data;
+        
+        return $toUpdate;
     }
 
     public function getFieldsValidationRules($fields) {
@@ -174,11 +160,6 @@ class Events {
             'label' => 'End Timestamp',
             'rules' => 'trim|required|is_natural',
         ),
-        'duration_seconds' => array(
-            'field' => 'duration_seconds',
-            'label' => 'Duration Seconds',
-            'rules' => 'trim|required|is_natural',
-        ),
         'description' => array(
             'field' => 'description',
             'label' => 'Description',
@@ -187,16 +168,11 @@ class Events {
         'send_notification' => array(
             'field' => 'send_notification',
             'label' => 'Send Notification',
-            'rules' => 'trim|required|is_natural',
+            'rules' => 'required|is_natural',
         ),
         'voided' => array(
             'field' => 'voided',
             'label' => 'Voided',
-            'rules' => 'trim|required|is_natural',
-        ),
-        'created_timestamp' => array(
-            'field' => 'created_timestamp',
-            'label' => 'Created Timestamp',
             'rules' => 'trim|required|is_natural',
         ),
         'remote_id' => array(
