@@ -13,6 +13,7 @@ function base_url() {
         <script type="text/javascript" src="static/js/jquery.js"></script>
         <script type="text/javascript" src="static/js/IndexedDB.js"></script>
         <script type="text/javascript" src="static/js/OffCalendar.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendarHelper.js"></script>
         <script type="text/javascript">
 
             IndexedDB.open(function() {

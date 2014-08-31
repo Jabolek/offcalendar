@@ -249,6 +249,20 @@
 #cal-day-box {
     text-wrap: none;
 }
+#cal-day-box .cal-day-hour-part:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+.add-event-text {
+    visibility: hidden;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    padding-top: 5px;
+}
+#cal-day-box .cal-day-hour-part:hover .add-event-text {
+    visibility: visible;
+}
 #cal-day-box .cal-day-hour-part {
     height: 30px;
     box-sizing: border-box;
@@ -484,10 +498,9 @@ span[data-cal-date]:hover {
 }
 #cal-slide-content {
     padding: 20px;
-    color: #ffffff;
-    background-image: url("../img/dark_wood.png");
-    -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
-    box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+    color: #000000;
+    -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 3px 0px rgba(0, 0, 0, 0.5);
 }
 #cal-slide-tick {
     background-image: url("../img/tick.png?2");
@@ -496,7 +509,6 @@ span[data-cal-date]:hover {
     background-color: transparent;
 }
 #cal-slide-content a.event-item {
-    color: #ffffff;
     font-weight: normal;
     line-height: 22px;
 }
@@ -513,4 +525,27 @@ a.cal-event-week {
 }
 .badge-important {
     background-color: #b94a48;
+}
+
+#add-event-window {
+    background-color: #f1f1f1;
+    width: 400px;
+    padding: 20px;
+    border-radius: 6px;
+    position: fixed;
+    z-index: 1000;
+    left: 67%;
+}
+
+#add-event-window select option {
+    color: #fff;
+}
+
+#add-event-window .window-dismiss {
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+} 
+textarea {
+    resize: none;
 }

@@ -81,5 +81,12 @@ body {
     border-radius: 50%;
 }
 
-form.medium { width: 400px; }
+.medium { width: 400px; }
 .small { font-size: 11px; }
+.dark { color: #101010; }
+
+#loaderImage {
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+}

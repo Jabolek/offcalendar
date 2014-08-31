@@ -1,24 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <base href="<?= base_url() ?>" />
+        <title><?php if (isset($page_title)) : ?><?= $page_title . ' | ' ?><?php endif; ?>OffCalendar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<?php if (isset($message)) : ?>
-    <div class="message"><?= $message ?></div>
-<?php endif; ?>
+        <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap-theme.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="static/bootstrap-responsive.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="static/style.css" />
+    </head>
 
-<form action="<?= current_url() ?>" method="POST" class="form-signin medium">
+    <body>
+        <div class="container medium">
+            <span class="logo dark" style="font-size: 55px;">OffCalendar</span>
 
-    <h2 class="form-signin-heading">Sign in</h2>
-    <br>
-    
-    <?php if (isset($errmsg)) : ?><div class="alert alert-danger" role="alert"><?= $errmsg ?></div><?php endif; ?>
+            <form id="login_form" method="POST" class="form-signin">
+                <h2 class="form-signin-heading">Sign in</h2><br>
+                <div id="error-label" class="alert alert-danger" role="alert" style="display: none;"></div><br>
 
-    <br>
-    <fieldset>
-        <input type="email" class="form-control" placeholder="Email address" required="" autofocus="" value="<?= set_value('email') ?>" name="email">
-        <span class="err"><?= form_error('email') ?></span>
-        <br>
-        <input type="password" class="form-control" placeholder="Password" required="" value="<?= set_value('password') ?>" name="password" />
-        <span class="err"><?= form_error('password') ?></span>
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </fieldset>
+                <fieldset>
+                    <input type="email" class="form-control" placeholder="Email address" required="" autofocus="" name="email"><br>
+                    <input type="password" pattern=".{8,20}" required title="Password must contain 8 to 20 characters" class="form-control" placeholder="Password" required="" name="password" /><br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-</form>
+                    <br>
+                    <a href="/welcome/register">Sign up</a>
+
+                    <div id="loaderImage">
+                        <img src="../../static/img/ajax-loader.gif" alt="loading">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendar.js"></script>
+        <script type="text/javascript" src="static/js/offcalendar_helper.js"></script>
+
+        <script type="text/javascript">
+
+            OffCalendar.initLogin();
+
+        </script>
+    </body>
+</html>

@@ -46,8 +46,8 @@ if (!String.prototype.formatNum) {
         // Initial date. No matter month, week or day this will be a starting point. Can be 'now' or a date in format 'yyyy-mm-dd'
         day: 'now',
         // Day Start time and end time with time intervals. Time split 10, 15 or 30.
-        time_start: '06:00',
-        time_end: '22:00',
+        time_start: '00:00',
+        time_end: '24:00',
         time_split: '30',
         // Source of events data. It can be one of the following:
         // - URL to return JSON list of events in special format.
@@ -138,7 +138,7 @@ if (!String.prototype.formatNum) {
     };
 
     var defaults_extended = {
-        first_day: 2,
+        first_day: 1,
         holidays: {
             // January 1
             '01-01': "New Year's Day",
@@ -821,74 +821,117 @@ if (!String.prototype.formatNum) {
 
     Calendar.prototype.getStartDate = function() {
         return this.options.position.start;
-    }
+    };
+
+    Calendar.prototype.getCurrentDateFormattedForInput = function() {
+
+        var currentDate = this.options.position.start;
+
+        return currentDate.getFullYear()
+                + '-' + currentDate.getMonthFormatted()
+                + '-' + currentDate.getDateFormatted();
+
+    };
 
     Calendar.prototype.getEndDate = function() {
         return this.options.position.end;
-    }
+    };
 
     Calendar.prototype._loadEvents = function() {
+
         var self = this;
         var source = null;
+
         if ('events_source' in this.options && this.options.events_source !== '') {
+
             source = this.options.events_source;
-        }
-        else if ('events_url' in this.options) {
+
+        } else if ('events_url' in this.options) {
+
             source = this.options.events_url;
             warn('The events_url option is DEPRECATED and it will be REMOVED in near future. Please use events_source instead.');
+
         }
+
         var loader;
+
         switch ($.type(source)) {
+
             case 'function':
+
                 loader = function() {
                     return source(self.options.position.start, self.options.position.end, browser_timezone);
                 };
                 break;
+
             case 'array':
+
                 loader = function() {
                     return [].concat(source);
                 };
                 break;
+
             case 'string':
+
                 if (source.length) {
+
                     loader = function() {
+
                         var events = [];
                         var params = {from: self.options.position.start.getTime(), to: self.options.position.end.getTime()};
+
                         if (browser_timezone.length) {
                             params.browser_timezone = browser_timezone;
                         }
+
                         $.ajax({
                             url: buildEventsUrl(source, params),
                             dataType: 'json',
                             type: 'GET',
                             async: false
                         }).done(function(json) {
+
                             if (!json.success) {
                                 $.error(json.error);
                             }
+
                             if (json.result) {
                                 events = json.result;
                             }
+
                         });
+
                         return events;
+
                     };
                 }
+
                 break;
+
         }
+
         if (!loader) {
             $.error(this.locale.error_loadurl);
         }
+
         this.options.onBeforeEventsLoad.call(this, function() {
+
             self.options.events = loader();
             self.options.events.sort(function(a, b) {
+
                 var delta;
                 delta = a.start - b.start;
-                if (delta == 0) {
+
+                if (delta === 0) {
                     delta = a.end - b.end;
                 }
+
                 return delta;
+
             });
+
             self.options.onAfterEventsLoad.call(self, self.options.events);
+
         });
     };
 
