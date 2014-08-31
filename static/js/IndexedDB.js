@@ -290,6 +290,7 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
 IndexedDB.sync = {};
 
 IndexedDB.sync.inProgress = false;
+IndexedDB.sync.timestamp = 0;
 IndexedDB.sync.email = '';
 IndexedDB.sync.password = '';
 IndexedDB.sync.url = '';
@@ -333,6 +334,7 @@ IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiU
     }
 
     IndexedDB.sync.inProgress = true;
+    IndexedDB.sync.timestamp = OffCalendarHelper.currentTimestamp();
     IndexedDB.sync.itemsSynced = 0;
     IndexedDB.sync.email = userEmail;
     IndexedDB.sync.password = userPassword;
@@ -416,6 +418,8 @@ IndexedDB.sync.processData = function(data) {
 IndexedDB.sync.success = function() {
 
     IndexedDB.sync.inProgress = false;
+    
+    IndexedDB.sync.setLastRemoteSyncTimestamp(IndexedDB.sync.timestamp);
 
     // TODO: update last sync timestamp and 
 

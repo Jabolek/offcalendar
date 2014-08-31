@@ -34,36 +34,32 @@ function base_url() {
                 <?php else : ?>
                 
 
-                // EVENT ADD TEST
-
+                // EVENT DIRECT ADD TEST
                 
                 var start = OffCalendarHelper.currentTimestamp();
                 var end = start + 3600;
                 var description = "This is cool event";
                 var sendNotification = 0;
 
-                OffCalendar.addEvent(userId, start, end, description, sendNotification);
+                var currTimestamp = OffCalendarHelper.currentTimestamp();
 
+                var Event = {
+                    id: 5,
+                    user_id: userId,
+                    start_timestamp: start,
+                    end_timestamp: end,
+                    description: description,
+                    send_notification: sendNotification,
+                    voided: 0,
+                    created_timestamp: currTimestamp,
+                    remote_timestamp: currTimestamp,
+                    last_update_timestamp: 0,
+                };
 
-                // EVENT DIRECT ADD TEST
+                IndexedDB.addEvent(Event, function(remoteEventId) {
+                    
+                    console.log('Event added');
 
-//                var currTimestamp = OffCalendarHelper.currentTimestamp();
-//
-//                var Event = {
-//                    id: 5,
-//                    user_id: userId,
-//                    start_timestamp: start,
-//                    end_timestamp: end,
-//                    description: description,
-//                    send_notification: sendNotification,
-//                    voided: 0,
-//                    created_timestamp: currTimestamp,
-//                    remote_timestamp: currTimestamp,
-//                    last_update_timestamp: 0,
-//                };
-//
-//                IndexedDB.addEvent(Event, function(remoteEventId) {
-//
 //                    var Event = {
 //                        id: 14,
 //                        user_id: userId,
@@ -79,8 +75,8 @@ function base_url() {
 //                    
 //                    IndexedDB.updateEventById(Event.id, Event, function(){
 //                    });
-//
-//                });
+
+                });
 
 
 //                // GET EVENTS TEST
