@@ -34,6 +34,13 @@ class Users_model extends CI_Model {
         return $query->row_array();
     }
 
+    function getUserById($userId) {
+
+        $query = $this->db->get_where('users', array('id' => $userId));
+
+        return $query->row_array();
+    }
+
 }
 
 class User {

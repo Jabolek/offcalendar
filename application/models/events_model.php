@@ -6,6 +6,13 @@ class Events_model extends CI_Model {
 
         parent::__construct();
     }
+    
+    function getEventById($eventId) {
+
+        $query = $this->db->get_where('events', array('id' => $eventId));
+
+        return $query->row_array();
+    }
 
     function updateEvent($eventId, $toUpdate) {
 
@@ -24,6 +31,20 @@ class Events_model extends CI_Model {
     function getEventsByUserId($userId, $where = array()) {
 
         $where['user_id'] = $userId;
+
+        $query = $this->db->get_where('events', $where);
+
+        return $query->result_array();
+    }
+
+    function getEventsForNotificationSend($maxStartTimestamp) {
+
+        $where = array(
+            'voided' => 0,
+            'send_notification' => 1,
+            'notification_sent' => 0,
+            'start_timestamp <' => $maxStartTimestamp,
+        );
 
         $query = $this->db->get_where('events', $where);
 
@@ -92,6 +113,12 @@ class Event {
         return $this;
     }
 
+    function notificationSent(){
+        
+        $this->_ci->events_model->updateEvent($this->id, array('notification_sent' => 1));
+        
+    }
+    
     public function toDbArray() {
 
         return array(

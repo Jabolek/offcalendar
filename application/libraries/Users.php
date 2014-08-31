@@ -63,6 +63,14 @@ class Users {
         return $user;
     }
 
+    function getUserById($userId){
+        
+        $userArr = $this->ci->users_model->getUserById($userId);
+        
+        return new User($userArr);
+        
+    }
+    
     private function hash($password) {
 
         return md5($password);

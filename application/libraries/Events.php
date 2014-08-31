@@ -15,6 +15,34 @@ class Events {
         $this->ci = &get_instance();
     }
 
+    public function getEventById($eventId){
+        
+        $eventArr = $this->ci->events_model->getEventById($eventId);
+        
+        return new Event($eventArr);
+        
+    }
+    
+    /**
+     * @param int $maxStartTimestamp
+     * @return Event[]
+     */
+    public function getEventsForNotificationSend($maxStartTimestamp) {
+
+        $eventsArr = $this->ci->events_model->getEventsForNotificationSend($maxStartTimestamp);
+
+        $events = array();
+
+        foreach ($eventsArr as $e) {
+
+            $event = Event::fromRowArray($e);
+
+            $events[$event->getId()] = $event;
+        }
+
+        return $events;
+    }
+
     /**
      * @param int $userId
      * @param int $lastSyncTimestamp
@@ -85,7 +113,7 @@ class Events {
      * @return Event[]
      */
     public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
-        
+
         $toUpdate = array();
 
         foreach ($remoteEvents as $remoteEvent) {
@@ -129,7 +157,7 @@ class Events {
 
             $toUpdate[] = $dbEvent;
         }
-        
+
         return $toUpdate;
     }
 
