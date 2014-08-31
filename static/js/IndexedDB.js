@@ -290,6 +290,8 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
 IndexedDB.sync = {};
 
 IndexedDB.sync.inProgress = false;
+IndexedDB.sync.userId = 0;
+IndexedDB.sync.remoteTimestamp = 0;
 IndexedDB.sync.timestamp = 0;
 IndexedDB.sync.email = '';
 IndexedDB.sync.password = '';
@@ -297,24 +299,6 @@ IndexedDB.sync.url = '';
 IndexedDB.sync.eventsToUpdate = [];
 IndexedDB.sync.itemsSynced = 0;
 IndexedDB.sync.callback = function() {
-};
-
-IndexedDB.sync.getLastRemoteSyncTimestamp = function() {
-
-    var timestamp = localStorage.getItem('last_remote_sync_timestamp');
-
-    if (timestamp) {
-        return parseInt(timestamp, 10);
-    }
-    
-    return 0;
-
-};
-
-IndexedDB.sync.setLastRemoteSyncTimestamp = function(timestamp) {
-
-    localStorage.setItem('last_remote_sync_timestamp', timestamp);
-    
 };
 
 /**
@@ -334,15 +318,16 @@ IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiU
     }
 
     IndexedDB.sync.inProgress = true;
-    IndexedDB.sync.timestamp = OffCalendarHelper.currentTimestamp();
+    IndexedDB.sync.userId = userId;
+    IndexedDB.sync.remoteTimestamp = OffCalendarHelper.currentTimestamp();
     IndexedDB.sync.itemsSynced = 0;
     IndexedDB.sync.email = userEmail;
     IndexedDB.sync.password = userPassword;
     IndexedDB.sync.url = eventsSyncApiUrl;
     IndexedDB.sync.callback = callback;
 
-    var lastRemoteSyncTimestamp = IndexedDB.sync.getLastRemoteSyncTimestamp();
-    
+    var lastRemoteSyncTimestamp = IndexedDB.sync.getLastRemoteSyncTimestamp(userId);
+
     console.log('Last remote sync timestamp: ' + lastRemoteSyncTimestamp);
 
     IndexedDB.getUserEventsForSync(userId, lastRemoteSyncTimestamp, IndexedDB.sync.eventsFetched);
@@ -366,7 +351,7 @@ IndexedDB.sync.eventsFetched = function(events) {
         IndexedDB.sync.failed('Error fetching events from db.');
     }
 
-    var lastSyncTimestamp = localStorage.getItem('last_sync_timestamp') || 0;
+    var lastSyncTimestamp = IndexedDB.sync.getLastSyncTimestamp();
 
     var request = $.ajax({
         url: IndexedDB.sync.url,
@@ -408,6 +393,8 @@ IndexedDB.sync.eventsFetched = function(events) {
 IndexedDB.sync.processData = function(data) {
 
     IndexedDB.sync.eventsToUpdate = data.events_to_update;
+    
+    IndexedDB.sync.timestamp = data.sync_timestamp;
 
     console.log("Updating events in DB.");
 
@@ -418,8 +405,10 @@ IndexedDB.sync.processData = function(data) {
 IndexedDB.sync.success = function() {
 
     IndexedDB.sync.inProgress = false;
+
+    IndexedDB.sync.setLastRemoteSyncTimestamp(IndexedDB.sync.remoteTimestamp);
     
-    IndexedDB.sync.setLastRemoteSyncTimestamp(IndexedDB.sync.timestamp);
+    IndexedDB.sync.setLastSyncTimestamp(IndexedDB.sync.timestamp)
 
     // TODO: update last sync timestamp and 
 
@@ -448,5 +437,61 @@ IndexedDB.sync.updateEvents = function() {
         IndexedDB.sync.success();
 
     }
+
+};
+
+IndexedDB.sync.getLastRemoteSyncTimestampKey = function(userId) {
+    
+    return 'last_remote_sync_timestamp_' + userId;
+    
+};
+
+IndexedDB.sync.getLastRemoteSyncTimestamp = function() {
+    
+    var key = IndexedDB.sync.getLastRemoteSyncTimestampKey(IndexedDB.sync.userId);
+
+    var timestamp = localStorage.getItem(key);
+
+    if (timestamp) {
+        return parseInt(timestamp, 10);
+    }
+
+    return 0;
+
+};
+
+IndexedDB.sync.setLastRemoteSyncTimestamp = function(timestamp) {
+    
+    var key = IndexedDB.sync.getLastRemoteSyncTimestampKey(IndexedDB.sync.userId);
+
+    localStorage.setItem(key, timestamp);
+
+};
+
+IndexedDB.sync.getLastSyncTimestampKey = function(userId) {
+    
+    return 'last_sync_timestamp_' + userId;
+    
+};
+
+IndexedDB.sync.getLastSyncTimestamp = function() {
+    
+    var key = IndexedDB.sync.getLastSyncTimestampKey(IndexedDB.sync.userId);
+
+    var timestamp = localStorage.getItem(key);
+
+    if (timestamp) {
+        return parseInt(timestamp, 10);
+    }
+
+    return 0;
+
+};
+
+IndexedDB.sync.setLastSyncTimestamp = function(timestamp) {
+    
+    var key = IndexedDB.sync.getLastSyncTimestampKey(IndexedDB.sync.userId);
+
+    localStorage.setItem(key, timestamp);
 
 };
