@@ -160,11 +160,11 @@ OffCalendar.isAuthorized = function() {
                 window.location = OffCalendar.unauthorizedUrl;
 
         },
-//        error: function() {
-//
-//            window.location = OffCalendar.unauthorizedUrl;
-//
-//        }
+        error: function() {
+
+            window.location = OffCalendar.unauthorizedUrl;
+
+        }
     });
 
 };
