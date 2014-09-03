@@ -7,6 +7,11 @@ OffCalendar.user = {
     password: localStorage.getItem('user_password')
 };
 
+OffCalendar.events = {
+    pastEvents: [],
+    ongoingEvents: [],
+    upcomingEvents: []
+};
 OffCalendar.homeUrl = '/';
 OffCalendar.dashboardUrl = '/welcome/dashboard';
 OffCalendar.loginApiUrl = '/apis/users_api/login';
@@ -131,8 +136,8 @@ OffCalendar.initRegister = function() {
  */
 OffCalendar.isAuthorized = function() {
 
-    var userEmail = localStorage.user_email;
-    var userPassword = localStorage.user_password;
+    var userEmail = OffCalendar.user.email;
+    var userPassword = OffCalendar.user.password;
 
     if (typeof userEmail === undefined)
         window.location = OffCalendar.unauthorizedUrl;
@@ -155,11 +160,11 @@ OffCalendar.isAuthorized = function() {
                 window.location = OffCalendar.unauthorizedUrl;
 
         },
-        error: function() {
-
-            window.location = OffCalendar.unauthorizedUrl;
-
-        }
+//        error: function() {
+//
+//            window.location = OffCalendar.unauthorizedUrl;
+//
+//        }
     });
 
 };
@@ -205,24 +210,55 @@ OffCalendar.saveCredentialsToLocalStorage = function(apiData) {
  * @param {object} toUpdate event properties to update
  * @returns {undefined}
  */
-OffCalendar.updateEvent = function(eventRemoteId, toUpdate) {
+OffCalendar.initEventUpdate = function() {
 
-    eventRemoteId = parseInt(eventRemoteId, 10);
+    var $form = $('form[name=offcalendar_update_event]');
 
-    toUpdate.remote_timestamp = currentTimestamp();
+    $form.submit(function(event) {
 
-    IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+        event.preventDefault();
 
-        if (Event === null) {
+        var formData = $form.serializeArray();
 
-            // TODO KO: insert correct logic
+        var currTimestamp = OffCalendarHelper.currentTimestamp();
+        var userId = OffCalendar.user.id;
 
-        } else {
+        var startTimestamp = OffCalendarHelper.getTimestampFromDate(formData[0]['value']);
+        var endTimestamp = OffCalendarHelper.getTimestampFromDate(formData[1]['value']);
 
-            // TODO KO: insert correct logic
+        var description = formData[2]['value'];
 
-        }
+        var url = formData[3]['value'];
 
+        var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
+
+        var sendNotifications = $('input#send_notifications').is(':checked');
+
+        var toUpdate = {
+            user_id: userId,
+            start: startTimestamp,
+            end: endTimestamp,
+            title: description,
+            url: url,
+            class: eventClass,
+            send_notifications: sendNotifications,
+            voided: 0,
+            created_timestamp: currTimestamp,
+            remote_timestamp: OffCalendarHelper.currentTimestamp()
+        };
+
+        var eventRemoteId = formData[5]['value'];
+        eventRemoteId = parseInt(eventRemoteId, 10);
+
+        IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+
+            if (Event !== null) {
+
+                window.location = OffCalendar.dashboardUrl;
+
+            }
+
+        });
     });
 
 };
@@ -238,7 +274,7 @@ OffCalendar.updateEvent = function(eventRemoteId, toUpdate) {
  */
 OffCalendar.initEventAdd = function() {
 
-    var $form = $('#add-event-form');
+    var $form = $('form[name=offcalendar_add_event]');
 
     $form.submit(function(event) {
 
@@ -265,17 +301,16 @@ OffCalendar.initEventAdd = function() {
 
         var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
 
-        var sendNotification = 0;
+        var sendNotifications = $('input#send_notifications').is(':checked');
 
         var Event = {
-            id: 2, //todo
             user_id: userId,
             start: startTimestamp,
             end: endTimestamp,
             title: description,
             url: url,
             class: eventClass,
-            send_notification: sendNotification,
+            send_notifications: sendNotifications,
             voided: 0,
             created_timestamp: currTimestamp,
             remote_timestamp: currTimestamp
@@ -292,4 +327,67 @@ OffCalendar.initEventAdd = function() {
         });
 
     });
+};
+
+OffCalendar.organizeEventsByDate = function(events) {
+
+    var currTimestamp = OffCalendarHelper.currentTimestamp();
+
+    for (var i = 0; i < events.length; i++) {
+
+        var ev = events[i];
+
+        if (ev.start > currTimestamp && ev.end > currTimestamp)
+            OffCalendar.events.upcomingEvents.push(ev);
+        else if (ev.start <= currTimestamp && ev.end >= currTimestamp)
+            OffCalendar.events.ongoingEvents.push(ev);
+        else
+            OffCalendar.events.pastEvents.push(ev);
+
+    }
+
+    OffCalendar.appendEvents();
+};
+
+OffCalendar.appendEvents = function() {
+
+    var $pastEventsContainer = $('#past_events-cont');
+    var $ongoingEventsContainer = $('#ongoing_events-cont');
+    var $upcomingEventsContainer = $('#upcoming_events-cont');
+
+    var pastEvents = OffCalendar.events.pastEvents;
+    var ongoingEvents = OffCalendar.events.ongoingEvents;
+    var upcomingEvents = OffCalendar.events.upcomingEvents;
+
+    OffCalendar.appendEventsHTML($pastEventsContainer, pastEvents);
+    OffCalendar.appendEventsHTML($ongoingEventsContainer, ongoingEvents);
+    OffCalendar.appendEventsHTML($upcomingEventsContainer, upcomingEvents);
+
+};
+
+OffCalendar.appendEventsHTML = function($container, events) {
+
+    var evLength = events.length;
+
+    if (evLength) {
+
+        for (var i = 0; i < events.length; i++) {
+
+            var html = '';
+            var ev = events[i];
+
+            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
+            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
+
+            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
+
+            $container.append(html);
+
+        }
+
+    } else {
+
+        $container.html('There are no events to show in this section.');
+
+    }
 };

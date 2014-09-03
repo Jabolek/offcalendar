@@ -692,7 +692,6 @@ if (!String.prototype.formatNum) {
             this.options.view = view;
         }
 
-
         this._init_position();
         this._loadEvents();
         this._render();

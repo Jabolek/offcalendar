@@ -1,9 +1,9 @@
-<div id="add-event-window" style="display: none;">
+<div id="add-update-event-window" style="display: none;">
 
-    <span id="add-event-window-dismiss" class="window-dismiss">&times;</span>
+    <span id="add-update-event-window-dismiss" class="window-dismiss">&times;</span>
 
-    <form id="add-event-form">
-        <h3>Add event</h3><br>
+    <form id="add-update-event-form" name="">
+        <h3></h3><br>
 
         <fieldset>
             <label>From:</label><input type="datetime-local" class="form-control" required="" autofocus="" name="start_time"><br>
@@ -22,11 +22,13 @@
             <br>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="send_notifications">Send notifications?
+                    <input type="checkbox" id="send_notifications">Send notifications?
                 </label>
             </div>
 
-            <br><button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+            <input type="hidden" id="event-remote-id" name="event-remote-id">
+
+            <br><button id="add-update-button" class="btn btn-lg btn-primary btn-block" type="submit"></button>
         </fieldset>
     </form>
 </div>
@@ -42,6 +44,7 @@
         <div class="span11 col-xs-11">
             <% _.each(all_day, function(event){ %>
             <div class="day-highlight dh-<%= event.class %>">
+
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
                     <%= event.title %></a>
@@ -57,6 +60,16 @@
             <% _.each(before_time, function(event){ %>
             <div class="day-highlight dh-<%= event.class %>">
                 <span class="cal-hours pull-right"><%= event.end_hour %></span>
+
+                <span class="edit-event" 
+                      data-event-id="<%= event.remote_id %>" 
+                      data-event-start="<%= event.start %>" 
+                      data-event-end="<%= event.end %>" 
+                      data-event-desc="<%= event.title %>" 
+                      data-event-url="<%= event.url %>" 
+                      data-event-class="<%= event.class %>" 
+                      data-event-notif="<%= event.send_notifications %>">edit</span>
+
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
                     <%= event.title %></a>
@@ -69,6 +82,16 @@
         <% _.each(by_hour, function(event){ %>
         <div class="pull-left day-event day-highlight dh-<%= event.class %>" style="margin-top: <%= (event.top * 30) %>px; height: <%= (event.lines * 30) %>px">
             <span class="cal-hours"><%= event.start_hour %> - <%= event.end_hour %></span>
+
+            <span class="edit-event" 
+                  data-event-id="<%= event.remote_id %>" 
+                  data-event-start="<%= event.start %>" 
+                  data-event-end="<%= event.end %>" 
+                  data-event-desc="<%= event.title %>" 
+                  data-event-url="<%= event.url %>" 
+                  data-event-class="<%= event.class %>" 
+                  data-event-notif="<%= event.send_notifications %>">edit</span>
+
             <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                data-event-class="<%= event['class'] %>" class="event-item">
                 <%= event.title %></a>
@@ -110,28 +133,9 @@
 
 <script type="text/javascript">
 
-    OffCalendar.initEventAdd();
+    OffCalendarHelper.handleEventAdd();
+    OffCalendarHelper.handleEventUpdate();
 
-    $('.add-event-text').click(function() {
-
-        var start = $(this).attr('data-event-start');
-
-        $('#add-event-window input[name=start_time]').val(start);
-        $('#add-event-window').fadeIn();
-
-    });
-
-    $('#add-event-window-dismiss').click(function() {
-
-        $('#add-event-window').fadeOut();
-
-    });
-
-    $(document).keyup(function(e) {
-
-        if (e.keyCode === 27)
-            $('#add-event-window').fadeOut();
-
-    });
+    OffCalendarHelper.handleAddUpdateWindowClose();
 
 </script>

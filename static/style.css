@@ -90,3 +90,16 @@ body {
     text-align: center;
     display: none;
 }
+
+.events-list-item {
+    color: #fff;
+    font-size: 12px;
+}
+
+.edit-event {
+    cursor: pointer;
+    color: darkgreen;
+    font-weight: bold;
+    float: right;
+    margin-right: 5px;
+}

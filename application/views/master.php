@@ -70,6 +70,7 @@
                         <li id="main" class="active offcalendar-menu"><a href="javascript:void(0)">Calendar</a></li>
                         <li id="notifications" class="offcalendar-menu"><a href="javascript:void(0)">Notifications <span class="badge">3</span></a></li>
                         <li id="upcoming_events" class="offcalendar-menu"><a href="javascript:void(0)">Upcoming Events</a></li>
+                        <li id="ongoing_events" class="offcalendar-menu"><a href="javascript:void(0)">Ongoing Events</a></li>
                         <li id="past_events" class="offcalendar-menu"><a href="javascript:void(0)">Past Events</a></li>
                         <li><a href="#" onclick="OffCalendar.logout();">Logout</a></li>
                     </ul>
@@ -105,8 +106,10 @@
                         </div>
 
                         <div id="notifications-cont" class="offcalendar-container" style="display: none;">notifications</div>
-                        <div id="upcoming_events-cont" class="offcalendar-container" style="display: none;">upcoming</div>
-                        <div id="past_events-cont" class="offcalendar-container" style="display: none;">past</div>
+
+                        <div id="upcoming_events-cont" class="offcalendar-container" style="display: none;"></div>
+                        <div id="ongoing_events-cont" class="offcalendar-container" style="display: none;"></div>
+                        <div id="past_events-cont" class="offcalendar-container" style="display: none;"></div>
                         <div id="settings-cont" class="offcalendar-container" style="display: none;">settings</div>
                         <div id="profile-cont" class="offcalendar-container" style="display: none;">your profile</div>
                         <div id="help-cont" class="offcalendar-container" style="display: none;">help</div>
@@ -131,15 +134,15 @@
 
         <script type="text/javascript">
 
-            Offline.options = {
-                checks: {
-                    image: {
-                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
-                    },
-                    active: 'image'
-                },
-                reconnect: false
-            };
+                            Offline.options = {
+                                checks: {
+                                    image: {
+                                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
+                                    },
+                                    active: 'image'
+                                },
+                                reconnect: false
+                            };
 
         </script>
     </body>

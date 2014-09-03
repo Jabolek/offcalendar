@@ -527,7 +527,7 @@ a.cal-event-week {
     background-color: #b94a48;
 }
 
-#add-event-window {
+#add-update-event-window {
     background-color: #f1f1f1;
     width: 400px;
     padding: 20px;
@@ -537,11 +537,11 @@ a.cal-event-week {
     left: 67%;
 }
 
-#add-event-window select option {
+#add-update-event-window select option {
     color: #fff;
 }
 
-#add-event-window .window-dismiss {
+#add-update-event-window .window-dismiss {
     float: right;
     font-weight: bold;
     cursor: pointer;
