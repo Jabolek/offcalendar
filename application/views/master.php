@@ -51,9 +51,8 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li id="settings" class="offcalendar-menu"><a href="javascript:void(0)">Settings</a></li>
                         <li id="profile" class="offcalendar-menu"><a href="javascript:void(0)">Your Profile</a></li>
-                        <li id="help" class="offcalendar-menu"><a href="javascript:void(0)">Help</a></li>
+                        <li><a href="#" onclick="OffCalendar.logout();">Logout</a></li>
                     </ul>
 
                     <form class="navbar-form navbar-right">
@@ -68,11 +67,9 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li id="main" class="active offcalendar-menu"><a href="javascript:void(0)">Calendar</a></li>
-                        <li id="notifications" class="offcalendar-menu"><a href="javascript:void(0)">Notifications <span class="badge">3</span></a></li>
                         <li id="upcoming_events" class="offcalendar-menu"><a href="javascript:void(0)">Upcoming Events</a></li>
                         <li id="ongoing_events" class="offcalendar-menu"><a href="javascript:void(0)">Ongoing Events</a></li>
                         <li id="past_events" class="offcalendar-menu"><a href="javascript:void(0)">Past Events</a></li>
-                        <li><a href="#" onclick="OffCalendar.logout();">Logout</a></li>
                     </ul>
                 </div>
 
@@ -105,14 +102,43 @@
                             </div>
                         </div>
 
-                        <div id="notifications-cont" class="offcalendar-container" style="display: none;">notifications</div>
-
                         <div id="upcoming_events-cont" class="offcalendar-container" style="display: none;"></div>
                         <div id="ongoing_events-cont" class="offcalendar-container" style="display: none;"></div>
                         <div id="past_events-cont" class="offcalendar-container" style="display: none;"></div>
-                        <div id="settings-cont" class="offcalendar-container" style="display: none;">settings</div>
-                        <div id="profile-cont" class="offcalendar-container" style="display: none;">your profile</div>
-                        <div id="help-cont" class="offcalendar-container" style="display: none;">help</div>
+
+                        <div id="profile-cont" class="offcalendar-container" style="display: none;">
+                            <div id="profile-name" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Your name:</h3>
+                                </div>
+
+                                <div class="panel-body"></div>
+                            </div>
+
+                            <div id="profile-email" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Your email:</h3>
+                                </div>
+
+                                <div class="panel-body"></div>
+                            </div>
+
+                            <div id="profile-events" class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Your events count:</h3>
+                                </div>
+
+                                <div class="panel-body"></div>
+                            </div>
+                            
+                            <div id="profile-events-notif" class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Your events with notifications count:</h3>
+                                </div>
+
+                                <div class="panel-body"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>                
             </div>
