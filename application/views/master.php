@@ -37,10 +37,24 @@
 
             OffCalendar.isAuthorized();
 
+            OffCalendar.initSearch();
+
+            Offline.options = {
+                checks: {
+                    image: {
+                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
+                    },
+                    active: 'image'
+                },
+                reconnect: false,
+                checkOnLoad: true
+            };
+
         </script>
     </head>
 
     <body>
+
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -55,9 +69,19 @@
                         <li><a href="#" onclick="OffCalendar.logout();">Logout</a></li>
                     </ul>
 
-                    <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </form>
+                    <div class="col-sm-3 col-md-3 pull-right">
+
+                        <form class="navbar-form" name="search_event">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="srch-term">
+
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,8 +97,22 @@
                     </ul>
                 </div>
 
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
                     <div class="container">
+
+                        <div id="sync-progress" class="alert alert-info medium-big center-block sync-alert" role="alert" style="display: none;">
+                            Synchronizing events...
+                            <img src="../../static/img/sync-loader.gif" alt="loading">
+                        </div>
+
+                        <div id="sync-success" class="alert alert-success medium-big center-block sync-alert" role="alert" style="display: none;">
+                            Success! Events synchronized: <span class="badge alert-success"></span>
+                        </div>
+
+                        <div id="sync-failed" class="alert alert-danger medium-big center-block sync-alert" role="alert" style="display: none;">
+                            Synchronization failed. Try again later.
+                        </div>
+
                         <div id="main-cont" class="offcalendar-container">
                             <div class="page-header">
                                 <div class="pull-right form-inline">
@@ -95,11 +133,10 @@
                                 <h3></h3>
                             </div>
 
-                            <div class="row">
-                                <div class="span9">
-                                    <div id="calendar"></div>
-                                </div>
+                            <div class="span11">
+                                <div id="calendar"></div>
                             </div>
+
                         </div>
 
                         <div id="upcoming_events-cont" class="offcalendar-container" style="display: none;"></div>
@@ -130,7 +167,7 @@
 
                                 <div class="panel-body"></div>
                             </div>
-                            
+
                             <div id="profile-events-notif" class="panel panel-success">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Your events with notifications count:</h3>
@@ -144,33 +181,6 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="static/js/components/underscore/underscore-min.js"></script>
-        <script type="text/javascript" src="static/js/components/bootstrap2/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="static/js/components/jstimezonedetect/jstz.min.js"></script>
-
-        <script type="text/javascript" src="static/js/calendar.js"></script>
-        <script type="text/javascript" src="static/js/app.js"></script>
-
-        <script type="text/javascript" src="static/js/OffCalendar.js"></script>
-
-        <script src="static/js/offline/offline.js" type="text/javascript"></script>
-        <script src="static/js/offline/requests.js" type="text/javascript"></script>
-        <script src="static/js/offline/ui.js" type="text/javascript"></script>
-
-        <script type="text/javascript">
-
-                            Offline.options = {
-                                checks: {
-                                    image: {
-                                        url: 'http://reviewconcierge.com/static/email/blank.png?_=' + (Math.floor(Math.random() * 1000000000))
-                                    },
-                                    active: 'image'
-                                },
-                                reconnect: false
-                            };
-
-        </script>
     </body>
 
 </html>

@@ -37,7 +37,7 @@
 
         <script type="text/javascript" src="static/js/components/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="static/js/OffCalendar.js"></script>
-        <script type="text/javascript" src="static/js/offcalendar_helper.js"></script>
+        <script type="text/javascript" src="static/js/OffCalendarHelper.js"></script>
 
         <script type="text/javascript">
 

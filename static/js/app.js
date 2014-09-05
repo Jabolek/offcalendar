@@ -7,23 +7,6 @@
         view: 'month',
         tmpl_path: 'tmpls/',
         tmpl_cache: false,
-        onAfterEventsLoad: function(events) {
-
-            if (!events) {
-                return;
-            }
-
-            var list = $('#eventlist');
-            list.html('');
-
-            $.each(events, function(key, val) {
-
-                $(document.createElement('li'))
-                        .html('<a href="' + val.url + '">' + val.title + '</a>')
-                        .appendTo(list);
-
-            });
-        },
         onAfterViewLoad: function(view) {
 
             $('.page-header h3').text(this.getTitle());
@@ -58,6 +41,13 @@
                     OffCalendar.setupProfileDetails();
                 }
             });
+
+            setInterval(function() {
+
+                OffCalendar.synchronizeEvents();
+
+            }, OffCalendar.syncInterval);
+
         });
     }
 

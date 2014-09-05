@@ -19,6 +19,9 @@ OffCalendar.loginApiUrl = '/apis/users_api/login';
 OffCalendar.registerApiUrl = '/apis/users_api/register';
 OffCalendar.isAuthorizedApiUrl = '/apis/users_api/is_authorized';
 OffCalendar.unauthorizedUrl = '/welcome/unauthorized';
+OffCalendar.eventsSyncApiUrl = '/apis/events_api/synchronize';
+OffCalendar.syncInterval = 60000 * 3;
+OffCalendar.alertInterval = 1000 * 5;
 
 /**
  * Get email and password from inputs and sends to auth API.
@@ -74,6 +77,16 @@ OffCalendar.initLogin = function() {
 
         return false;
     });
+
+};
+
+/**
+ * Logging out user, clears localStorage user data.
+ */
+OffCalendar.logout = function() {
+
+    localStorage.clear();
+    window.location = OffCalendar.homeUrl;
 
 };
 
@@ -161,22 +174,12 @@ OffCalendar.isAuthorized = function() {
                 window.location = OffCalendar.unauthorizedUrl;
 
         },
-//        error: function() {
-//
-//            window.location = OffCalendar.unauthorizedUrl;
-//
-//        }
+        error: function() {
+
+            window.location = OffCalendar.unauthorizedUrl;
+
+        }
     });
-
-};
-
-/**
- * Logging out user, clears localStorage user data.
- */
-OffCalendar.logout = function() {
-
-    localStorage.clear();
-    window.location = OffCalendar.homeUrl;
 
 };
 
@@ -202,64 +205,6 @@ OffCalendar.saveCredentialsToLocalStorage = function(apiData) {
 
     if (typeof userName !== undefined)
         localStorage.setItem('user_name', userName);
-
-};
-
-/**
- * Updates event stored in the db. IMPORTANT: make sure toUpdate properties are of correct types
- * @param {int} eventRemoteId  
- * @param {object} toUpdate event properties to update
- * @returns {undefined}
- */
-OffCalendar.initEventUpdate = function() {
-
-    var $form = $('form[name=offcalendar_update_event]');
-
-    $form.submit(function(event) {
-
-        event.preventDefault();
-
-        var formData = $form.serializeArray();
-
-        var currTimestamp = OffCalendarHelper.currentTimestamp();
-        var userId = OffCalendar.user.id;
-
-        var startTimestamp = OffCalendarHelper.getTimestampFromDate(formData[0]['value']);
-        var endTimestamp = OffCalendarHelper.getTimestampFromDate(formData[1]['value']);
-
-        var description = formData[2]['value'];
-
-        var url = formData[3]['value'];
-
-        var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
-
-        var sendNotifications = $('input#send_notifications').is(':checked');
-
-        var toUpdate = {
-            user_id: userId,
-            start: startTimestamp,
-            end: endTimestamp,
-            title: description,
-            url: url,
-            class: eventClass,
-            send_notifications: sendNotifications ? 1 : 0,
-            voided: 0,
-            remote_timestamp: OffCalendarHelper.currentTimestamp()
-        };
-
-        var eventRemoteId = formData[5]['value'];
-        eventRemoteId = parseInt(eventRemoteId, 10);
-
-        IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
-
-            if (Event !== null) {
-
-                window.location = OffCalendar.dashboardUrl;
-
-            }
-
-        });
-    });
 
 };
 
@@ -329,149 +274,6 @@ OffCalendar.initEventAdd = function() {
     });
 };
 
-OffCalendar.organizeEventsByDate = function(events) {
-
-    var currTimestamp = OffCalendarHelper.currentTimestamp();
-
-    for (var i = 0; i < events.length; i++) {
-
-        var ev = events[i];
-
-        if (ev.start > currTimestamp && ev.end > currTimestamp)
-            OffCalendar.events.upcomingEvents.push(ev);
-        else if (ev.start <= currTimestamp && ev.end >= currTimestamp)
-            OffCalendar.events.ongoingEvents.push(ev);
-        else
-            OffCalendar.events.pastEvents.push(ev);
-
-    }
-
-    OffCalendar.appendEvents();
-};
-
-OffCalendar.appendEvents = function() {
-
-    var $pastEventsContainer = $('#past_events-cont');
-    var $ongoingEventsContainer = $('#ongoing_events-cont');
-    var $upcomingEventsContainer = $('#upcoming_events-cont');
-
-    var pastEvents = OffCalendar.events.pastEvents;
-    var ongoingEvents = OffCalendar.events.ongoingEvents;
-    var upcomingEvents = OffCalendar.events.upcomingEvents;
-
-    OffCalendar.appendEventsHTML($pastEventsContainer, pastEvents);
-    OffCalendar.appendEventsHTML($ongoingEventsContainer, ongoingEvents);
-    OffCalendar.appendEventsHTML($upcomingEventsContainer, upcomingEvents);
-
-};
-
-OffCalendar.appendEventsHTML = function($container, events) {
-
-    var evLength = events.length;
-
-    if (evLength) {
-
-        for (var i = 0; i < events.length; i++) {
-
-            var html = '';
-            var ev = events[i];
-
-            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
-            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
-
-            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
-
-            $container.append(html);
-
-        }
-
-    } else {
-
-        $container.html('There are no events to show in this section.');
-
-    }
-};
-
-OffCalendar.setupProfileDetails = function() {
-
-    var name = OffCalendar.user.name;
-    var email = OffCalendar.user.email;
-
-    var eventsWithNotifications = 0;
-
-    var events = OffCalendar.events.pastEvents.concat(OffCalendar.events.ongoingEvents, OffCalendar.events.upcomingEvents);
-
-    for (var i = 0; i < events.length; i++) {
-
-        if (events[i]['send_notifications'])
-            eventsWithNotifications++;
-
-    }
-
-    $('#profile-cont #profile-name .panel-body').text(name);
-    $('#profile-cont #profile-email .panel-body').text(email);
-    $('#profile-cont #profile-events .panel-body').text(events.length);
-    $('#profile-cont #profile-events-notif .panel-body').text(eventsWithNotifications);
-
-};
-
-OffCalendar.setCalendarNavigation = function(calendar) {
-
-    $('.btn-group button[data-calendar-nav]').each(function() {
-
-        var $this = $(this);
-
-        $this.click(function() {
-            calendar.navigate($this.data('calendar-nav'));
-        });
-
-    });
-
-    $('.btn-group button[data-calendar-view]').each(function() {
-
-        var $this = $(this);
-
-        $this.click(function() {
-            calendar.view($this.data('calendar-view'));
-        });
-
-    });
-
-    $('#first_day').change(function() {
-
-        var value = $(this).val();
-        value = value.length ? parseInt(value) : null;
-        calendar.setOptions({first_day: value});
-        calendar.view();
-
-    });
-
-    $('#language').change(function() {
-
-        calendar.setLanguage($(this).val());
-        calendar.view();
-
-    });
-
-    $('#events-in-modal').change(function() {
-
-        var val = $(this).is(':checked') ? $(this).val() : null;
-        calendar.setOptions({modal: val});
-
-    });
-
-    $('li.offcalendar-menu').click(function() {
-
-        var containerId = $(this).attr('id');
-        $('.offcalendar-container').hide();
-        $('#' + containerId + '-cont').show();
-        $('.offcalendar-menu').removeClass('active');
-        $(this).addClass('active');
-
-    });
-
-};
-
 OffCalendar.handleEventAdd = function() {
 
     $('.add-event-text').click(function() {
@@ -495,6 +297,58 @@ OffCalendar.handleEventAdd = function() {
 
         OffCalendar.initEventAdd();
 
+    });
+
+};
+
+OffCalendar.initEventUpdate = function() {
+
+    var $form = $('form[name=offcalendar_update_event]');
+
+    $form.submit(function(event) {
+
+        event.preventDefault();
+
+        var formData = $form.serializeArray();
+
+        var currTimestamp = OffCalendarHelper.currentTimestamp();
+        var userId = OffCalendar.user.id;
+
+        var startTimestamp = OffCalendarHelper.getTimestampFromDate(formData[0]['value']);
+        var endTimestamp = OffCalendarHelper.getTimestampFromDate(formData[1]['value']);
+
+        var description = formData[2]['value'];
+
+        var url = formData[3]['value'];
+
+        var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
+
+        var sendNotifications = $('input#send_notifications').is(':checked');
+
+        var toUpdate = {
+            user_id: userId,
+            start: startTimestamp,
+            end: endTimestamp,
+            title: description,
+            url: url,
+            class: eventClass,
+            send_notifications: sendNotifications ? 1 : 0,
+            voided: 0,
+            remote_timestamp: OffCalendarHelper.currentTimestamp()
+        };
+
+        var eventRemoteId = formData[5]['value'];
+        eventRemoteId = parseInt(eventRemoteId, 10);
+
+        IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+
+            if (Event !== null) {
+
+                window.location = OffCalendar.dashboardUrl;
+
+            }
+
+        });
     });
 
 };
@@ -536,6 +390,166 @@ OffCalendar.handleEventUpdate = function() {
 
 };
 
+OffCalendar.handleEventDelete = function() {
+
+    $('.delete-event').click(function() {
+
+        var eventRemoteId = $(this).attr('data-event-id');
+
+        OffCalendar.deleteEvent(eventRemoteId);
+
+    });
+
+};
+
+OffCalendar.deleteEvent = function(eventRemoteId) {
+
+    var toUpdate = {
+        voided: 1
+    };
+
+    eventRemoteId = parseInt(eventRemoteId, 10);
+
+    IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+
+        if (Event !== null) {
+
+            window.location = OffCalendar.dashboardUrl;
+
+        }
+
+    });
+
+};
+
+OffCalendar.organizeEventsByDate = function(events) {
+
+    var currTimestamp = OffCalendarHelper.currentTimestamp();
+
+    for (var i = 0; i < events.length; i++) {
+
+        var ev = events[i];
+
+        if (ev.start > currTimestamp && ev.end > currTimestamp)
+            OffCalendar.events.upcomingEvents.push(ev);
+        else if (ev.start <= currTimestamp && ev.end >= currTimestamp)
+            OffCalendar.events.ongoingEvents.push(ev);
+        else
+            OffCalendar.events.pastEvents.push(ev);
+
+    }
+
+    OffCalendar.appendEvents();
+};
+
+OffCalendar.appendEvents = function() {
+
+    var $pastEventsContainer = $('#past_events-cont');
+    var $ongoingEventsContainer = $('#ongoing_events-cont');
+    var $upcomingEventsContainer = $('#upcoming_events-cont');
+
+    var pastEvents = OffCalendar.events.pastEvents;
+    var ongoingEvents = OffCalendar.events.ongoingEvents;
+    var upcomingEvents = OffCalendar.events.upcomingEvents;
+
+    OffCalendar.appendEventsHTML($pastEventsContainer, pastEvents);
+    OffCalendar.appendEventsHTML($ongoingEventsContainer, ongoingEvents);
+    OffCalendar.appendEventsHTML($upcomingEventsContainer, upcomingEvents);
+
+};
+
+OffCalendar.appendEventsHTML = function($container, events) {
+
+    $container.empty();
+
+    var evLength = events.length;
+
+    for (var i = 0; i < evLength; i++) {
+
+        var html = '';
+        var ev = events[i];
+
+        if (!ev.voided) {
+
+            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
+            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
+
+            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
+
+            $container.append(html);
+
+        }
+
+    }
+
+    if ($container.is(':empty'))
+        $container.html('<div class="alert-danger alert" role="alert">There are no events to show in this section.</div>');
+};
+
+OffCalendar.setupProfileDetails = function() {
+
+    var name = OffCalendar.user.name;
+    var email = OffCalendar.user.email;
+
+    var eventsCount = 0;
+    var eventsWithNotifications = 0;
+
+    var events = OffCalendar.events.pastEvents.concat(OffCalendar.events.ongoingEvents, OffCalendar.events.upcomingEvents);
+
+    for (var i = 0; i < events.length; i++) {
+
+        if (!events[i]['voided']) {
+
+            if (events[i]['send_notifications'])
+                eventsWithNotifications++;
+
+            eventsCount++;
+
+        }
+
+    }
+
+    $('#profile-cont #profile-name .panel-body').text(name);
+    $('#profile-cont #profile-email .panel-body').text(email);
+    $('#profile-cont #profile-events .panel-body').text(eventsCount);
+    $('#profile-cont #profile-events-notif .panel-body').text(eventsWithNotifications);
+
+};
+
+OffCalendar.setCalendarNavigation = function(calendar) {
+
+    $('.btn-group button[data-calendar-nav]').each(function() {
+
+        var $this = $(this);
+
+        $this.click(function() {
+            calendar.navigate($this.data('calendar-nav'));
+        });
+
+    });
+
+    $('.btn-group button[data-calendar-view]').each(function() {
+
+        var $this = $(this);
+
+        $this.click(function() {
+            calendar.view($this.data('calendar-view'));
+        });
+
+    });
+
+    $('li.offcalendar-menu').click(function() {
+
+        var containerId = $(this).attr('id');
+        $('.offcalendar-container').hide();
+        $('#' + containerId + '-cont').show();
+        $('.offcalendar-menu').removeClass('active');
+        $(this).addClass('active');
+
+    });
+
+};
+
 OffCalendar.handleAddUpdateWindowClose = function() {
 
     $('#add-update-event-window-dismiss').click(function() {
@@ -548,6 +562,64 @@ OffCalendar.handleAddUpdateWindowClose = function() {
 
         if (e.keyCode === 27)
             $('#add-update-event-window').fadeOut();
+
+    });
+
+};
+
+OffCalendar.synchronizeEvents = function() {
+
+    if (Offline.state === 'up') {
+
+        var userId = OffCalendar.user.id;
+        var userEmail = OffCalendar.user.email;
+        var userPassword = OffCalendar.user.password;
+        var eventsSyncApiUrl = OffCalendar.eventsSyncApiUrl;
+
+        $('.sync-alert').hide();
+
+        $('#sync-progress').show();
+
+        IndexedDB.synchronize(userId, userEmail, userPassword, eventsSyncApiUrl, function(itemsSynced) {
+
+            if (itemsSynced !== null) {
+
+                $('.sync-alert').hide();
+
+                $('#sync-success .badge.alert-success').text(itemsSynced);
+
+                $('#sync-success').show().delay(OffCalendar.alertInterval).fadeOut();
+
+            } else {
+
+                $('.sync-alert').hide();
+
+                $('#sync-failed').show().delay(OffCalendar.alertInterval).fadeOut();
+            }
+
+            console.log('Synchronization finished.');
+
+        });
+
+    } else {
+
+        console.log('Synchronization failed, connection down.')
+
+    }
+
+};
+
+OffCalendar.initSearch = function() {
+
+    var $form = $('form[name=search_event]');
+
+    $form.submit(function(event) {
+
+        event.preventDefault();
+
+        var formData = $form.serializeArray();
+
+        console.log(formData);
 
     });
 

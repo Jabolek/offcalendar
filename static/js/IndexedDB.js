@@ -224,7 +224,7 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
     transaction.oncomplete = function(event) {
 
-        console.log('IndexedDB events sent to sync:');
+        console.log('IndexedDB events fetched');
         console.log(resultSet);
 
         callback(resultSet);
@@ -408,9 +408,7 @@ IndexedDB.sync.success = function() {
 
     IndexedDB.sync.setLastRemoteSyncTimestamp(IndexedDB.sync.remoteTimestamp);
     
-    IndexedDB.sync.setLastSyncTimestamp(IndexedDB.sync.timestamp)
-
-    // TODO: update last sync timestamp and 
+    IndexedDB.sync.setLastSyncTimestamp(IndexedDB.sync.timestamp);
 
     console.log(IndexedDB.sync.itemsSynced + ' events updated.');
 

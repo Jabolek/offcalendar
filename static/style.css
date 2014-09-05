@@ -82,6 +82,7 @@ body {
 }
 
 .medium { width: 400px; }
+.medium-big { width: 750px; }
 .small { font-size: 11px; }
 .dark { color: #101010; }
 
@@ -102,4 +103,12 @@ body {
     font-weight: bold;
     float: right;
     margin-right: 5px;
+}
+
+.delete-event {
+    cursor: pointer;
+    color: darkred;
+    font-weight: bold;
+    float: right;
+    margin: 0 5px;
 }

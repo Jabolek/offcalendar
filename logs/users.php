@@ -67,3 +67,5 @@ The Password field is required.
 [28 Aug 00:02:58][<span style="color:red">error</span>] Email does not exist.<BR>
 [28 Aug 00:03:40][<span style="color:red">error</span>] Email already exists in database.<BR>
 [03 Sep 17:48:44][<span style="color:red">error</span>] Email does not exist.<BR>
+[05 Sep 19:56:24][<span style="color:red">error</span>] Email does not exist.<BR>
+[05 Sep 19:57:05][<span style="color:red">error</span>] Email does not exist.<BR>

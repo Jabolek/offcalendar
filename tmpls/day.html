@@ -70,6 +70,8 @@
                       data-event-class="<%= event.class %>" 
                       data-event-notif="<%= event.send_notifications %>">edit</span>
 
+                <span class="delete-event" data-event-id="<%= event.remote_id %>">delete</span>
+
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
                     <%= event.title %></a>
@@ -80,22 +82,26 @@
     <% }; %>
     <div id="cal-day-panel" class="clearfix">
         <% _.each(by_hour, function(event){ %>
-        <div class="pull-left day-event day-highlight dh-<%= event.class %>" style="margin-top: <%= (event.top * 30) %>px; height: <%= (event.lines * 30) %>px">
-            <span class="cal-hours"><%= event.start_hour %> - <%= event.end_hour %></span>
+            <% if(!event.voided) {%>
+                <div class="pull-left day-event day-highlight dh-<%= event.class %>" style="margin-top: <%= (event.top * 30) %>px; height: <%= (event.lines * 30) %>px">
+                    <span class="cal-hours"><%= event.start_hour %> - <%= event.end_hour %></span>
 
-            <span class="edit-event" 
-                  data-event-id="<%= event.remote_id %>" 
-                  data-event-start="<%= event.start %>" 
-                  data-event-end="<%= event.end %>" 
-                  data-event-desc="<%= event.title %>" 
-                  data-event-url="<%= event.url %>" 
-                  data-event-class="<%= event.class %>" 
-                  data-event-notif="<%= event.send_notifications %>">edit</span>
+                    <span class="edit-event" 
+                          data-event-id="<%= event.remote_id %>" 
+                          data-event-start="<%= event.start %>" 
+                          data-event-end="<%= event.end %>" 
+                          data-event-desc="<%= event.title %>" 
+                          data-event-url="<%= event.url %>" 
+                          data-event-class="<%= event.class %>" 
+                          data-event-notif="<%= event.send_notifications %>">edit</span>
 
-            <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
-               data-event-class="<%= event['class'] %>" class="event-item">
-                <%= event.title %></a>
-        </div>
+                    <span class="delete-event" data-event-id="<%= event.remote_id %>">delete</span>
+
+                    <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
+                       data-event-class="<%= event['class'] %>" class="event-item">
+                        <%= event.title %></a>
+                </div>  
+            <% }; %>
         <% }); %>
 
         <div id="cal-day-panel-hour">
@@ -135,6 +141,7 @@
 
     OffCalendar.handleEventAdd();
     OffCalendar.handleEventUpdate();
+    OffCalendar.handleEventDelete();
 
     OffCalendar.handleAddUpdateWindowClose();
 
