@@ -39,7 +39,7 @@ Aby budowa aplikacji www wspierającej tryb offline była możliwa, konieczny je
 \subsection{HTML5 WebSQL Database}
 \label{sec:html5WebSqlDatabase}
 
-WebSQL Database jest mechanizmem, który do przechowywania, odczytu oraz aktualizacji danych po stronie klienta wykorzystuje strukturalny język zapytań SQL. Metoda działania mechanizmu bazuje na specyfikacji bazy SQLite. Mechanizm WebSQL posiada zarówno zalety przypisywane relacynym bazom danych oraz kilka zalet cechujących metody lokalnego zapisu danych:
+WebSQL Database jest mechanizmem, który do przechowywania, odczytu oraz aktualizacji danych po stronie klienta wykorzystuje strukturalny język zapytań SQL. Metoda działania mechanizmu bazuje na specyfikacji bazy SQLite. Mechanizm WebSQL posiada zarówno zalety przypisywane relacyjnym bazom danych oraz kilka zalet cechujących metody lokalnego zapisu danych:
 
 \begin{itemize}
 \item Transakcyjność,
@@ -54,7 +54,7 @@ Mechanizm WebSQL sprawdzi się dobrze w przypadku z góry zdefiniowanych struktu
 
 WebSQL jest metodą posiadającą umiarkowane wsparcie wśród popularnych przeglądarek internetowych. Poniżej znajduje się tabela przedstawiające wsparcie przeglądarek dla mechanizmu WebSQL zarówno na systemach desktopowych jak i mobilnych:
 
-\begin{table}
+\begin{table}[h]
 \centering
     \begin{tabular}{ | p{8cm} | p{6cm} | }
     \hline
@@ -95,7 +95,7 @@ Web Storage udostępnia dwa obszary składowania danych różniące się zasięg
 
 Największymi zaletami mechanizmu Web Storage jest kompleksowe wsparcie na wszystkich obecnie popularnych przeglądarkach internetowych, jak również łatwość jego obsługi - pobranie wartości danego elementu następuje synchronicznie poprzez odwołanie się do globalnego obiektu localStorage lub sessionStorage wraz z podaniem w notacji tablicowej klucza - ciągu znakowego - identyfikującego dany element.
 
-\begin{table}
+\begin{table}[h]
 \centering
     \begin{tabular}{ | p{8cm} | p{6cm} | }
     \hline
@@ -139,7 +139,7 @@ Ilość miejsca, jaka może zostać przeznaczona na zasoby przechowywane w Index
 
 Indexed Database posiada dobre wsparcie wśród nowszych wersji popularnych przeglądarek internetowych.
 
-\begin{table}
+\begin{table}[h]
 \centering
     \begin{tabular}{ | p{8cm} | p{6cm} | }
     \hline
@@ -173,7 +173,7 @@ Lista funkcji udostępnianych przez Filesystem API obejmuje zarówno operacje na
 
 Pomimo wysokiej użyteczności mechanizmu Filesystem API, wsparcie przeglądarkek ograniczna się do Google Chrome oraz Chrome for Android. W związku z niskim zainteresowaniem innych firm zajmujących się rozwijaniem przeglądarek internetowych, organizacja W3C zawiesiła prace nad tym standardem.
 
-\begin{table}
+\begin{table}[h]
 \centering
     \begin{tabular}{ | p{8cm} | p{6cm} | }
     \hline
@@ -226,7 +226,7 @@ Pamięć podręczna przeglądarki (ang. \emph{cache}) obejmuje miejsce na dysku 
 Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz na sesję (za rozpoczęcie sesji przyjmujemy uruchomienie przeglądarki) tak, by użytkownik był na bieżąco ze zmianami treści. Poniżej przedstawiono ogólne zasady działania Web Cache:
 
 \begin{enumerate}
-\item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania“świeżej” porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
+\item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania "świeżej" porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
 \item Żądania uwierzytelnienia lub żądania zabezpieczone (np. HTTPS) nie są cache-owane.
 \item Reprezentacja danych w cache jest uważana za "świeżą" (nie musi być sprawdzana z wersją danych na serwerze oryginalnym), jeśli ustawiono nagłówek HTTP odpowiadający za czas życia danych lub jeśli dane były cache-owane niedawno.
 \item Jeśli dane są nieaktualne do serwera zostanie wysłane zapytanie o walidację.
@@ -370,7 +370,7 @@ Serwer aplikacji wraz z bazą danych gwarantują nieprzerwaną obsługę żąda�
 
 Platforma zapewnia bezpieczną autentykację dla użytkowników posiadających konta.
 
-Komunikacja pomiędzy częściami systemu powinna minimalizować narzut danych celem ograniczenia kosztów transmisji, co motywuje zastosowanie architektury REST wykorzystującej lekki format JSON (JavaScript Object Notation).
+Komunikacja pomiędzy częściami systemu powinna minimalizować narzut danych celem ograniczenia kosztów transmisji, co motywuje zastosowanie architektury REST wykorzystującej lekki format JSON \emph{(JavaScript Object Notation)}.
 
 Detekcja połączenia sieciowego winna następować automatycznie wraz z przełączeniem się systemu na tryb offline/online.
 

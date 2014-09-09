@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  21 JUL 2014 13:34
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  9 SEP 2014 22:48
 entering extended mode
 **praca.tex
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.tex
@@ -450,20 +450,21 @@ LaTeX Warning: Unused global option(s):
 
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 68.
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 70.
 
 (D:\latex\tex\latex\psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -519,34 +520,34 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 <agh.jpg, id=1, 146.4672pt x 284.7438pt>
 File: agh.jpg Graphic file (type jpg)
  <use agh.jpg>
-Package pdftex.def Info: agh.jpg used on input line 70.
+Package pdftex.def Info: agh.jpg used on input line 72.
 (pdftex.def)             Requested size: 87.88098pt x 170.8476pt.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 70.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 72.
 
 (D:\latex\tex\latex\psnfss\t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
 LaTeX Font Info:    Font shape `T1/phv/bx/sc' in size <12> not available
-(Font)              Font shape `T1/phv/b/sc' tried instead on input line 70.
+(Font)              Font shape `T1/phv/b/sc' tried instead on input line 72.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 70.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 70.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 70.
+(Font)              <10.95> on input line 72.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 70.
+(Font)              <8> on input line 72.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 70.
+(Font)              <6> on input line 72.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 70.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
  [1
 
 {C:/Users/freak/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/fr
 eak/Dropbox/offcalendar/mgr/agh.jpg>]
-Underfull \hbox (badness 2903) in paragraph at lines 70--70
+Underfull \hbox (badness 2903) in paragraph at lines 72--72
 []\T1/ptm/m/it/12 O±wiadczamy, ±wia-domi od-po-wie-dzial-no-±ci kar-nej za po-±
 wiad-cze-nie nie-prawdy, »e
  []
@@ -554,7 +555,7 @@ wiad-cze-nie nie-prawdy, »e
 [2
 
 ]
-Underfull \hbox (badness 4013) in paragraph at lines 70--70
+Underfull \hbox (badness 4013) in paragraph at lines 72--72
 []\T1/ptm/m/it/14.4 Skªadamy ser-deczne po-dzi¦-ko-wa-nia Panu dr
  []
 
@@ -564,9 +565,9 @@ Underfull \hbox (badness 4013) in paragraph at lines 70--70
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 72.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 74.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 72.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 74.
  (C:\Users\freak\Dropbox\offcalendar\mgr\praca.toc [5
 
 ])
@@ -593,7 +594,19 @@ Rozdzia\l  2.
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 39.
- [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11] [12]
+Underfull \vbox (badness 2005) has occurred while \output is active []
+
+ [13]
+[14] [15] [16] [17] [18] [19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [20]
@@ -604,28 +617,39 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-[24]) [25]
+[24]) [25] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.tex
+Rozdzia\l  3.
+[26
+
+
+
+] [27]
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 58.
+ (D:\latex\tex\latex\psnfss\t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [28] [29] [30] [31]) [32]
 No file praca.bbl.
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)) ) 
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)) ) 
 Here is how much of TeX's memory you used:
- 4918 strings out of 494045
- 63533 string characters out of 3156044
+ 4969 strings out of 494045
+ 64412 string characters out of 3156044
  158632 words of memory out of 3000000
- 8099 multiletter control sequences out of 15000+200000
- 69917 words of font info for 66 fonts, out of 3000000 for 9000
+ 8138 multiletter control sequences out of 15000+200000
+ 70538 words of font info for 68 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 34i,12n,45p,788b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,12n,45p,840b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/latex/fonts/enc/dv
-ips/fontname/8r.enc}<D:/latex/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fon
-ts/type1/urw/helvetic/uhvr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb
-><D:/latex/fonts/type1/urw/times/utmb8a.pfb><D:/latex/fonts/type1/urw/times/utm
-r8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/ti
-mes/utmri8a.pfb>
-Output written on praca.pdf (25 pages, 234647 bytes).
+ips/fontname/8r.enc}<D:/latex/fonts/type1/urw/courier/ucrr8a.pfb><D:/latex/font
+s/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvr8a.pfb><
+D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex/fonts/type1/urw/times/u
+tmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/
+times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8a.pfb>
+Output written on praca.pdf (32 pages, 263328 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
+ 139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
