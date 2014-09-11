@@ -12,16 +12,16 @@ W rozdziale tym zostanie opisana architektura aplikacji OffCalendar. Aplikacja s
 \section{Architektura systemu}
 \label{sec:archSys}
 
-Z uwagi na fakt, iż fundamentalna dla aplikacji OffCalendar jest możliwość działania na różnych urządzeniach oraz wspieranie trybu offline, projekt realizowany jest z wykorzystaniem architektury klient-serwer.
+Z uwagi na fakt, iż fundamentalna dla aplikacji OffCalendar jest możliwość działania na różnych urządzeniach oraz wspieranie trybu offline, projekt realizowany będzie z wykorzystaniem architektury klient-serwer.
 
 \subsection{Założenia}
 \label{sec:zalozenia}
 
-Podstawowym założeniem dotyczącym architektury aplikacji OffCalendar jest podział na część serwerową, której zadaniem jest przyjmowanie i odpowiadanie na żądania napływające z aplikacji www, która stanowi część kliencką. Celem usprawnienia komunikacji i minimalizacji rozmiaru danych przesyłanych pomiędzy klientem i serwerem zdecydowano się na architekturę REST.
+Podstawowym założeniem dotyczącym architektury aplikacji OffCalendar jest podział na część serwerową, której zadaniem będzie przyjmowanie i odpowiadanie na żądania napływające z aplikacji www, która stanowić ma część kliencką. Celem usprawnienia komunikacji i minimalizacji rozmiaru danych przesyłanych pomiędzy klientem i serwerem zdecydowano się na architekturę REST.
 
-Dane zgromadzone za pomocą interfejsu użytkownika i przekonwertowane na lekki format JSON winny trafić do interfejsów serwera. Natępnie odpowiednie moduły logiki systemu wykonują operacje CRUD \emph{(Create/Read/Update/Delete)} i zwracają rezultaty owych operacji z powrotem do aplikacji klienckiej, która dokonuje interpretacji zwróconych danych i odpowiednio prezentuje wyniki w postaci komunikatów użytkownika.
+Dane zgromadzone za pomocą interfejsu użytkownika i przekonwertowane na lekki format JSON winny trafić do interfejsów serwera. Następnie odpowiednie moduły logiki systemu wykonają operacje CRUD (Create/Read/Update/Delete) i zwrócą rezultaty owych operacji z powrotem do aplikacji klienckiej, która dokona interpretacji zwróconych danych i odpowiednio zaprezentuje wyniki (aktualizacja widoku wydarzeń, komunikaty o błędach lub poprawnie zakończonych operacjach etc.).
 
-Warunkiem koniecznym funkcjonowania komunikacji pomiędzy klientem i serwerem jest dostęp do sieci Internet. Jednocześnie aplikacja kliencka musi oferować wsparcie dla trybu offline. Jest to możliwe z uwagi na fakt, że na serwerze spoczywa wyłącznie ciężar autoryzacji i synchronizacji danych. Dzięki zastosowaniu przechowywania lokalnego manipulacja danymi użytkownika odbywa się z udziałem pamięci podręcznej przeglądarki. W sytuacji detekcji przejścia w tryb online zgromadzone dane winny zostać przesłane do serwera, gdzie nastąpi ich synchronizacja. Odbywać się to będzie co określony w systemie czas.
+Warunkiem koniecznym funkcjonowania komunikacji pomiędzy klientem i serwerem jest dostęp do sieci Internet. Jednocześnie aplikacja kliencka musi oferować wsparcie dla trybu offline. Będzie to możliwe z uwagi na fakt, że na serwerze spoczywa wyłącznie ciężar autoryzacji i synchronizacji danych. Dzięki zastosowaniu przechowywania lokalnego manipulacja danymi użytkownika odbywać się będzie z udziałem pamięci podręcznej przeglądarki. W sytuacji detekcji przejścia w tryb online zgromadzone dane winny zostać przesłane do serwera, gdzie nastąpi ich synchronizacja. Odbywać się to będzie co określony w systemie czas.
 
 %---------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ Poniższa tabela przybliża przykładowe żądania z wykorzystaniem w/w metod:
 	\caption{Przykłady operacji i ich odwzorowania na żądania w architekturze REST.}
 \end{table}
 
-Każde żądanie kierowane do serwera jest niezależne od innych i nie można pomiędzy nimi znaleźć powiązań. Z uwagi na brak dodatkowych narzutów związanych ze standardami (np. SOAP) i prostotę implementacji REST stanowi podstawę komunikacji w aplikacji OffCalendar.
+Każde żądanie kierowane do serwera jest niezależne od innych i nie można pomiędzy nimi znaleźć powiązań. Z uwagi na brak dodatkowych narzutów związanych ze standardami (np. SOAP) i prostotę implementacji REST stanowić będzie podstawę komunikacji w aplikacji OffCalendar.
 
 %---------------------------------------------------------------------------
 
@@ -79,16 +79,16 @@ Zadaniem aplikacji klienckiej będzie lokalne gromadzenie informacji użytkownik
 \subsection{Tryb offline}
 \label{trybOff}
 
-Wsparcie dla trybu offline w aplikacji OffCalendar realizowane jest za pomocą metod lokalnego przechowywania danych oferowanych w ramach HTML5. Użytkownik nie dysponujący aktywnym połączeniem sieciowym nadal ma możliwość wprowadzania/edytowania oraz usuwania wydarzeń. Zostają one zapisane w pamięci podręcznej przeglądarki i podlegają pełnej kontroli bez ingerencji serwera.
+Wsparcie dla trybu offline w aplikacji OffCalendar realizowane będzie za pomocą metod lokalnego przechowywania danych oferowanych w ramach HTML5. Użytkownik nie dysponujący aktywnym połączeniem sieciowym nadal winien mieć możliwość wprowadzania/edytowania oraz usuwania wydarzeń. Zostaną one zapisane w pamięci podręcznej przeglądarki i podlegać będą bezproblemowemu dostępowi bez angażowania strony serwerowej.
 
-Wykrywanie stanu połączenia internetowego odbywa się poprzez wykonanie żądania załadowania małego (110 bajtów) zasobu graficznego. Nieudana próba dostępu do pliku warunkuje przejście w tryb offline. Skutkuje to zawieszeniem wszystkich operacji angażujących stronę serwerową, a więc synchronizacji danych.
+Wykrywanie stanu połączenia internetowego odbywać się winno poprzez wykonanie żądania załadowania małego (110 bajtów) zasobu graficznego. Nieudana próba dostępu do pliku warunkuje przejście w tryb offline. Skutkuje to zawieszeniem wszystkich operacji angażujących stronę serwerową, a więc synchronizacji danych.
 	
-Istotną kwestią jest bezpieczeństwo aplikacji klienckiej. Z uwagi na fakt, iż to serwer odpowiada za autoryzację użytkownika, a w trybie offline dostęp do niego nie jest możliwy, pojawiające się niedogodności uwzględniono w konstrukcji interfejsu graficznego OffCalendar. Opiera się on na jednym głównym widoku tzw. dashboard (przestrzeń robocza). Poszczególne jego sekcje są ładowane asynchronicznie, co eliminuje konieczność weryfikacji praw użytkownika w trakcie przechodzenia pomiędzy widokami aplikacji. Wszystkie konieczne dane są pobierane przy pierwszym logowaniu i pozostają do dyspozycji użytkownika do momentu wylogowania się.
+Istotną kwestię stanowi bezpieczeństwo aplikacji klienckiej. Z uwagi na fakt, iż to serwer odpowiadać ma za autoryzację użytkownika, a w trybie offline dostęp do niego nie będzie możliwy, pojawiające się niedogodności uwzględniono w konstrukcji interfejsu graficznego OffCalendar. Opierać się będzie on na jednym głównym widoku tzw. dashboard (przestrzeń robocza). Poszczególne jego sekcje będą ładowane asynchronicznie, co eliminuje konieczność weryfikacji praw użytkownika w trakcie przechodzenia pomiędzy widokami aplikacji. Wszystkie konieczne dane winny być pobierane przy pierwszym logowaniu i pozostaną do dyspozycji użytkownika do momentu wylogowania się.
 
 \subsection{Tryb online}
 \label{trybOn}
 
-Praca aplikacji w trybie online obejmuje wykonywanie operacji wymagających komunikacji z serwerem. Składają się na nie:
+Praca aplikacji w trybie online obejmuje wykonywanie operacji wymagających komunikacji z serwerem. Składać się na nie będą:
 
 \begin{itemize}
 \item logowanie,
@@ -97,7 +97,7 @@ Praca aplikacji w trybie online obejmuje wykonywanie operacji wymagających komu
 \item synchronizacja wydarzeń z aplikacją serwerową.
 \end{itemize}
 
-Wyżej wymienione czynności realizowane są w oparciu o dane wprowadzane przez użytkowników i przechowywane lokalnie. Jest to poprzedzone sprawdzeniem stanu połączenia internetowego. Przełączanie między trybami offline/online jest wykonywane automatycznie. W wypadku braku połączenia zawieszana jest regularna synchronizacja aż do momentu ponownego jego nawiązania.
+Wyżej wymienione czynności winny być realizowane w oparciu o dane wprowadzane przez użytkowników i przechowywane lokalnie. Będzie to poprzedzone sprawdzeniem stanu połączenia internetowego. Przełączanie między trybami offline/online wykonywać się będzie automatycznie. W wypadku braku połączenia regularna synchronizacja zostanie zawieszona aż do momentu ponownego jego nawiązania.
 
 \section{Aplikacja serwerowa}
 \label{sec:appSerw}
