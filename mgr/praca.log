@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  11 SEP 2014 16:02
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  12 SEP 2014 14:34
 entering extended mode
 **praca.tex
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.tex
@@ -451,7 +451,13 @@ LaTeX Warning: Unused global option(s):
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux))
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux
+
+LaTeX Warning: Label `sec:apKli' multiply defined.
+
+) (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
 LaTeX Font Info:    ... okay on input line 70.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
@@ -593,7 +599,7 @@ Rozdzia\l  2.
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 39.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 33.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -624,32 +630,58 @@ Rozdzia\l  3.
 
 
 ] [27]
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 58.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 54.
  (D:\latex\tex\latex\psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [28] [29] [30] [31]) [32]
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.tex
+Rozdzia\l  4.
+) [33
+
+
+
+] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.tex
+Rozdzia\l  5.
+) [34
+
+
+
+] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.tex
+Rozdzia\l  6.
+) [35
+
+
+
+]
 No file praca.bbl.
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)) ) 
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux)
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4969 strings out of 494045
- 64412 string characters out of 3156044
+ 5010 strings out of 494045
+ 65657 string characters out of 3156044
  158632 words of memory out of 3000000
- 8138 multiletter control sequences out of 15000+200000
+ 8158 multiletter control sequences out of 15000+200000
  70538 words of font info for 68 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  34i,12n,45p,840b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
-{D:/latex/fonts/enc/dv
-ips/fontname/8r.enc}<D:/latex/fonts/type1/urw/courier/ucrr8a.pfb><D:/latex/font
-s/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvr8a.pfb><
-D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex/fonts/type1/urw/times/u
-tmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/
-times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8a.pfb>
-Output written on praca.pdf (32 pages, 263507 bytes).
+{D:/latex/fonts/enc/dvips/fontname/8r.enc}<D:/latex/fonts/type1/urw/courier/u
+crr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fonts/type1/u
+rw/helvetic/uhvr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex
+/fonts/type1/urw/times/utmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D
+:/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on praca.pdf (35 pages, 266507 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
+ 148 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

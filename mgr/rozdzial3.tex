@@ -7,8 +7,6 @@ Tworzonej aplikacji nadano nazwę OffCalendar. Będzie ona umożliwiać użytkow
 
 W rozdziale tym zostanie opisana architektura aplikacji OffCalendar. Aplikacja składa się z dwóch głównych części: klienckiej oraz serwerowej. Przedstawiony zostanie model komunikacji pomiędzy danymi częściami aplikacji oraz zaprezentowane zostaną najważniejsze ich elementy. W części klienckiej wyszczególnione zostaną założenia lokalnego gromadzenia danych użytkownika, metody komunikacji z częścią serwerową, detekcja i przełączanie pomiędzy trybami offline/online oraz graficzny interfejs użytkownika. W części serwerowej opisana zostanie warstwa danych, interfejsy przeznaczone do komunikacji z częścią kliencką oraz założenia procesu synchronizacji danych pomiędzy częściami aplikacji. Szczególną uwagę zwrócono na bezpieczeństwo komunikacji i danych.
 
-%---------------------------------------------------------------------------
-
 \section{Architektura systemu}
 \label{sec:archSys}
 
@@ -22,8 +20,6 @@ Podstawowym założeniem dotyczącym architektury aplikacji OffCalendar jest pod
 Dane zgromadzone za pomocą interfejsu użytkownika i przekonwertowane na lekki format JSON winny trafić do interfejsów serwera. Następnie odpowiednie moduły logiki systemu wykonają operacje CRUD (Create/Read/Update/Delete) i zwrócą rezultaty owych operacji z powrotem do aplikacji klienckiej, która dokona interpretacji zwróconych danych i odpowiednio zaprezentuje wyniki (aktualizacja widoku wydarzeń, komunikaty o błędach lub poprawnie zakończonych operacjach etc.).
 
 Warunkiem koniecznym funkcjonowania komunikacji pomiędzy klientem i serwerem jest dostęp do sieci Internet. Jednocześnie aplikacja kliencka musi oferować wsparcie dla trybu offline. Będzie to możliwe z uwagi na fakt, że na serwerze spoczywa wyłącznie ciężar autoryzacji i synchronizacji danych. Dzięki zastosowaniu przechowywania lokalnego manipulacja danymi użytkownika odbywać się będzie z udziałem pamięci podręcznej przeglądarki. W sytuacji detekcji przejścia w tryb online zgromadzone dane winny zostać przesłane do serwera, gdzie nastąpi ich synchronizacja. Odbywać się to będzie co określony w systemie czas.
-
-%---------------------------------------------------------------------------
 
 \subsection{Representational State Transfer (REST)}
 \label{sec:REST}
@@ -68,8 +64,6 @@ Poniższa tabela przybliża przykładowe żądania z wykorzystaniem w/w metod:
 \end{table}
 
 Każde żądanie kierowane do serwera jest niezależne od innych i nie można pomiędzy nimi znaleźć powiązań. Z uwagi na brak dodatkowych narzutów związanych ze standardami (np. SOAP) i prostotę implementacji REST stanowić będzie podstawę komunikacji w aplikacji OffCalendar.
-
-%---------------------------------------------------------------------------
 
 \section{Aplikacja kliencka}
 \label{sec:appKliencka}
