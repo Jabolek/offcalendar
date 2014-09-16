@@ -28,9 +28,9 @@ OffCalendar.alertInterval = 1000 * 5;
  * Triggered by submitting login form.
  */
 
-OffCalendar.initLogin = function() {
+OffCalendar.initLogin = function () {
 
-    $('#login_form').submit(function(event) {
+    $('#login_form').submit(function (event) {
 
         event.preventDefault();
 
@@ -47,29 +47,36 @@ OffCalendar.initLogin = function() {
                 email: email,
                 password: password
             }),
-            complete: function() {
+            complete: function () {
 
                 $('#loaderImage').hide();
 
             },
-            success: function(result) {
+            success: function (result) {
 
-                if (result && !result.error) {
+                result.password = password;
 
-                    result.password = password;
+                OffCalendar.saveCredentialsToLocalStorage(result);
+                window.location = OffCalendar.dashboardUrl;
 
-                    OffCalendar.saveCredentialsToLocalStorage(result);
-                    window.location = OffCalendar.dashboardUrl;
-
-                } else {
-
-                    $('#error-label').text('Bad credentials. Try again!');
-                    $('#error-label').show();
-                }
             },
-            error: function() {
+            error: function (result) {
 
-                $('#error-label').text('API error, try again later.');
+                var errorResponse = null;
+
+                try {
+
+                    var response = JSON.parse(result.responseText);
+
+                    errorResponse = response.error;
+
+                } catch (ex) {
+
+                    errorResponse = 'API connection error, please try later.';
+
+                }
+
+                $('#error-label').text(errorResponse);
                 $('#error-label').show();
 
             }
@@ -83,7 +90,7 @@ OffCalendar.initLogin = function() {
 /**
  * Logging out user, clears localStorage user data.
  */
-OffCalendar.logout = function() {
+OffCalendar.logout = function () {
 
     localStorage.clear();
     window.location = OffCalendar.homeUrl;
@@ -94,9 +101,9 @@ OffCalendar.logout = function() {
  * Get name, email and password from inputs and sends to auth API.
  * Triggered by submitting register form.
  */
-OffCalendar.initRegister = function() {
+OffCalendar.initRegister = function () {
 
-    $('#register_form').submit(function(event) {
+    $('#register_form').submit(function (event) {
 
         event.preventDefault();
 
@@ -115,26 +122,33 @@ OffCalendar.initRegister = function() {
                 email: email,
                 password: password
             }),
-            complete: function() {
+            complete: function () {
 
                 $('#loaderImage').hide();
 
             },
-            success: function(result) {
+            success: function () {
 
-                if (result && !result.error) {
+                window.location = OffCalendar.homeUrl;
 
-                    window.location = OffCalendar.homeUrl;
-
-                } else {
-
-                    $('#error-label').text('Please correct given data!');
-                    $('#error-label').show();
-                }
             },
-            error: function() {
+            error: function (result) {
 
-                $('#error-label').text('API error, try again later.');
+                var errorResponse = null;
+
+                try {
+
+                    var response = JSON.parse(result.responseText);
+
+                    errorResponse = response.error;
+
+                } catch (ex) {
+
+                    errorResponse = 'API connection error, please try later.';
+
+                }
+
+                $('#error-label').text(errorResponse);
                 $('#error-label').show();
 
             }
@@ -148,7 +162,7 @@ OffCalendar.initRegister = function() {
 /**
  * Checking if user has permission to access main page.
  */
-OffCalendar.isAuthorized = function() {
+OffCalendar.isAuthorized = function () {
 
     var userEmail = OffCalendar.user.email;
     var userPassword = OffCalendar.user.password;
@@ -168,13 +182,13 @@ OffCalendar.isAuthorized = function() {
             email: userEmail,
             password: userPassword
         }),
-        success: function(result) {
+        success: function (result) {
 
             if (!result)
                 window.location = OffCalendar.unauthorizedUrl;
 
         },
-        error: function() {
+        error: function () {
 
             window.location = OffCalendar.unauthorizedUrl;
 
@@ -187,7 +201,7 @@ OffCalendar.isAuthorized = function() {
  * Saves credentials returned from API to LocalStorage.
  * @param {object} apiData
  */
-OffCalendar.saveCredentialsToLocalStorage = function(apiData) {
+OffCalendar.saveCredentialsToLocalStorage = function (apiData) {
 
     var userId = apiData.id;
     var userEmail = apiData.email;
@@ -217,11 +231,11 @@ OffCalendar.saveCredentialsToLocalStorage = function(apiData) {
  * @param {string} url
  * @returns {undefined}
  */
-OffCalendar.initEventAdd = function() {
+OffCalendar.initEventAdd = function () {
 
     var $form = $('form[name=offcalendar_add_event]');
 
-    $form.submit(function(event) {
+    $form.submit(function (event) {
 
         event.preventDefault();
 
@@ -261,7 +275,7 @@ OffCalendar.initEventAdd = function() {
             remote_timestamp: currTimestamp
         };
 
-        IndexedDB.addEvent(Event, function(remoteEventId) {
+        IndexedDB.addEvent(Event, function (remoteEventId) {
 
             if (remoteEventId !== null) {
 
@@ -274,9 +288,9 @@ OffCalendar.initEventAdd = function() {
     });
 };
 
-OffCalendar.handleEventAdd = function() {
+OffCalendar.handleEventAdd = function () {
 
-    $('.add-event-text').click(function() {
+    $('.add-event-text').click(function () {
 
         $('form#add-update-event-form').attr('name', 'offcalendar_add_event');
         $('#add-update-button').html('Add');
@@ -301,11 +315,11 @@ OffCalendar.handleEventAdd = function() {
 
 };
 
-OffCalendar.initEventUpdate = function() {
+OffCalendar.initEventUpdate = function () {
 
     var $form = $('form[name=offcalendar_update_event]');
 
-    $form.submit(function(event) {
+    $form.submit(function (event) {
 
         event.preventDefault();
 
@@ -340,7 +354,7 @@ OffCalendar.initEventUpdate = function() {
         var eventRemoteId = formData[5]['value'];
         eventRemoteId = parseInt(eventRemoteId, 10);
 
-        IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+        IndexedDB.updateEvent(eventRemoteId, toUpdate, function (Event) {
 
             if (Event !== null) {
 
@@ -353,9 +367,9 @@ OffCalendar.initEventUpdate = function() {
 
 };
 
-OffCalendar.handleEventUpdate = function() {
+OffCalendar.handleEventUpdate = function () {
 
-    $('.edit-event').click(function() {
+    $('.edit-event').click(function () {
 
         $('form#add-update-event-form').attr('name', 'offcalendar_update_event');
         $('#add-update-button').html('Update');
@@ -390,9 +404,9 @@ OffCalendar.handleEventUpdate = function() {
 
 };
 
-OffCalendar.handleEventDelete = function() {
+OffCalendar.handleEventDelete = function () {
 
-    $('.delete-event').click(function() {
+    $('.delete-event').click(function () {
 
         var eventRemoteId = $(this).attr('data-event-id');
 
@@ -402,7 +416,7 @@ OffCalendar.handleEventDelete = function() {
 
 };
 
-OffCalendar.deleteEvent = function(eventRemoteId) {
+OffCalendar.deleteEvent = function (eventRemoteId) {
 
     var toUpdate = {
         voided: 1
@@ -410,7 +424,7 @@ OffCalendar.deleteEvent = function(eventRemoteId) {
 
     eventRemoteId = parseInt(eventRemoteId, 10);
 
-    IndexedDB.updateEvent(eventRemoteId, toUpdate, function(Event) {
+    IndexedDB.updateEvent(eventRemoteId, toUpdate, function (Event) {
 
         if (Event !== null) {
 
@@ -422,7 +436,7 @@ OffCalendar.deleteEvent = function(eventRemoteId) {
 
 };
 
-OffCalendar.organizeEventsByDate = function(events) {
+OffCalendar.organizeEventsByDate = function (events) {
 
     var currTimestamp = OffCalendarHelper.currentTimestamp();
 
@@ -442,7 +456,7 @@ OffCalendar.organizeEventsByDate = function(events) {
     OffCalendar.appendEvents();
 };
 
-OffCalendar.appendEvents = function() {
+OffCalendar.appendEvents = function () {
 
     var $pastEventsContainer = $('#past_events-cont');
     var $ongoingEventsContainer = $('#ongoing_events-cont');
@@ -458,7 +472,7 @@ OffCalendar.appendEvents = function() {
 
 };
 
-OffCalendar.appendEventsHTML = function($container, events) {
+OffCalendar.appendEventsHTML = function ($container, events) {
 
     $container.empty();
 
@@ -486,7 +500,7 @@ OffCalendar.appendEventsHTML = function($container, events) {
         $container.html('<div class="alert-danger alert" role="alert">There are no events to show in this section.</div>');
 };
 
-OffCalendar.setupProfileDetails = function() {
+OffCalendar.setupProfileDetails = function () {
 
     var name = OffCalendar.user.name;
     var email = OffCalendar.user.email;
@@ -516,29 +530,29 @@ OffCalendar.setupProfileDetails = function() {
 
 };
 
-OffCalendar.setCalendarNavigation = function(calendar) {
+OffCalendar.setCalendarNavigation = function (calendar) {
 
-    $('.btn-group button[data-calendar-nav]').each(function() {
+    $('.btn-group button[data-calendar-nav]').each(function () {
 
         var $this = $(this);
 
-        $this.click(function() {
+        $this.click(function () {
             calendar.navigate($this.data('calendar-nav'));
         });
 
     });
 
-    $('.btn-group button[data-calendar-view]').each(function() {
+    $('.btn-group button[data-calendar-view]').each(function () {
 
         var $this = $(this);
 
-        $this.click(function() {
+        $this.click(function () {
             calendar.view($this.data('calendar-view'));
         });
 
     });
 
-    $('li.offcalendar-menu').click(function() {
+    $('li.offcalendar-menu').click(function () {
 
         var containerId = $(this).attr('id');
         $('.offcalendar-container').hide();
@@ -550,15 +564,15 @@ OffCalendar.setCalendarNavigation = function(calendar) {
 
 };
 
-OffCalendar.handleAddUpdateWindowClose = function() {
+OffCalendar.handleAddUpdateWindowClose = function () {
 
-    $('#add-update-event-window-dismiss').click(function() {
+    $('#add-update-event-window-dismiss').click(function () {
 
         $('#add-update-event-window').fadeOut();
 
     });
 
-    $(document).keyup(function(e) {
+    $(document).keyup(function (e) {
 
         if (e.keyCode === 27)
             $('#add-update-event-window').fadeOut();
@@ -567,7 +581,7 @@ OffCalendar.handleAddUpdateWindowClose = function() {
 
 };
 
-OffCalendar.synchronizeEvents = function() {
+OffCalendar.synchronizeEvents = function () {
 
     if (Offline.state === 'up') {
 
@@ -580,7 +594,7 @@ OffCalendar.synchronizeEvents = function() {
 
         $('#sync-progress').show();
 
-        IndexedDB.synchronize(userId, userEmail, userPassword, eventsSyncApiUrl, function(itemsSynced) {
+        IndexedDB.synchronize(userId, userEmail, userPassword, eventsSyncApiUrl, function (itemsSynced) {
 
             if (itemsSynced !== null) {
 
@@ -609,11 +623,11 @@ OffCalendar.synchronizeEvents = function() {
 
 };
 
-OffCalendar.initSearch = function() {
+OffCalendar.initSearch = function () {
 
     var $form = $('form[name=search_event]');
 
-    $form.submit(function(event) {
+    $form.submit(function (event) {
 
         event.preventDefault();
 
