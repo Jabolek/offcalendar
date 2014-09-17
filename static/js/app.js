@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     var calendar = null;
 
@@ -7,16 +7,11 @@
         view: 'month',
         tmpl_path: 'tmpls/',
         tmpl_cache: false,
-        onAfterViewLoad: function(view) {
+        onAfterViewLoad: function (view) {
 
             $('.page-header h3').text(this.getTitle());
             $('.btn-group button').removeClass('active');
             $('button[data-calendar-view="' + view + '"]').addClass('active');
-        },
-        classes: {
-            months: {
-                general: 'label'
-            }
         }
     };
 
@@ -24,9 +19,9 @@
 
     if (userId) {
 
-        IndexedDB.open(function() {
+        IndexedDB.open(function () {
 
-            IndexedDB.getUserEvents(userId, function(events) {
+            IndexedDB.getUserEvents(userId, function (events) {
 
                 if (events !== null) {
 
@@ -42,7 +37,7 @@
                 }
             });
 
-            setInterval(function() {
+            setInterval(function () {
 
                 OffCalendar.synchronizeEvents();
 

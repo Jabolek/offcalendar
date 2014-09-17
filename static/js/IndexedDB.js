@@ -11,11 +11,11 @@ var IndexedDB = {};
  * @param {function} callback function to call after execution
  * @returns {bool} true on success, false otherwise
  */
-IndexedDB.open = function(callback) {
+IndexedDB.open = function (callback) {
 
     var request = indexedDB.open(DB_NAME, DB_VERSION);
 
-    request.onupgradeneeded = function(e) {
+    request.onupgradeneeded = function (e) {
 
         console.log('IndexedDB upgrade triggered.');
 
@@ -33,10 +33,11 @@ IndexedDB.open = function(callback) {
         store.createIndex('user_id', 'user_id', {unique: false});
         store.createIndex('voided', 'voided', {unique: false});
         store.createIndex('remote_timestamp', 'remote_timestamp', {unique: false});
+        store.createIndex('search', ['user_id', 'title'], {unique: false});
 
     };
 
-    request.onsuccess = function(e) {
+    request.onsuccess = function (e) {
 
         IndexedDB.db = e.target.result;
 
@@ -45,7 +46,7 @@ IndexedDB.open = function(callback) {
         callback(true);
     };
 
-    request.onerror = function(event) {
+    request.onerror = function (event) {
 
         callback(false);
 
@@ -58,7 +59,7 @@ IndexedDB.open = function(callback) {
  * @param {function} callback to call after execution
  * @returns {mixed} remote_id of created event on success, null otherwise
  */
-IndexedDB.addEvent = function(Event, callback) {
+IndexedDB.addEvent = function (Event, callback) {
 
     console.log('Adding event:');
     console.log(Event);
@@ -71,7 +72,7 @@ IndexedDB.addEvent = function(Event, callback) {
 
     var request = store.put(Event);
 
-    request.onsuccess = function(e) {
+    request.onsuccess = function (e) {
 
         console.log('IndexedDB event #' + e.target.result + ' added successfully.');
 
@@ -79,7 +80,7 @@ IndexedDB.addEvent = function(Event, callback) {
 
     };
 
-    request.onerror = function(e) {
+    request.onerror = function (e) {
 
         console.error('IndexedDB event add error:');
         console.error(e);
@@ -96,7 +97,7 @@ IndexedDB.addEvent = function(Event, callback) {
  * @param {function} callback
  * @returns {mixed} Event on success, null otherwise
  */
-IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callback) {
+IndexedDB.updateEvent = function (eventRemoteId, eventPropertiesToUpdate, callback) {
 
     console.log('Updating event #' + eventRemoteId + ' properties:');
     console.log(eventPropertiesToUpdate);
@@ -107,7 +108,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
     var cursorRequest = store.openCursor(IDBKeyRange.only(eventRemoteId));
 
-    cursorRequest.onsuccess = function(e) {
+    cursorRequest.onsuccess = function (e) {
 
         var cursor = cursorRequest.result || e.result;
 
@@ -121,7 +122,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
         var request = cursor.update(Event);
 
-        request.onerror = function(e) {
+        request.onerror = function (e) {
 
             console.error('Event update failed.');
 
@@ -129,7 +130,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
 
         };
 
-        request.onsuccess = function(e) {
+        request.onsuccess = function (e) {
 
             console.log('Event updated successfully:');
             console.log(Event);
@@ -140,7 +141,7 @@ IndexedDB.updateEvent = function(eventRemoteId, eventPropertiesToUpdate, callbac
     };
 };
 
-IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
+IndexedDB.updateEventById = function (eventId, eventToUpdate, callback) {
 
     console.log('Updating event by ID #' + eventId + ':');
     console.log(eventToUpdate);
@@ -151,7 +152,7 @@ IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
 
     var cursorRequest = store.index('id').openCursor(IDBKeyRange.only(eventId));
 
-    cursorRequest.onsuccess = function(e) {
+    cursorRequest.onsuccess = function (e) {
 
         var cursor = cursorRequest.result || e.result;
 
@@ -169,7 +170,7 @@ IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
 
             var request = cursor.update(Event);
 
-            request.onerror = function(e) {
+            request.onerror = function (e) {
 
                 console.error('Event update failed.');
 
@@ -177,7 +178,7 @@ IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
 
             };
 
-            request.onsuccess = function(e) {
+            request.onsuccess = function (e) {
 
                 console.log('Event updated successfully:');
                 console.log(Event);
@@ -198,7 +199,7 @@ IndexedDB.updateEventById = function(eventId, eventToUpdate, callback) {
  * @param {function} callback
  * @returns {mixed} array of Events on success, null otherwise
  */
-IndexedDB.getUserEvents = function(userId, callback) {
+IndexedDB.getUserEvents = function (userId, callback) {
 
     var resultSet = [];
 
@@ -210,7 +211,7 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
     var cursorRequest = store.index('user_id').openCursor(keyRange);
 
-    cursorRequest.onsuccess = function(e) {
+    cursorRequest.onsuccess = function (e) {
 
         var result = e.target.result;
 
@@ -220,9 +221,10 @@ IndexedDB.getUserEvents = function(userId, callback) {
         resultSet.push(result.value);
 
         result.continue();
+
     };
 
-    transaction.oncomplete = function(event) {
+    transaction.oncomplete = function (event) {
 
         console.log('IndexedDB events fetched');
         console.log(resultSet);
@@ -231,7 +233,7 @@ IndexedDB.getUserEvents = function(userId, callback) {
 
     };
 
-    cursorRequest.onerror = function(event) {
+    cursorRequest.onerror = function (event) {
 
         console.error('Error getting user events');
 
@@ -240,7 +242,7 @@ IndexedDB.getUserEvents = function(userId, callback) {
     };
 };
 
-IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callback) {
+IndexedDB.getUserEventsForSync = function (userId, lastRemoteSyncTimestamp, callback) {
 
     var resultSet = [];
 
@@ -252,7 +254,7 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
 
     var cursorRequest = store.index('user_id').openCursor(keyRange);
 
-    cursorRequest.onsuccess = function(e) {
+    cursorRequest.onsuccess = function (e) {
 
         var result = e.target.result;
 
@@ -266,7 +268,7 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
         result.continue();
     };
 
-    transaction.oncomplete = function(event) {
+    transaction.oncomplete = function (event) {
 
         console.log('IndexedDB events to sync:');
         console.log(resultSet);
@@ -275,7 +277,7 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
 
     };
 
-    cursorRequest.onerror = function(event) {
+    cursorRequest.onerror = function (event) {
 
         console.error('Error getting user events');
 
@@ -284,6 +286,51 @@ IndexedDB.getUserEventsForSync = function(userId, lastRemoteSyncTimestamp, callb
     };
 };
 
+IndexedDB.searchEvent = function (userId, eventDesc, callback) {
+
+    var resultSet = [];
+
+    var transaction = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_ONLY);
+
+    var store = transaction.objectStore(DB_STORE_NAME);
+
+    var lowerBound = [userId, eventDesc];
+    var upperBound = [userId, eventDesc + '\uffff'];
+
+    var keyRange = IDBKeyRange.bound(lowerBound, upperBound);
+
+    var cursorRequest = store.index('search').openCursor(keyRange, 'prev');
+
+    cursorRequest.onsuccess = function (e) {
+
+        var result = e.target.result;
+
+        if (result) {
+
+            resultSet.push(result.value);
+
+            result.continue();
+        }
+
+    };
+
+    transaction.oncomplete = function (event) {
+
+        console.log('IndexedDB events found');
+        console.log(resultSet);
+
+        callback(resultSet);
+
+    };
+
+    cursorRequest.onerror = function (event) {
+
+        console.error('Error searching events');
+
+        callback(null);
+
+    };
+};
 
 // --------------------- IndexedDB Synchronize methods --------------------- //
 
@@ -298,7 +345,7 @@ IndexedDB.sync.password = '';
 IndexedDB.sync.url = '';
 IndexedDB.sync.eventsToUpdate = [];
 IndexedDB.sync.itemsSynced = 0;
-IndexedDB.sync.callback = function() {
+IndexedDB.sync.callback = function () {
 };
 
 /**
@@ -310,7 +357,7 @@ IndexedDB.sync.callback = function() {
  * @param {function} callback
  * @returns {undefined}
  */
-IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiUrl, callback) {
+IndexedDB.synchronize = function (userId, userEmail, userPassword, eventsSyncApiUrl, callback) {
 
     if (IndexedDB.sync.inProgress === true) {
         console.log('IndexedDB sync already in progress');
@@ -335,7 +382,7 @@ IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiU
 
 };
 
-IndexedDB.sync.failed = function(msg) {
+IndexedDB.sync.failed = function (msg) {
 
     console.error('IndexedDB sync error: ' + msg);
 
@@ -345,7 +392,7 @@ IndexedDB.sync.failed = function(msg) {
 
 };
 
-IndexedDB.sync.eventsFetched = function(events) {
+IndexedDB.sync.eventsFetched = function (events) {
 
     if (events === null) {
         IndexedDB.sync.failed('Error fetching events from db.');
@@ -365,7 +412,7 @@ IndexedDB.sync.eventsFetched = function(events) {
         }
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function (response, textStatus, jqXHR) {
 
         console.log('Response from the server received:');
         console.log(response);
@@ -374,7 +421,7 @@ IndexedDB.sync.eventsFetched = function(events) {
 
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
 
         var msg;
 
@@ -390,10 +437,10 @@ IndexedDB.sync.eventsFetched = function(events) {
 
 };
 
-IndexedDB.sync.processData = function(data) {
+IndexedDB.sync.processData = function (data) {
 
     IndexedDB.sync.eventsToUpdate = data.events_to_update;
-    
+
     IndexedDB.sync.timestamp = data.sync_timestamp;
 
     console.log("Updating events in DB.");
@@ -402,12 +449,12 @@ IndexedDB.sync.processData = function(data) {
 
 };
 
-IndexedDB.sync.success = function() {
+IndexedDB.sync.success = function () {
 
     IndexedDB.sync.inProgress = false;
 
     IndexedDB.sync.setLastRemoteSyncTimestamp(IndexedDB.sync.remoteTimestamp);
-    
+
     IndexedDB.sync.setLastSyncTimestamp(IndexedDB.sync.timestamp);
 
     console.log(IndexedDB.sync.itemsSynced + ' events updated.');
@@ -416,7 +463,7 @@ IndexedDB.sync.success = function() {
 
 };
 
-IndexedDB.sync.updateEvents = function() {
+IndexedDB.sync.updateEvents = function () {
 
     if (IndexedDB.sync.eventsToUpdate.length > 0) {
 
@@ -438,14 +485,14 @@ IndexedDB.sync.updateEvents = function() {
 
 };
 
-IndexedDB.sync.getLastRemoteSyncTimestampKey = function(userId) {
-    
+IndexedDB.sync.getLastRemoteSyncTimestampKey = function (userId) {
+
     return 'last_remote_sync_timestamp_' + userId;
-    
+
 };
 
-IndexedDB.sync.getLastRemoteSyncTimestamp = function() {
-    
+IndexedDB.sync.getLastRemoteSyncTimestamp = function () {
+
     var key = IndexedDB.sync.getLastRemoteSyncTimestampKey(IndexedDB.sync.userId);
 
     var timestamp = localStorage.getItem(key);
@@ -458,22 +505,22 @@ IndexedDB.sync.getLastRemoteSyncTimestamp = function() {
 
 };
 
-IndexedDB.sync.setLastRemoteSyncTimestamp = function(timestamp) {
-    
+IndexedDB.sync.setLastRemoteSyncTimestamp = function (timestamp) {
+
     var key = IndexedDB.sync.getLastRemoteSyncTimestampKey(IndexedDB.sync.userId);
 
     localStorage.setItem(key, timestamp);
 
 };
 
-IndexedDB.sync.getLastSyncTimestampKey = function(userId) {
-    
+IndexedDB.sync.getLastSyncTimestampKey = function (userId) {
+
     return 'last_sync_timestamp_' + userId;
-    
+
 };
 
-IndexedDB.sync.getLastSyncTimestamp = function() {
-    
+IndexedDB.sync.getLastSyncTimestamp = function () {
+
     var key = IndexedDB.sync.getLastSyncTimestampKey(IndexedDB.sync.userId);
 
     var timestamp = localStorage.getItem(key);
@@ -486,8 +533,8 @@ IndexedDB.sync.getLastSyncTimestamp = function() {
 
 };
 
-IndexedDB.sync.setLastSyncTimestamp = function(timestamp) {
-    
+IndexedDB.sync.setLastSyncTimestamp = function (timestamp) {
+
     var key = IndexedDB.sync.getLastSyncTimestampKey(IndexedDB.sync.userId);
 
     localStorage.setItem(key, timestamp);

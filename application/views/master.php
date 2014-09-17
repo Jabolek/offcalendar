@@ -110,7 +110,7 @@
                         </div>
 
                         <div id="sync-failed" class="alert alert-danger medium-big center-block sync-alert" role="alert" style="display: none;">
-                            Synchronization failed. Try again later.
+                            Synchronization failed.
                         </div>
 
                         <div id="main-cont" class="offcalendar-container">
@@ -175,6 +175,10 @@
 
                                 <div class="panel-body"></div>
                             </div>
+                        </div>
+
+                        <div id="search-cont" class="offcalendar-container" style="display: none;">
+                            Search results:
                         </div>
                     </div>
                 </div>                

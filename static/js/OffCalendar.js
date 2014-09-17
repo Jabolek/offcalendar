@@ -472,34 +472,6 @@ OffCalendar.appendEvents = function () {
 
 };
 
-OffCalendar.appendEventsHTML = function ($container, events) {
-
-    $container.empty();
-
-    var evLength = events.length;
-
-    for (var i = 0; i < evLength; i++) {
-
-        var html = '';
-        var ev = events[i];
-
-        if (!ev.voided) {
-
-            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
-            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
-
-            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
-
-            $container.append(html);
-
-        }
-
-    }
-
-    if ($container.is(':empty'))
-        $container.html('<div class="alert-danger alert" role="alert">There are no events to show in this section.</div>');
-};
-
 OffCalendar.setupProfileDetails = function () {
 
     var name = OffCalendar.user.name;
@@ -625,16 +597,64 @@ OffCalendar.synchronizeEvents = function () {
 
 OffCalendar.initSearch = function () {
 
-    var $form = $('form[name=search_event]');
+    $(document).ready(function () {
 
-    $form.submit(function (event) {
+        var $form = $('form[name=search_event]');
 
-        event.preventDefault();
+        $form.submit(function (event) {
 
-        var formData = $form.serializeArray();
+            event.preventDefault();
 
-        console.log(formData);
+            var userId = OffCalendar.user.id;
+            var formData = $form.serializeArray();
+            var searchTerm = formData[0]['value'];
+
+            if (searchTerm !== '') {
+
+                IndexedDB.searchEvent(userId, searchTerm, function (events) {
+
+                    var $containers = $('.offcalendar-container');
+                    var $searchContainer = $('#search-cont');
+
+                    OffCalendar.appendEventsHTML($searchContainer, events);
+
+                    $containers.hide();
+                    $searchContainer.show();
+
+                });
+
+            }
+
+        });
 
     });
+};
+
+OffCalendar.appendEventsHTML = function ($container, events) {
+
+    $container.empty();
+
+    var evLength = events.length;
+
+    for (var i = 0; i < evLength; i++) {
+
+        var html = '';
+        var ev = events[i];
+
+        if (!ev.voided) {
+
+            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
+            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
+
+            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
+
+            $container.append(html);
+
+        }
+
+    }
+
+    if ($container.is(':empty'))
+        $container.html('<div class="alert-danger alert" role="alert">There are no events to show in this section.</div>');
 
 };
