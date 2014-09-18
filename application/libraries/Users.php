@@ -63,36 +63,11 @@ class Users {
         return $user;
     }
 
-    function getUserById($userId){
-        
+    function getUserById($userId) {
+
         $userArr = $this->ci->users_model->getUserById($userId);
-        
+
         return new User($userArr);
-        
-    }
-    
-    /**
-     * @param string $email
-     * @param string $password
-     * @return boolean
-     */
-    function isAuthorized($email, $password) {
-
-        $result = $this->ci->users_model->getUserByEmail($email);
-
-        if (!$result) {
-            return false;
-        }
-
-        $user = User::fromRowArray($result);
-
-        $hash = $this->hash($password);
-
-        if ($user->getHash() !== $hash) {
-            return false;
-        }
-
-        return true;
     }
 
     private function hash($password) {

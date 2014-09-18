@@ -100,17 +100,16 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
                     <div class="container">
 
-                        <div id="sync-progress" class="alert alert-info medium-big center-block sync-alert" role="alert" style="display: none;">
-                            Synchronizing events...
-                            <img src="../../static/img/sync-loader.gif" alt="loading">
+                        <div id="alert-progress" class="alert alert-info medium-big center-block offcalendar-alert" role="alert" style="display: none;">
+
                         </div>
 
-                        <div id="sync-success" class="alert alert-success medium-big center-block sync-alert" role="alert" style="display: none;">
-                            Success! Events synchronized: <span class="badge alert-success"></span>
+                        <div id="alert-success" class="alert alert-success medium-big center-block offcalendar-alert" role="alert" style="display: none;">
+
                         </div>
 
-                        <div id="sync-failed" class="alert alert-danger medium-big center-block sync-alert" role="alert" style="display: none;">
-                            Synchronization failed.
+                        <div id="alert-failed" class="alert alert-danger medium-big center-block offcalendar-alert" role="alert" style="display: none;">
+
                         </div>
 
                         <div id="main-cont" class="offcalendar-container">

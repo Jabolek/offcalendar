@@ -62,20 +62,4 @@ class Users_api extends Api_Controller {
         }
     }
 
-    function is_authorized() {
-
-        try {
-
-            $email = (string) $this->input->post('email');
-
-            $password = (string) $this->input->post('password');
-
-            $isAuthorized = $this->users->isAuthorized($email, $password);
-
-            return $this->jsonResponse($isAuthorized);
-        } catch (Exception $e) {
-            return $this->jsonError($e->getMessage());
-        }
-    }
-
 }

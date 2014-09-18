@@ -17,11 +17,10 @@ OffCalendar.homeUrl = '/';
 OffCalendar.dashboardUrl = '/welcome/dashboard';
 OffCalendar.loginApiUrl = '/apis/users_api/login';
 OffCalendar.registerApiUrl = '/apis/users_api/register';
-OffCalendar.isAuthorizedApiUrl = '/apis/users_api/is_authorized';
 OffCalendar.unauthorizedUrl = '/welcome/unauthorized';
 OffCalendar.eventsSyncApiUrl = '/apis/events_api/synchronize';
 OffCalendar.syncInterval = 60000 * 3;
-OffCalendar.alertInterval = 1000 * 5;
+OffCalendar.alertInterval = 1000 * 2;
 
 /**
  * Get email and password from inputs and sends to auth API.
@@ -57,7 +56,14 @@ OffCalendar.initLogin = function () {
                 result.password = password;
 
                 OffCalendar.saveCredentialsToLocalStorage(result);
-                window.location = OffCalendar.dashboardUrl;
+
+                var alertContent = 'Authentication succesfull, redirecting... <img src="../../static/img/sync-loader.gif" alt="loading">';
+
+                OffCalendar.showFlashMessage('progress', alertContent, function () {
+
+                    window.location = OffCalendar.dashboardUrl;
+
+                });
 
             },
             error: function (result) {
@@ -129,7 +135,13 @@ OffCalendar.initRegister = function () {
             },
             success: function () {
 
-                window.location = OffCalendar.homeUrl;
+                var alertContent = 'Account was succesfully created.';
+
+                OffCalendar.showFlashMessage('success', alertContent, function () {
+
+                    window.location = OffCalendar.homeUrl;
+
+                });
 
             },
             error: function (result) {
@@ -164,36 +176,11 @@ OffCalendar.initRegister = function () {
  */
 OffCalendar.isAuthorized = function () {
 
-    var userEmail = OffCalendar.user.email;
-    var userPassword = OffCalendar.user.password;
+    var userEmail = localStorage.getItem('user_email');
+    var userPassword = localStorage.getItem('user_password');
 
-    if (typeof userEmail === undefined)
+    if (userEmail === null || userPassword === null)
         window.location = OffCalendar.unauthorizedUrl;
-
-    if (typeof userPassword === undefined)
-        window.location = OffCalendar.unauthorizedUrl;
-
-    $.ajax({
-        type: 'POST',
-        datatype: 'json',
-        async: false,
-        url: OffCalendar.isAuthorizedApiUrl,
-        data: ({
-            email: userEmail,
-            password: userPassword
-        }),
-        success: function (result) {
-
-            if (!result)
-                window.location = OffCalendar.unauthorizedUrl;
-
-        },
-        error: function () {
-
-            window.location = OffCalendar.unauthorizedUrl;
-
-        }
-    });
 
 };
 
@@ -279,7 +266,11 @@ OffCalendar.initEventAdd = function () {
 
             if (remoteEventId !== null) {
 
-                window.location = OffCalendar.dashboardUrl;
+                OffCalendar.showFlashMessage('success', 'Event succesfully added!', function () {
+
+                    window.location = OffCalendar.dashboardUrl;
+
+                });
 
             }
 
@@ -358,7 +349,11 @@ OffCalendar.initEventUpdate = function () {
 
             if (Event !== null) {
 
-                window.location = OffCalendar.dashboardUrl;
+                OffCalendar.showFlashMessage('success', 'Event succesfully updated!', function () {
+
+                    window.location = OffCalendar.dashboardUrl;
+
+                });
 
             }
 
@@ -428,7 +423,15 @@ OffCalendar.deleteEvent = function (eventRemoteId) {
 
         if (Event !== null) {
 
-            window.location = OffCalendar.dashboardUrl;
+            if (Event !== null) {
+
+                OffCalendar.showFlashMessage('success', 'Event succesfully deleted!', function () {
+
+                    window.location = OffCalendar.dashboardUrl;
+
+                });
+
+            }
 
         }
 
@@ -561,26 +564,25 @@ OffCalendar.synchronizeEvents = function () {
         var userEmail = OffCalendar.user.email;
         var userPassword = OffCalendar.user.password;
         var eventsSyncApiUrl = OffCalendar.eventsSyncApiUrl;
+        var alertContent = null;
 
-        $('.sync-alert').hide();
+        alertContent = 'Synchronizing events... <img src="../../static/img/sync-loader.gif" alt="loading">';
 
-        $('#sync-progress').show();
+        OffCalendar.showFlashMessage('progress', alertContent);
 
         IndexedDB.synchronize(userId, userEmail, userPassword, eventsSyncApiUrl, function (itemsSynced) {
 
             if (itemsSynced !== null) {
 
-                $('.sync-alert').hide();
+                alertContent = 'Success! Events synchronized: <span class="badge alert-success">' + itemsSynced + '</span>';
 
-                $('#sync-success .badge.alert-success').text(itemsSynced);
-
-                $('#sync-success').show().delay(OffCalendar.alertInterval).fadeOut();
+                OffCalendar.showFlashMessage('success', alertContent, jQuery.noop());
 
             } else {
 
-                $('.sync-alert').hide();
+                alertContent = 'Synchronization failed.';
 
-                $('#sync-failed').show().delay(OffCalendar.alertInterval).fadeOut();
+                OffCalendar.showFlashMessage('failed', alertContent, jQuery.noop());
             }
 
             console.log('Synchronization finished.');
@@ -656,5 +658,19 @@ OffCalendar.appendEventsHTML = function ($container, events) {
 
     if ($container.is(':empty'))
         $container.html('<div class="alert-danger alert" role="alert">There are no events to show in this section.</div>');
+
+};
+
+OffCalendar.showFlashMessage = function (alertType, alertContent, callback) {
+
+    var alertId = '#alert-' + alertType;
+
+    $('.offcalendar-alert').hide();
+
+    $(alertId).html(alertContent);
+
+    window.scrollTo(0, 0);
+
+    $(alertId).show().delay(OffCalendar.alertInterval).fadeOut('slow', callback);
 
 };

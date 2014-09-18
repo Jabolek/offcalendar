@@ -16,6 +16,18 @@
         <div class="container medium">
             <span class="logo dark" style="font-size: 55px;">OffCalendar</span>
 
+            <div id="alert-progress" class="alert alert-info medium center-block offcalendar-alert" role="alert" style="display: none;">
+
+            </div>
+
+            <div id="alert-success" class="alert alert-success medium center-block offcalendar-alert" role="alert" style="display: none;">
+
+            </div>
+
+            <div id="alert-failed" class="alert alert-danger medium center-block offcalendar-alert" role="alert" style="display: none;">
+
+            </div>
+
             <form id="register_form" method="POST" class="form-signin">
                 <h2 class="form-signin-heading">Sign up</h2><br>
                 <div id="error-label" class="alert alert-danger" role="alert" style="display: none;"></div><br>
