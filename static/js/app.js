@@ -35,7 +35,10 @@
 
                     OffCalendar.setupProfileDetails();
                 }
+
             });
+
+            OffCalendar.synchronizeEvents();
 
             setInterval(function () {
 
@@ -44,6 +47,7 @@
             }, OffCalendar.syncInterval);
 
         });
+
     }
 
 }(jQuery));

@@ -1,12 +1,12 @@
 var OffCalendarHelper = {};
 
-OffCalendarHelper.currentTimestamp = function() {
+OffCalendarHelper.currentTimestamp = function () {
 
     return new Date().getTime();
 
 };
 
-OffCalendarHelper.getDateFromTimestamp = function(timestamp, forInput) {
+OffCalendarHelper.getDateFromTimestamp = function (timestamp, forInput) {
 
     var date = new Date(parseInt(timestamp, 10));
 
@@ -28,7 +28,7 @@ OffCalendarHelper.getDateFromTimestamp = function(timestamp, forInput) {
 
 };
 
-OffCalendarHelper.getTimestampFromDate = function(date) {
+OffCalendarHelper.getTimestampFromDate = function (date) {
 
     var timestamp = date.replace('T', ' ');
     timestamp = new Date(timestamp).getTime();
@@ -37,7 +37,7 @@ OffCalendarHelper.getTimestampFromDate = function(date) {
 
 };
 
-OffCalendarHelper.mapEventTypeToClassName = function(eventType) {
+OffCalendarHelper.mapEventTypeToClassName = function (eventType) {
 
     var eventTypeToClassNameMap = {
         'regular': 'event-inverse',
@@ -50,7 +50,7 @@ OffCalendarHelper.mapEventTypeToClassName = function(eventType) {
     return eventTypeToClassNameMap[eventType];
 };
 
-OffCalendarHelper.mapEventClassNameToType = function(className) {
+OffCalendarHelper.mapEventClassNameToType = function (className) {
 
     var eventClassNameToTypeMap = {
         'event-inverse': 'regular',
@@ -63,9 +63,9 @@ OffCalendarHelper.mapEventClassNameToType = function(className) {
     return eventClassNameToTypeMap[className];
 };
 
-OffCalendarHelper.setSelectValue = function(value, inputName) {
+OffCalendarHelper.setSelectValue = function (value, inputName) {
 
-    $('select[name=' + inputName + '] option').filter(function() {
+    $('select[name=' + inputName + '] option').filter(function () {
 
         return $(this).text() === value;
 
@@ -73,7 +73,7 @@ OffCalendarHelper.setSelectValue = function(value, inputName) {
 
 };
 
-OffCalendarHelper.setCheckboxValue = function(value, inputId) {
+OffCalendarHelper.setCheckboxValue = function (value, inputId) {
 
     $obj = $('#' + inputId);
 

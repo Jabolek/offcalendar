@@ -231,15 +231,8 @@ OffCalendar.initEventAdd = function () {
         var currTimestamp = OffCalendarHelper.currentTimestamp();
         var userId = OffCalendar.user.id;
 
-        var startTimestamp = formData[0]['value'];
-        startTimestamp = startTimestamp.replace('T', ' ');
-        startTimestamp = new Date(startTimestamp).getTime();
-        startTimestamp = parseInt(startTimestamp, 10);
-
-        var endTimestamp = formData[1]['value'];
-        endTimestamp = endTimestamp.replace('T', ' ');
-        endTimestamp = new Date(endTimestamp).getTime();
-        endTimestamp = parseInt(endTimestamp, 10);
+        var startTimestamp = OffCalendarHelper.getTimestampFromDate(formData[0]['value']);
+        var endTimestamp = OffCalendarHelper.getTimestampFromDate(formData[1]['value']);
 
         var description = formData[2]['value'];
 
@@ -259,7 +252,8 @@ OffCalendar.initEventAdd = function () {
             send_notifications: sendNotifications ? 1 : 0,
             voided: 0,
             created_timestamp: currTimestamp,
-            remote_timestamp: currTimestamp
+            remote_timestamp: currTimestamp,
+            last_update_timestamp: 0
         };
 
         IndexedDB.addEvent(Event, function (remoteEventId) {
@@ -316,7 +310,6 @@ OffCalendar.initEventUpdate = function () {
 
         var formData = $form.serializeArray();
 
-        var currTimestamp = OffCalendarHelper.currentTimestamp();
         var userId = OffCalendar.user.id;
 
         var startTimestamp = OffCalendarHelper.getTimestampFromDate(formData[0]['value']);
@@ -591,7 +584,7 @@ OffCalendar.synchronizeEvents = function () {
 
     } else {
 
-        console.log('Synchronization failed, connection down.')
+        console.log('Synchronization failed, connection down.');
 
     }
 
