@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  12 SEP 2014 14:34
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  22 SEP 2014 21:50
 entering extended mode
 **praca.tex
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.tex
@@ -444,6 +444,16 @@ File: lstlang2.sty 2004/09/05 1.3 listings language file
 (D:\latex\tex\latex\listings\lstlang3.sty
 File: lstlang3.sty 2004/09/05 1.3 listings language file
 )
+(D:\latex\tex\latex\psnfss\courier.sty
+Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
+) (D:\latex\tex\latex\float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count103
+\float@exts=\toks21
+\float@box=\box29
+\@float@everytoks=\toks22
+\@floatcapt=\box30
+)
 
 LaTeX Warning: Unused global option(s):
     [11pt].
@@ -452,41 +462,110 @@ LaTeX Warning: Unused global option(s):
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+
+LaTeX Warning: Label `amb' multiply defined.
+
+) (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux
 
 LaTeX Warning: Label `sec:apKli' multiply defined.
 
 ) (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.aux))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
-LaTeX Font Info:    ... okay on input line 70.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 70.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 73.
 
 (D:\latex\tex\latex\psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 ) (D:\latex\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count103
+\scratchcounter=\count104
 \scratchdimen=\dimen127
-\scratchbox=\box29
-\nofMPsegments=\count104
-\nofMParguments=\count105
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count106
+\scratchbox=\box31
+\nofMPsegments=\count105
+\nofMParguments=\count106
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count107
 \MPscratchDim=\dimen128
-\MPnumerator=\count107
-\makeMPintoPDFobject=\count108
-\everyMPtoPDFconversion=\toks22
+\MPnumerator=\count108
+\makeMPintoPDFobject=\count109
+\everyMPtoPDFconversion=\toks24
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -522,38 +601,38 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count109
+\c@lstlisting=\count110
 <agh.jpg, id=1, 146.4672pt x 284.7438pt>
 File: agh.jpg Graphic file (type jpg)
  <use agh.jpg>
-Package pdftex.def Info: agh.jpg used on input line 72.
+Package pdftex.def Info: agh.jpg used on input line 75.
 (pdftex.def)             Requested size: 87.88098pt x 170.8476pt.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 72.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 75.
 
 (D:\latex\tex\latex\psnfss\t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `T1/phv/bx/sc' in size <12> not available
-(Font)              Font shape `T1/phv/b/sc' tried instead on input line 72.
+(Font)              Font shape `T1/phv/b/sc' tried instead on input line 75.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 72.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 75.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 72.
+(Font)              <10.95> on input line 75.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 72.
+(Font)              <8> on input line 75.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 72.
+(Font)              <6> on input line 75.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 75.
  [1
 
 {C:/Users/freak/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/fr
 eak/Dropbox/offcalendar/mgr/agh.jpg>]
-Underfull \hbox (badness 2903) in paragraph at lines 72--72
+Underfull \hbox (badness 2903) in paragraph at lines 75--75
 []\T1/ptm/m/it/12 O±wiadczamy, ±wia-domi od-po-wie-dzial-no-±ci kar-nej za po-±
 wiad-cze-nie nie-prawdy, »e
  []
@@ -561,7 +640,7 @@ wiad-cze-nie nie-prawdy, »e
 [2
 
 ]
-Underfull \hbox (badness 4013) in paragraph at lines 72--72
+Underfull \hbox (badness 4013) in paragraph at lines 75--75
 []\T1/ptm/m/it/14.4 Skªadamy ser-deczne po-dzi¦-ko-wa-nia Panu dr
  []
 
@@ -571,9 +650,9 @@ Underfull \hbox (badness 4013) in paragraph at lines 72--72
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 74.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 77.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 74.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 77.
  (C:\Users\freak\Dropbox\offcalendar\mgr\praca.toc [5
 
 ])
@@ -636,19 +715,65 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [28] [29] [30] [31]) [32]
 (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.tex
 Rozdzia\l  4.
-) [33
+[33
 
 
 
-] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.tex
+] [34] [35] [36] <signin.png, id=124, 441.90094pt x 330.48468pt>
+File: signin.png Graphic file (type png)
+
+<use signin.png>
+Package pdftex.def Info: signin.png used on input line 139.
+(pdftex.def)             Requested size: 227.62206pt x 170.23428pt.
+ <register.png, id=125, 388.45125pt x 365.11406pt>
+File: register.png Graphic file (type png)
+
+<use register.png>
+Package pdftex.def Info: register.png used on input line 145.
+(pdftex.def)             Requested size: 227.62206pt x 213.9502pt.
+ [37 <C:/Users/freak/Dropbox/offcalendar/mgr/signin.png> <C:/Users/freak/Dropbo
+x/offcalendar/mgr/register.png>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 160.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 160.
+
+<add_event.png, id=130, 694.84593pt x 613.54219pt>
+File: add_event.png Graphic file (type png)
+ <use add_event.png>
+Package pdftex.def Info: add_event.png used on input line 166.
+(pdftex.def)             Requested size: 409.71692pt x 361.77144pt.
+ [38 <C:/Users/freak/Dropbox/offcalendar/mgr/add_event.png>] [39] [40] [41] [42
+]
+[43] [44] [45] [46] <isOnline.png, id=159, 307.1475pt x 60.225pt>
+File: isOnline.png Graphic file (type png)
+
+<use isOnline.png>
+Package pdftex.def Info: isOnline.png used on input line 526.
+(pdftex.def)             Requested size: 409.71692pt x 80.34174pt.
+ [47] <isOffline.png, id=163, 306.39468pt x 60.225pt>
+File: isOffline.png Graphic file (type png)
+
+<use isOffline.png>
+Package pdftex.def Info: isOffline.png used on input line 532.
+(pdftex.def)             Requested size: 409.71692pt x 80.5384pt.
+ [48 <C:/Users/freak/Dropbox/offcalendar/mgr/isOnline.png> <C:/Users/freak/Drop
+box/offcalendar/mgr/isOffline.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 565--566
+[]\T1/ptm/m/n/10.95 W przy-padku gdy pro-ces syn-chro-ni-za-cji jest w trak-cie
+ wy-ko-na-nia (atry-but In-de-
+ []
+
+[49] [50] [51] [52] [53] [54] [55] [56] [57]) [58]
+(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.tex
 Rozdzia\l  5.
-) [34
+) [59
 
 
 
 ] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.tex
 Rozdzia\l  6.
-) [35
+) [60
 
 
 
@@ -666,22 +791,22 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5010 strings out of 494045
- 65657 string characters out of 3156044
- 158632 words of memory out of 3000000
- 8158 multiletter control sequences out of 15000+200000
- 70538 words of font info for 68 fonts, out of 3000000 for 9000
+ 5396 strings out of 494045
+ 69139 string characters out of 3156044
+ 239632 words of memory out of 3000000
+ 8525 multiletter control sequences out of 15000+200000
+ 80237 words of font info for 79 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 34i,12n,45p,840b,375s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,12n,45p,840b,1814s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/latex/fonts/enc/dvips/fontname/8r.enc}<D:/latex/fonts/type1/urw/courier/u
 crr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fonts/type1/u
 rw/helvetic/uhvr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex
 /fonts/type1/urw/times/utmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D
 :/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on praca.pdf (35 pages, 266507 bytes).
+Output written on praca.pdf (60 pages, 396238 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
+ 236 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
