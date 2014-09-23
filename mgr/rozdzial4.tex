@@ -187,7 +187,7 @@ Widoki kalendarza ładowane są asynchroniczne. Zostały skonstruowane w HTML z 
 <% _.each(after_time, function(event){ %>
 <div class="day-highlight dh-<%= event.class %>">
        		<span class="cal-hours"><%= event.start_hour %></span>
-              	<%= event.title %></a>
+              	<%= event.description %></a>
        </div>
 <% }); %>
 
@@ -268,7 +268,7 @@ IndexedDB.open = function (callback) {
         store.createIndex('user_id', 'user_id', {unique: false});
         store.createIndex('voided', 'voided', {unique: false});
         store.createIndex('remote_timestamp', 'remote_timestamp', {unique: false});
-        store.createIndex('search', ['user_id', 'title'], {unique: false});
+        store.createIndex('search', ['user_id', 'description'], {unique: false});
 
     };
 
@@ -284,7 +284,7 @@ IndexedDB.open = function (callback) {
 
 \end{lstlisting}
 
-Baza lokalna zostaje otwarta z dwoma parametrami: nazwą bazy oraz jej wersją. Następnie tworzone są indeksy niezbędne do przeszukiwania po nazwach pól np. indeks o nazwie \textbf{search} wyszukuje pola \textbf{user\_id} oraz \textbf{title} i akceptuje duplikaty. Zarówno w przypadku pomyślnego jak i błędnego wykonania żądania wykonywana jest funkcja określona w parametrze callback. 
+Baza lokalna zostaje otwarta z dwoma parametrami: nazwą bazy oraz jej wersją. Następnie tworzone są indeksy niezbędne do przeszukiwania po nazwach pól np. indeks o nazwie \textbf{search} wyszukuje pola \textbf{user\_id} oraz \textbf{description} i akceptuje duplikaty. Zarówno w przypadku pomyślnego jak i błędnego wykonania żądania wykonywana jest funkcja określona w parametrze callback. 
 
 W aplikacji OffCalendar po otwarciu połączenia do bazy danych wykonywane jest pobranie wydarzeń dla danego użytkownika (kod poniżej) a następnie zainicjowanie synchronizacji
 
@@ -332,13 +332,13 @@ Pobrane wydarzenia zostają zapisane w opcjach kalendarza, po czym następuje je
 \begin{lstlisting}[caption=Struktura obiektu reprezentującego wydarzenie., label=amb, captionpos=b]
 
 class: "event-important"
-start: 1411349400000
-end: 1411380720000
+start_timestamp: 1411349400000
+end_timestamp: 1411380720000
 last_update_timestamp: 0
 remote_id: 1
 remote_timestamp: 1411398325288
-send_notifications: 0
-title: "test"
+send_notification: 0
+description: "test"
 url: ""
 user_id: 4
 voided: 0
@@ -407,16 +407,16 @@ OffCalendar.initEventUpdate = function () {
         var url = formData[3]['value'];
         var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
 
-        var sendNotifications = $('input#send_notifications').is(':checked');
+        var sendNotification = $('input#send_notification').is(':checked');
 
         var toUpdate = {
             user_id: userId,
-            start: startTimestamp,
-            end: endTimestamp,
-            title: description,
+            start_timestamp: startTimestamp,
+            end_timestamp: endTimestamp,
+            description: description,
             url: url,
             class: eventClass,
-            send_notifications: sendNotifications ? 1 : 0,
+            send_notification: sendNotification ? 1 : 0,
             voided: 0,
             remote_timestamp: OffCalendarHelper.currentTimestamp()
         };

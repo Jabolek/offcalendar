@@ -240,18 +240,17 @@ OffCalendar.initEventAdd = function () {
 
         var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
 
-        var sendNotifications = $('input#send_notifications').is(':checked');
+        var sendNotification = $('input#send_notification').is(':checked');
 
         var Event = {
             user_id: userId,
-            start: startTimestamp,
-            end: endTimestamp,
-            title: description,
+            start_timestamp: startTimestamp,
+            end_timestamp: endTimestamp,
+            description: description,
             url: url,
             class: eventClass,
-            send_notifications: sendNotifications ? 1 : 0,
+            send_notification: sendNotification ? 1 : 0,
             voided: 0,
-            created_timestamp: currTimestamp,
             remote_timestamp: currTimestamp,
             last_update_timestamp: 0
         };
@@ -290,7 +289,7 @@ OffCalendar.handleEventAdd = function () {
 
         OffCalendarHelper.setSelectValue('regular', 'event-class');
 
-        OffCalendarHelper.setCheckboxValue(true, 'send_notifications');
+        OffCalendarHelper.setCheckboxValue(true, 'send_notification');
 
         $('#add-update-event-window').fadeIn();
 
@@ -321,16 +320,16 @@ OffCalendar.initEventUpdate = function () {
 
         var eventClass = OffCalendarHelper.mapEventTypeToClassName(formData[4]['value']);
 
-        var sendNotifications = $('input#send_notifications').is(':checked');
+        var sendNotification = $('input#send_notification').is(':checked');
 
         var toUpdate = {
             user_id: userId,
-            start: startTimestamp,
-            end: endTimestamp,
-            title: description,
+            start_timestamp: startTimestamp,
+            end_timestamp: endTimestamp,
+            description: description,
             url: url,
             class: eventClass,
-            send_notifications: sendNotifications ? 1 : 0,
+            send_notification: sendNotification ? 1 : 0,
             voided: 0,
             remote_timestamp: OffCalendarHelper.currentTimestamp()
         };
@@ -382,7 +381,7 @@ OffCalendar.handleEventUpdate = function () {
 
         OffCalendarHelper.setSelectValue(evClass, 'event-class');
 
-        OffCalendarHelper.setCheckboxValue(notif, 'send_notifications');
+        OffCalendarHelper.setCheckboxValue(notif, 'send_notification');
 
         $('#add-update-event-window').fadeIn();
 
@@ -482,7 +481,7 @@ OffCalendar.setupProfileDetails = function () {
 
         if (!events[i]['voided']) {
 
-            if (events[i]['send_notifications'])
+            if (events[i]['send_notification'])
                 eventsWithNotifications++;
 
             eventsCount++;
@@ -638,10 +637,10 @@ OffCalendar.appendEventsHTML = function ($container, events) {
 
         if (!ev.voided) {
 
-            var start = OffCalendarHelper.getDateFromTimestamp(ev.start);
-            var end = OffCalendarHelper.getDateFromTimestamp(ev.end);
+            var start = OffCalendarHelper.getDateFromTimestamp(ev.start_timestamp);
+            var end = OffCalendarHelper.getDateFromTimestamp(ev.end_timestamp);
 
-            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.title + '</div>';
+            html = '<div class="events-list-item alert ' + ev.class + '" role="alert">' + start + ' - ' + end + '<br><br>' + ev.description + '</div>';
 
             $container.append(html);
 

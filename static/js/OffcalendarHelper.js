@@ -77,7 +77,7 @@ OffCalendarHelper.setCheckboxValue = function (value, inputId) {
 
     $obj = $('#' + inputId);
 
-    if (value === 'true') {
+    if (value === '1') {
 
         $obj.prop('checked', 'checked');
 

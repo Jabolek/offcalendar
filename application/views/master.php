@@ -58,7 +58,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="javascript:void(0)">
+                    <a class="navbar-brand" href="/welcome/dashboard">
                         <span class="logo" style="font-size: 35px;">OffCalendar</span>
                     </a>
                 </div>
