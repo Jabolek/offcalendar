@@ -6,8 +6,7 @@ class Events_model extends CI_Model {
 
         parent::__construct();
     }
-    
-    function getEventById($eventId) {
+function getEventById($eventId) {
 
         $query = $this->db->get_where('events', array('id' => $eventId));
 
@@ -27,7 +26,7 @@ class Events_model extends CI_Model {
 
         return $this->db->insert_id();
     }
-
+    
     function getEventsByUserId($userId, $where = array()) {
 
         $where['user_id'] = $userId;
@@ -60,13 +59,13 @@ class Event {
      */
     private $_ci;
     private $id = null;
+    private $remoteId = null;
     private $userId;
     private $startTimestamp;
     private $endTimestamp;
     private $description;
     private $sendNotification;
     private $voided;
-    private $remoteId = null;
     private $remoteTimestamp;
     private $lastUpdateTimestamp;
 
@@ -113,12 +112,11 @@ class Event {
         return $this;
     }
 
-    function notificationSent(){
-        
+    function notificationSent() {
+
         $this->_ci->events_model->updateEvent($this->id, array('notification_sent' => 1));
-        
     }
-    
+
     public function toDbArray() {
 
         return array(
@@ -133,7 +131,7 @@ class Event {
         );
     }
 
-    public function toApiResponse() {
+    public function toApiArray() {
 
         $arr = $this->toDbArray();
 
@@ -158,6 +156,10 @@ class Event {
                 $this->id = (int) $properties['id'];
             }
 
+            if (isset($properties['remote_id']) && $properties['remote_id']) {
+                $this->remoteId = (int) $properties['remote_id'];
+            }
+
             $this->userId = (int) $properties['user_id'];
 
             $this->startTimestamp = (int) $properties['start_timestamp'];
@@ -171,10 +173,6 @@ class Event {
             $this->voided = (int) $properties['voided'];
 
             $this->remoteTimestamp = (int) $properties['remote_timestamp'];
-
-            if (isset($properties['remote_id']) && $properties['remote_id']) {
-                $this->remoteId = (int) $properties['remote_id'];
-            }
 
             $this->lastUpdateTimestamp = (int) $properties['last_update_timestamp'];
         }

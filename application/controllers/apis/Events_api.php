@@ -49,14 +49,12 @@ class Events_api extends Api_Controller {
 
             $remoteEvents = $this->events->getEventsFromPostData($postEvents, $user);
             
-            $eventsToAdd = array();
-            
             $eventsToUpdate = $this->events->synchronize($remoteEvents, $dbEvents, $currTimestamp);
 
             $toUpdate = array();
             
             foreach($eventsToUpdate as $e){
-                $toUpdate[] = $e->toApiResponse();
+                $toUpdate[] = $e->toApiArray();
             }
 
             $response = array(
