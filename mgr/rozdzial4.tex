@@ -332,7 +332,6 @@ Pobrane wydarzenia zostają zapisane w opcjach kalendarza, po czym następuje je
 \begin{lstlisting}[caption=Struktura obiektu reprezentującego wydarzenie., label=amb, captionpos=b]
 
 class: "event-important"
-created_timestamp: 1411397003411
 start: 1411349400000
 end: 1411380720000
 last_update_timestamp: 0
@@ -346,7 +345,7 @@ voided: 0
 
 \end{lstlisting}
 
-Poszczególne pola oznaczają kolejno: klasę wydarzenia (kolor), stempel czasowy jego utworzenia, stempel czasowy rozpoczęcia wydarzenia, stempel czasowy zakończenia wydarzenia, stempel czasowy ostatniej synchronizacji (0 oznacza nowo dodane wydarzenie), identyfikator rekordu, stempel czasowy ostatniej aktualizacji wydarzenia przez użytkownika, flagę informującą o wysyłaniu powiadomień \mbox{e-mail}, opis wydarzenia, zewnętrzny adres url, id użytkownika oraz flagę informującą o usunięciu danego wydarzenia (ustawiona na wartość 1 oznacza, że użytkownik usunął wydarzenie).
+Poszczególne pola oznaczają kolejno: klasę wydarzenia (kolor), stempel czasowy rozpoczęcia wydarzenia, stempel czasowy zakończenia wydarzenia, stempel czasowy ostatniej synchronizacji (0 oznacza nowo dodane wydarzenie), identyfikator rekordu, stempel czasowy ostatniej aktualizacji wydarzenia przez użytkownika, flagę informującą o wysyłaniu powiadomień \mbox{e-mail}, opis wydarzenia, zewnętrzny adres url, id użytkownika oraz flagę informującą o usunięciu danego wydarzenia (ustawiona na wartość 1 oznacza, że użytkownik usunął wydarzenie).
 
 Dodawanie, edycja oraz usuwanie wydarzeń odbywa się widoku dziennym. Przedstawia on godziny dnia w odstępie 30 minutowym. Kliknięcie na każdą z nich otwiera okno dodawania nowego wydarzenia z odpowiednio uzupełnioną datą rozpoczęcia. W przypadku edycji wydarzenia to samo okno zostaje uzupełnione również o wszystkie pozostałe dane wydarzenia. Poniższy kod obrazuje operację edycji.
 

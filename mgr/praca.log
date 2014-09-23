@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  23 SEP 2014 14:13
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  23 SEP 2014 14:37
 entering extended mode
 **praca.tex
 (C:\Users\freak\Dropbox\offcalendar\mgr\praca.tex
@@ -762,17 +762,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <isOnline.png, id=162, 307.1475pt x 60.225pt>
 File: isOnline.png Graphic file (type png)
  <use isOnline.png>
-Package pdftex.def Info: isOnline.png used on input line 526.
+Package pdftex.def Info: isOnline.png used on input line 525.
 (pdftex.def)             Requested size: 409.71692pt x 80.34174pt.
 
 <isOffline.png, id=163, 306.39468pt x 60.225pt>
 File: isOffline.png Graphic file (type png)
  <use isOffline.png>
-Package pdftex.def Info: isOffline.png used on input line 532.
+Package pdftex.def Info: isOffline.png used on input line 531.
 (pdftex.def)             Requested size: 409.71692pt x 80.5384pt.
  [48 <C:/Users/freak/Dropbox/offcalendar/mgr/isOnline.png> <C:/Users/freak/Drop
 box/offcalendar/mgr/isOffline.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 []\T1/ptm/m/n/10.95 W przy-padku gdy pro-ces syn-chro-ni-za-cji jest w trak-cie
  wy-ko-na-nia (atry-but In-de-
  []
@@ -858,7 +858,7 @@ rw/helvetic/uhvr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex
 /fonts/type1/urw/times/utmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D
 :/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on praca.pdf (67 pages, 413437 bytes).
+Output written on praca.pdf (67 pages, 413391 bytes).
 PDF statistics:
  259 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
