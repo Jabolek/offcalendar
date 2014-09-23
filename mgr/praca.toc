@@ -47,14 +47,12 @@
 \contentsline {subsection}{\numberline {4.1.4}Synchronizacja danych}{48}
 \contentsline {section}{\numberline {4.2}Aplikacja serwerowa}{51}
 \contentsline {subsection}{\numberline {4.2.1}Implementacja warstwy danych}{51}
-\contentsline {subsection}{\numberline {4.2.2}Bezstanowe interfejsy}{54}
+\contentsline {subsection}{\numberline {4.2.2}Bezstanowe interfejsy}{55}
 \contentsline {subsection}{\numberline {4.2.3}Synchronizacja danych}{56}
-\contentsline {chapter}{\numberline {5}Instrukcja u\IeC {\.z}ytkownika}{59}
-\contentsline {section}{\numberline {5.1}Instalacja i konfiguracja}{59}
-\contentsline {subsection}{\numberline {5.1.1}Aplikacja kliencka}{59}
-\contentsline {subsection}{\numberline {5.1.2}Aplikacja serwerowa}{59}
-\contentsline {section}{\numberline {5.2}Obs\IeC {\l }uga aplikacji}{59}
-\contentsline {subsection}{\numberline {5.2.1}Zarz\IeC {\k a}dzanie wydarzeniami}{59}
-\contentsline {subsection}{\numberline {5.2.2}Tryb offline}{59}
-\contentsline {subsection}{\numberline {5.2.3}Tryb online}{59}
-\contentsline {chapter}{\numberline {6}Podsumowanie}{60}
+\contentsline {chapter}{\numberline {5}Instrukcja u\IeC {\.z}ytkownika}{60}
+\contentsline {section}{\numberline {5.1}Instalacja i konfiguracja}{60}
+\contentsline {section}{\numberline {5.2}Obs\IeC {\l }uga aplikacji}{62}
+\contentsline {subsection}{\numberline {5.2.1}Zarz\IeC {\k a}dzanie wydarzeniami}{62}
+\contentsline {subsection}{\numberline {5.2.2}Zarz\IeC {\k a}dzanie kontami}{63}
+\contentsline {subsection}{\numberline {5.2.3}Tryb offline/online}{63}
+\contentsline {chapter}{\numberline {6}Podsumowanie}{65}
