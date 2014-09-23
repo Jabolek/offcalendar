@@ -33,7 +33,7 @@ IndexedDB.open = function (callback) {
         store.createIndex('user_id', 'user_id', {unique: false});
         store.createIndex('voided', 'voided', {unique: false});
         store.createIndex('remote_timestamp', 'remote_timestamp', {unique: false});
-        store.createIndex('search', ['user_id', 'title'], {unique: false});
+        store.createIndex('search', ['user_id', 'description'], {unique: false});
 
     };
 

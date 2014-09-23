@@ -349,7 +349,7 @@ if (!String.prototype.formatNum) {
     }
 
     function Calendar(params, context) {
-        this.options = $.extend(true, {position: {start: new Date(), end: new Date()}}, defaults, params);
+        this.options = $.extend(true, {position: {start_timestamp: new Date(), end_timestamp: new Date()}}, defaults, params);
         this.setLanguage(this.options.language);
         this.context = context;
 
@@ -396,8 +396,8 @@ if (!String.prototype.formatNum) {
         }
 
         // Get all events between start and end
-        var start = parseInt(this.options.position.start.getTime());
-        var end = parseInt(this.options.position.end.getTime());
+        var start = parseInt(this.options.position.start_timestamp.getTime());
+        var end = parseInt(this.options.position.end_timestamp.getTime());
 
         data.events = this.getEventsBetween(start, end);
 
@@ -412,7 +412,7 @@ if (!String.prototype.formatNum) {
                 break;
         }
 
-        data.start = new Date(this.options.position.start.getTime());
+        data.start = new Date(this.options.position.start_timestamp.getTime());
         data.lang = this.locale;
 
         this.context.append(this.options.templates[this.options.view](data));
@@ -435,10 +435,10 @@ if (!String.prototype.formatNum) {
         var lines = data.hours * data.in_hour;
         var ms_per_line = (60000 * parseInt(this.options.time_split));
 
-        var start = new Date(this.options.position.start.getTime());
+        var start = new Date(this.options.position.start_timestamp.getTime());
         start.setHours(time_start[0]);
         start.setMinutes(time_start[1]);
-        var end = new Date(this.options.position.start.getTime());
+        var end = new Date(this.options.position.start_timestamp.getTime());
         end.setHours(time_end[0]);
         end.setMinutes(time_end[1]);
 
@@ -447,38 +447,38 @@ if (!String.prototype.formatNum) {
         data.after_time = [];
         data.before_time = [];
         $.each(data.events, function (k, e) {
-            var s = new Date(parseInt(e.start));
-            var f = new Date(parseInt(e.end));
+            var s = new Date(parseInt(e.start_timestamp));
+            var f = new Date(parseInt(e.end_timestamp));
 
             e.start_hour = s.getHours().toString().formatNum(2) + ':' + s.getMinutes().toString().formatNum(2);
             e.end_hour = f.getHours().toString().formatNum(2) + ':' + f.getMinutes().toString().formatNum(2);
 
-            if (e.start < start.getTime()) {
+            if (e.start_timestamp < start.getTime()) {
                 warn(1);
                 e.start_hour = s.getDate() + ' ' + $self.locale['ms' + s.getMonth()] + ' ' + e.start_hour;
             }
 
-            if (e.end > end.getTime()) {
+            if (e.end_timestamp > end.getTime()) {
                 warn(1);
                 e.end_hour = f.getDate() + ' ' + $self.locale['ms' + f.getMonth()] + ' ' + e.end_hour;
             }
 
-            if (e.start < start.getTime() && e.end > end.getTime()) {
+            if (e.start_timestamp < start.getTime() && e.end_timestamp > end.getTime()) {
                 data.all_day.push(e);
                 return;
             }
 
-            if (e.end < start.getTime()) {
+            if (e.end_timestamp < start.getTime()) {
                 data.before_time.push(e);
                 return;
             }
 
-            if (e.start > end.getTime()) {
+            if (e.start_timestamp > end.getTime()) {
                 data.after_time.push(e);
                 return;
             }
 
-            var event_start = start.getTime() - e.start;
+            var event_start = start.getTime() - e.start_timestamp;
 
             if (event_start >= 0) {
                 e.top = 0;
@@ -487,9 +487,9 @@ if (!String.prototype.formatNum) {
             }
 
             var lines_left = lines - e.top;
-            var lines_in_event = (e.end - e.start) / ms_per_line;
+            var lines_in_event = (e.end_timestamp - e.start_timestamp) / ms_per_line;
             if (event_start >= 0) {
-                lines_in_event = (e.end - start.getTime()) / ms_per_line;
+                lines_in_event = (e.end_timestamp - start.getTime()) / ms_per_line;
             }
 
 
@@ -518,26 +518,26 @@ if (!String.prototype.formatNum) {
         this._loadTemplate('week-days');
 
         var t = {};
-        var start = parseInt(this.options.position.start.getTime());
-        var end = parseInt(this.options.position.end.getTime());
+        var start = parseInt(this.options.position.start_timestamp.getTime());
+        var end = parseInt(this.options.position.end_timestamp.getTime());
         var events = [];
         var self = this;
         var first_day = getExtentedOption(this, 'first_day');
 
         $.each(this.getEventsBetween(start, end), function (k, event) {
-            event.start_day = new Date(parseInt(event.start)).getDay();
+            event.start_day = new Date(parseInt(event.start_timestamp)).getDay();
             if (first_day == 1) {
                 event.start_day = (event.start_day + 6) % 7;
             }
-            if ((event.end - event.start) <= 86400000) {
+            if ((event.end_timestamp - event.start_timestamp) <= 86400000) {
                 event.days = 1;
             } else {
-                event.days = ((event.end - event.start) / 86400000);
+                event.days = ((event.end_timestamp - event.start_timestamp) / 86400000);
             }
 
-            if (event.start < start) {
+            if (event.start_timestamp < start) {
 
-                event.days = event.days - ((start - event.start) / 86400000);
+                event.days = event.days - ((start - event.start_timestamp) / 86400000);
                 event.start_day = 0;
             }
 
@@ -559,12 +559,12 @@ if (!String.prototype.formatNum) {
 
         var t = {cal: this};
         var newmonth = month + 1;
-        t.data_day = this.options.position.start.getFullYear() + '-' + (newmonth < 10 ? '0' + newmonth : newmonth) + '-' + '01';
+        t.data_day = this.options.position.start_timestamp.getFullYear() + '-' + (newmonth < 10 ? '0' + newmonth : newmonth) + '-' + '01';
         t.month_name = this.locale['m' + month];
 
-        var curdate = new Date(this.options.position.start.getFullYear(), month, 1, 0, 0, 0);
+        var curdate = new Date(this.options.position.start_timestamp.getFullYear(), month, 1, 0, 0, 0);
         t.start = parseInt(curdate.getTime());
-        t.end = parseInt(new Date(this.options.position.start.getFullYear(), month + 1, 1, 0, 0, 0).getTime());
+        t.end = parseInt(new Date(this.options.position.start_timestamp.getFullYear(), month + 1, 1, 0, 0, 0).getTime());
         t.events = this.getEventsBetween(t.start, t.end);
         return this.options.templates['year-month'](t);
     }
@@ -575,7 +575,7 @@ if (!String.prototype.formatNum) {
         var t = {tooltip: '', cal: this};
         var cls = this.options.classes.months.outmonth;
 
-        var firstday = this.options.position.start.getDay();
+        var firstday = this.options.position.start_timestamp.getDay();
         if (getExtentedOption(this, 'first_day') == 2) {
             firstday++;
         } else {
@@ -583,14 +583,14 @@ if (!String.prototype.formatNum) {
         }
 
         day = (day - firstday) + 1;
-        var curdate = new Date(this.options.position.start.getFullYear(), this.options.position.start.getMonth(), day, 0, 0, 0);
+        var curdate = new Date(this.options.position.start_timestamp.getFullYear(), this.options.position.start_timestamp.getMonth(), day, 0, 0, 0);
 
         // if day of the current month
         if (day > 0) {
             cls = this.options.classes.months.inmonth;
         }
         // stop cycling table rows;
-        var daysinmonth = (new Date(this.options.position.end.getTime() - 1)).getDate();
+        var daysinmonth = (new Date(this.options.position.end_timestamp.getTime() - 1)).getDate();
         if ((day + 1) > daysinmonth) {
             this.stop_cycling = true;
         }
@@ -603,7 +603,7 @@ if (!String.prototype.formatNum) {
         cls = $.trim(cls + " " + this._getDayClass("months", curdate));
 
         if (day <= 0) {
-            var daysinprevmonth = (new Date(this.options.position.start.getFullYear(), this.options.position.start.getMonth(), 0)).getDate();
+            var daysinprevmonth = (new Date(this.options.position.start_timestamp.getFullYear(), this.options.position.start_timestamp.getMonth(), 0)).getDate();
             day = daysinprevmonth - Math.abs(day);
             cls += ' cal-month-first-row';
         }
@@ -697,40 +697,40 @@ if (!String.prototype.formatNum) {
         if (where == 'next') {
             switch (this.options.view) {
                 case 'year':
-                    to.start.setFullYear(this.options.position.start.getFullYear() + 1);
+                    to.start_timestamp.setFullYear(this.options.position.start_timestamp.getFullYear() + 1);
                     break;
                 case 'month':
-                    to.start.setMonth(this.options.position.start.getMonth() + 1);
+                    to.start_timestamp.setMonth(this.options.position.start_timestamp.getMonth() + 1);
                     break;
                 case 'week':
-                    to.start.setDate(this.options.position.start.getDate() + 7);
+                    to.start_timestamp.setDate(this.options.position.start_timestamp.getDate() + 7);
                     break;
                 case 'day':
-                    to.start.setDate(this.options.position.start.getDate() + 1);
+                    to.start_timestamp.setDate(this.options.position.start_timestamp.getDate() + 1);
                     break;
             }
         } else if (where == 'prev') {
             switch (this.options.view) {
                 case 'year':
-                    to.start.setFullYear(this.options.position.start.getFullYear() - 1);
+                    to.start_timestamp.setFullYear(this.options.position.start_timestamp.getFullYear() - 1);
                     break;
                 case 'month':
-                    to.start.setMonth(this.options.position.start.getMonth() - 1);
+                    to.start_timestamp.setMonth(this.options.position.start_timestamp.getMonth() - 1);
                     break;
                 case 'week':
-                    to.start.setDate(this.options.position.start.getDate() - 7);
+                    to.start_timestamp.setDate(this.options.position.start_timestamp.getDate() - 7);
                     break;
                 case 'day':
-                    to.start.setDate(this.options.position.start.getDate() - 1);
+                    to.start_timestamp.setDate(this.options.position.start_timestamp.getDate() - 1);
                     break;
             }
         } else if (where == 'today') {
-            to.start.setTime(new Date().getTime());
+            to.start_timestamp.setTime(new Date().getTime());
         }
         else {
             $.error(this.locale.error_where.format(where))
         }
-        this.options.day = to.start.getFullYear() + '-' + to.start.getMonthFormatted() + '-' + to.start.getDateFormatted();
+        this.options.day = to.start_timestamp.getFullYear() + '-' + to.start_timestamp.getMonthFormatted() + '-' + to.start_timestamp.getDateFormatted();
         this.view();
         if (_.isFunction(next)) {
             next();
@@ -757,16 +757,16 @@ if (!String.prototype.formatNum) {
 
         switch (this.options.view) {
             case 'year':
-                this.options.position.start.setTime(new Date(year, 0, 1).getTime());
-                this.options.position.end.setTime(new Date(year + 1, 0, 1).getTime());
+                this.options.position.start_timestamp.setTime(new Date(year, 0, 1).getTime());
+                this.options.position.end_timestamp.setTime(new Date(year + 1, 0, 1).getTime());
                 break;
             case 'month':
-                this.options.position.start.setTime(new Date(year, month, 1).getTime());
-                this.options.position.end.setTime(new Date(year, month + 1, 1).getTime());
+                this.options.position.start_timestamp.setTime(new Date(year, month, 1).getTime());
+                this.options.position.end_timestamp.setTime(new Date(year, month + 1, 1).getTime());
                 break;
             case 'day':
-                this.options.position.start.setTime(new Date(year, month, day).getTime());
-                this.options.position.end.setTime(new Date(year, month, day + 1).getTime());
+                this.options.position.start_timestamp.setTime(new Date(year, month, day).getTime());
+                this.options.position.end_timestamp.setTime(new Date(year, month, day + 1).getTime());
                 break;
             case 'week':
                 var curr = new Date(year, month, day);
@@ -777,8 +777,8 @@ if (!String.prototype.formatNum) {
                 else {
                     first = curr.getDate() - curr.getDay();
                 }
-                this.options.position.start.setTime(new Date(year, month, first).getTime());
-                this.options.position.end.setTime(new Date(year, month, first + 7).getTime());
+                this.options.position.start_timestamp.setTime(new Date(year, month, first).getTime());
+                this.options.position.end_timestamp.setTime(new Date(year, month, first + 7).getTime());
                 break;
             default:
                 $.error(this.locale.error_noview.format(this.options.view))
@@ -787,7 +787,7 @@ if (!String.prototype.formatNum) {
     };
 
     Calendar.prototype.getTitle = function () {
-        var p = this.options.position.start;
+        var p = this.options.position.start_timestamp;
         switch (this.options.view) {
             case 'year':
                 return this.locale.title_year.format(p.getFullYear());
@@ -808,16 +808,16 @@ if (!String.prototype.formatNum) {
     Calendar.prototype.isToday = function () {
         var now = new Date().getTime();
 
-        return ((now > this.options.position.start) && (now < this.options.position.end));
+        return ((now > this.options.position.start_timestamp) && (now < this.options.position.end_timestamp));
     }
 
     Calendar.prototype.getStartDate = function () {
-        return this.options.position.start;
+        return this.options.position.start_timestamp;
     };
 
     Calendar.prototype.getCurrentDateFormattedForInput = function () {
 
-        var currentDate = this.options.position.start;
+        var currentDate = this.options.position.start_timestamp;
 
         return currentDate.getFullYear()
                 + '-' + currentDate.getMonthFormatted()
@@ -826,7 +826,7 @@ if (!String.prototype.formatNum) {
     };
 
     Calendar.prototype.getEndDate = function () {
-        return this.options.position.end;
+        return this.options.position.end_timestamp;
     };
 
     Calendar.prototype._loadEvents = function () {
@@ -852,7 +852,7 @@ if (!String.prototype.formatNum) {
             case 'function':
 
                 loader = function () {
-                    return source(self.options.position.start, self.options.position.end, browser_timezone);
+                    return source(self.options.position.start_timestamp, self.options.position.end_timestamp, browser_timezone);
                 };
                 break;
 
@@ -870,7 +870,7 @@ if (!String.prototype.formatNum) {
                     loader = function () {
 
                         var events = [];
-                        var params = {from: self.options.position.start.getTime(), to: self.options.position.end.getTime()};
+                        var params = {from: self.options.position.start_timestamp.getTime(), to: self.options.position.end_timestamp.getTime()};
 
                         if (browser_timezone.length) {
                             params.browser_timezone = browser_timezone;
@@ -912,10 +912,10 @@ if (!String.prototype.formatNum) {
             self.options.events.sort(function (a, b) {
 
                 var delta;
-                delta = a.start - b.start;
+                delta = a.start_timestamp - b.start_timestamp;
 
                 if (delta === 0) {
-                    delta = a.end - b.end;
+                    delta = a.end_timestamp - b.end_timestamp;
                 }
 
                 return delta;
@@ -1071,10 +1071,10 @@ if (!String.prototype.formatNum) {
         var self = this;
 
         var week = $(document.createElement('div')).attr('id', 'cal-week-box');
-        var start = this.options.position.start.getFullYear() + '-' + this.options.position.start.getMonthFormatted() + '-';
+        var start = this.options.position.start_timestamp.getFullYear() + '-' + this.options.position.start_timestamp.getMonthFormatted() + '-';
         $('.cal-month-box .cal-row-fluid')
                 .on('mouseenter', function () {
-                    var p = new Date(self.options.position.start);
+                    var p = new Date(self.options.position.start_timestamp);
                     var child = $('.cal-cell1:first-child .cal-month-day', this);
                     var day = (child.hasClass('cal-month-first-row') ? 1 : $('[data-cal-date]', child).text());
                     p.setDate(parseInt(day));
@@ -1143,11 +1143,11 @@ if (!String.prototype.formatNum) {
     Calendar.prototype.getEventsBetween = function (start, end) {
         var events = [];
         $.each(this.options.events, function () {
-            if (this.start == null) {
+            if (this.start_timestamp == null) {
                 return true;
             }
-            var event_end = this.end || this.start;
-            if ((parseInt(this.start) < end) && (parseInt(event_end) >= start) && !this.voided) {
+            var event_end = this.end_timestamp || this.start_timestamp;
+            if ((parseInt(this.start_timestamp) < end) && (parseInt(event_end) >= start) && !this.voided) {
                 events.push(this);
             }
         });

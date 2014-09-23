@@ -22,7 +22,7 @@
             <br>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="send_notifications">Send notifications?
+                    <input type="checkbox" id="send_notification">Send notification?
                 </label>
             </div>
 
@@ -47,7 +47,7 @@
 
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
-                    <%= event.title %></a>
+                    <%= event.description %></a>
             </div>
             <% }); %>
         </div>
@@ -63,18 +63,18 @@
 
                 <span class="edit-event" 
                       data-event-id="<%= event.remote_id %>" 
-                      data-event-start="<%= event.start %>" 
-                      data-event-end="<%= event.end %>" 
-                      data-event-desc="<%= event.title %>" 
+                      data-event-start="<%= event.start_timestamp %>" 
+                      data-event-end="<%= event.end_timestamp %>" 
+                      data-event-desc="<%= event.description %>" 
                       data-event-url="<%= event.url %>" 
                       data-event-class="<%= event.class %>" 
-                      data-event-notif="<%= event.send_notifications %>">edit</span>
+                      data-event-notif="<%= event.send_notification %>">edit</span>
 
                 <span class="delete-event" data-event-id="<%= event.remote_id %>">delete</span>
 
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
-                    <%= event.title %></a>
+                    <%= event.description %></a>
             </div>
             <% }); %>
         </div>
@@ -88,18 +88,18 @@
 
                     <span class="edit-event" 
                           data-event-id="<%= event.remote_id %>" 
-                          data-event-start="<%= event.start %>" 
-                          data-event-end="<%= event.end %>" 
-                          data-event-desc="<%= event.title %>" 
+                          data-event-start="<%= event.start_timestamp %>" 
+                          data-event-end="<%= event.end_timestamp %>" 
+                          data-event-desc="<%= event.description %>" 
                           data-event-url="<%= event.url %>" 
                           data-event-class="<%= event.class %>" 
-                          data-event-notif="<%= event.send_notifications %>">edit</span>
+                          data-event-notif="<%= event.send_notification %>">edit</span>
 
                     <span class="delete-event" data-event-id="<%= event.remote_id %>">delete</span>
 
                     <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                        data-event-class="<%= event['class'] %>" class="event-item">
-                        <%= event.title %></a>
+                        <%= event.description %></a>
                 </div>  
             <% }; %>
         <% }); %>
@@ -129,7 +129,7 @@
                 <span class="cal-hours"><%= event.start_hour %></span>
                 <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>"
                    data-event-class="<%= event['class'] %>" class="event-item">
-                    <%= event.title %></a>
+                    <%= event.description %></a>
             </div>
             <% }); %>
         </div>
