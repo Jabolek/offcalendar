@@ -193,6 +193,16 @@ class Events {
             'label' => 'Description',
             'rules' => 'trim|required',
         ),
+        'class' => array(
+            'field' => 'class',
+            'label' => 'Class',
+            'rules' => 'trim',
+        ),
+        'url' => array(
+            'field' => 'url',
+            'label' => 'Url',
+            'rules' => 'trim',
+        ),
         'send_notification' => array(
             'field' => 'send_notification',
             'label' => 'Send Notification',

@@ -64,6 +64,8 @@ class Event {
     private $startTimestamp;
     private $endTimestamp;
     private $description;
+    private $class;
+    private $url;
     private $sendNotification;
     private $voided;
     private $remoteTimestamp;
@@ -124,6 +126,8 @@ class Event {
             'start_timestamp' => $this->startTimestamp,
             'end_timestamp' => $this->endTimestamp,
             'description' => $this->description,
+            'class' => $this->class,
+            'url' => $this->url,
             'send_notification' => $this->sendNotification,
             'voided' => $this->voided,
             'remote_timestamp' => $this->remoteTimestamp,
@@ -167,6 +171,10 @@ class Event {
             $this->endTimestamp = (int) $properties['end_timestamp'];
 
             $this->description = (string) $properties['description'];
+            
+            $this->class = (string) $properties['class'];
+            
+            $this->url = (string) $properties['url'];
 
             $this->sendNotification = (int) $properties['send_notification'];
 

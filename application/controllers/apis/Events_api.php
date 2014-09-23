@@ -41,7 +41,7 @@ class Events_api extends Api_Controller {
 
             $lastSyncTimestamp = (int) $this->input->post('last_sync_timestamp');
 
-            $currTimestamp = time();
+            $currTimestamp = round(microtime(true) * 1000);
 
             $dbEvents = $this->events->getDbEventsForSynchronization($userId, $lastSyncTimestamp);
             

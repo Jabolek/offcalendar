@@ -18,7 +18,7 @@ class Cron_email_notifications extends Cron_Controller {
 
         $this->load->library('Mailer');
 
-        $this->maxSendTimestamp = time() + 600;
+        $this->maxSendTimestamp = round(microtime(true) * 1000) + 600000;
     }
 
     function index() {
