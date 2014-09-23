@@ -42,7 +42,7 @@ Poniżej przykład pola, które narzuca konieczność jego uzupełnienia oraz wy
 
 Na potrzeby aplikacji pobierana jest wyłącznie nazwa użytkownika, jego adres e-mail oraz hasło dostępu do konta.
 
-W przypadku pomyślnego przejścia wstępnej walidacji dane zostają wysłane na adres wystawionego interfejsu (w tym przypadku \url{/apis/users_api/register}). W myśl założeń MVC zaimplementowanych w stosowanym w aplikacji frameworku CodeIgniter podany url kieruje do kontrolera \textbf{Users\_api} do metody \textbf{register()}. Opis działania bezstanowych interfejsów znajduje się w sekcji 4.2.2. niniejszej pracy.
+W przypadku pomyślnego przejścia wstępnej walidacji dane zostają wysłane na adres wystawionego interfejsu (w tym przypadku \url{/apis/users_api/register}). W myśl założeń MVC zaimplementowanych w stosowanym w aplikacji frameworku CodeIgniter\cite{codeigniterUserGuide} podany url kieruje do kontrolera \textbf{Users\_api} do metody \textbf{register()}. Opis działania bezstanowych interfejsów znajduje się w sekcji 4.2.2. niniejszej pracy.
 
 Poniżej przedstawiono funkcję \textbf{initRegister()} odpowiedzialną za inicjację przesłania danych do API. Pobiera ona wartości pól name, email oraz password oraz przesyła je metodą POST w formacie JSON na podany adres interfejsu po zatwierdzeniu formularza. Wywołanie metody \textbf{preventDefault} na obiekcie event zapobiega domyślnemu przeładowaniu strony. Żądanie wykonywane jest za pomocą asynchronicznej metody \textbf{jQuery.ajax}.
 
@@ -672,7 +672,7 @@ Największym problemem, który należało rozwiązać, były różnice w struktu
 Pierwszym z elementów, który musiał zostać wykonany w części serwerowej aplikacji była warstwa danych. Składają się na nią: 
 
 \begin{enumerate}
-\item klasy wykonujące operacje CRUD oparte na klasie ActiveRecord frameworku CodeIgniter:
+\item klasy wykonujące operacje CRUD oparte na klasie ActiveRecord\cite{ciActiveRecord} frameworku CodeIgniter:
 \begin{itemize}
 \item \textbf{Events\_model}
 \item \textbf{Users\_model}
@@ -771,7 +771,7 @@ function persist() {
 
 \end{lstlisting}
 
-Klasa Events\_model bezpośrednio odpowiada za manipulację rekordami znajdującymi się w bazie danych. Bogaty zbiór metod klasy Active Record pozwala na łatwe wykonanie operacji tworzenia, pobierania oraz aktualizacji rekordów.
+Klasa Events\_model bezpośrednio odpowiada za manipulację rekordami znajdującymi się w bazie danych. Bogaty zbiór metod klasy ActiveRecord pozwala na łatwe wykonanie operacji tworzenia, pobierania oraz aktualizacji rekordów.
 
 \begin{lstlisting}[caption=Przykładowe metody klasy Events\_model odpowiedzialne za komunikację z bazą danych., label=amb, captionpos=b]
 

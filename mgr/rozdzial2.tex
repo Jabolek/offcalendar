@@ -33,7 +33,7 @@ Aby budowa aplikacji www wspierającej tryb offline była możliwa, konieczny je
 \subsection{HTML5 WebSQL Database}
 \label{sec:html5WebSqlDatabase}
 
-WebSQL Database jest mechanizmem, który do przechowywania, odczytu oraz aktualizacji danych po stronie klienta wykorzystuje strukturalny język zapytań SQL. Metoda działania mechanizmu bazuje na specyfikacji bazy SQLite. Mechanizm WebSQL posiada zarówno zalety przypisywane relacyjnym bazom danych oraz kilka zalet cechujących metody lokalnego zapisu danych:
+WebSQL Database\cite{webSqlDb} jest mechanizmem, który do przechowywania, odczytu oraz aktualizacji danych po stronie klienta wykorzystuje strukturalny język zapytań SQL. Metoda działania mechanizmu bazuje na specyfikacji bazy SQLite. Mechanizm WebSQL posiada zarówno zalety przypisywane relacyjnym bazom danych oraz kilka zalet cechujących metody lokalnego zapisu danych:
 
 \begin{itemize}
 \item Transakcyjność,
@@ -78,7 +78,7 @@ Biorąc pod uwagę powyższe informacje, użytkowanie aplikacji www bazującej n
 \subsection{HTML5 Web Storage}
 \label{sec:html5WebStorage}
 
-HTML5 Web Storage, znany również jako DOM Storage, jest mechanizmem, który przechowuje dane w tablicy asocjacyjnej w której klucze oraz wartości są ciągami tekstowymi. W zależności od przeglądarki internetowej, maksymalny rozmiar danych możliwy do zapisu wynosi od 5 do 35 megabajtów danych.
+HTML5 Web Storage\cite{webStorage}, znany również jako DOM Storage, jest mechanizmem, który przechowuje dane w tablicy asocjacyjnej w której klucze oraz wartości są ciągami tekstowymi. W zależności od przeglądarki internetowej, maksymalny rozmiar danych możliwy do zapisu wynosi od 5 do 35 megabajtów danych.
 
 Web Storage udostępnia dwa obszary składowania danych różniące się zasięgiem oraz cyklem życia:
 
@@ -123,7 +123,7 @@ Mechanizm Web Storage posiada pełne wsparcie w obecnych klientach sieci www, je
 \subsection{HTML5 IndexedDB}
 \label{sec:html5IndexedDB}
 
-Indexed Database jest mechanizmem, który powstał na bazie Web Storage oraz WebSQL, łączy cechy obydwu specyfikacji. IndexedDB przechowuje obiekty języka JavaScript w magazynach obiektów (\emph{objectStores}) które są odpowiednikami tabel w relacyjnej bazie danych.
+Indexed Database\cite{indexedDb} jest mechanizmem, który powstał na bazie Web Storage oraz WebSQL, łączy cechy obydwu specyfikacji. IndexedDB przechowuje obiekty języka JavaScript w magazynach obiektów (\emph{objectStores}) które są odpowiednikami tabel w relacyjnej bazie danych.
 
 Każdy rekord przetrzymywany w magazynie musi posiadać unikalny klucz główny który może zostać zdefiniowany przez użytkowika lub, w przeciwnym wypadku, zostanie utworzony automatycznie. W celu optymalizacji przeszukiwania zbioru danych, IndexedDB umożliwia zdefiniowanie indeksu na dowolnym z atrybutów przechowywanych obiektów. Znacząco skraca to czas wyszukiwania oraz ilość potrzebnych do tego zasobów.
 
@@ -161,7 +161,7 @@ IndexedDB łączy najlepsze funkcjonalności WebSQL oraz Web Storage. Biorąc po
 \subsection{HTML5 Filesystem API}
 \label{sec:html5filesystemApi}
 
-Filesystem API jest mechanizmem który umożliwia operacje na plikach znajdujących się w wydzielonej przestrzeni na dysku twardym użytkownika. Aby zapis na dysku był możliwy, użytkownik musi najpierw upoważnić do tego aplikację, co odbywa się poprzez zaakceptowanie okna dialogowego wyświetlającego żądanie przechowywania konkretnej ilości danych, jaką dana aplikacja zamierza wykorzystać.
+Filesystem API\cite{filesystemApi} jest mechanizmem który umożliwia operacje na plikach znajdujących się w wydzielonej przestrzeni na dysku twardym użytkownika. Aby zapis na dysku był możliwy, użytkownik musi najpierw upoważnić do tego aplikację, co odbywa się poprzez zaakceptowanie okna dialogowego wyświetlającego żądanie przechowywania konkretnej ilości danych, jaką dana aplikacja zamierza wykorzystać.
 
 Lista funkcji udostępnianych przez Filesystem API obejmuje zarówno operacje na plikach - zapis, odczyt pliku, odczyt metadanych pliku, kopia do wskazanej lokacji, oraz narzędzia do tworzenia drzewa katalogów oraz ich przeszukiwania. Pliki przechowywane na wydzielonej przestrzeni dyskowej mogą później zostać osadzone jako elementy strony www - jedna z metod Filesystem API zwraca pełny adres URL do danego zasobu.
 
@@ -221,7 +221,7 @@ Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz n
 
 \begin{enumerate}
 \item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania "świeżej" porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
-\item Żądania uwierzytelnienia lub żądania zabezpieczone (np. HTTPS) nie są cache-owane.
+\item Żądania uwierzytelnienia lub żądania zabezpieczone (np. HTTPS\cite{https}) nie są cache-owane.
 \item Reprezentacja danych w cache jest uważana za "świeżą" (nie musi być sprawdzana z wersją danych na serwerze oryginalnym), jeśli ustawiono nagłówek HTTP odpowiadający za czas życia danych lub jeśli dane były cache-owane niedawno.
 \item Jeśli dane są nieaktualne do serwera zostanie wysłane zapytanie o walidację.
 \item W sytuacji utraty połączenia internetowego pamięć cache może wysyłać dane bez weryfikacji ich z danymi pochodzącymi z oryginalnego serwera.
@@ -364,7 +364,7 @@ Serwer aplikacji wraz z bazą danych gwarantują nieprzerwaną obsługę żąda�
 
 Platforma zapewnia bezpieczną autentykację dla użytkowników posiadających konta.
 
-Komunikacja pomiędzy częściami systemu powinna minimalizować narzut danych celem ograniczenia kosztów transmisji, co motywuje zastosowanie architektury REST wykorzystującej lekki format JSON \emph{(JavaScript Object Notation)}.
+Komunikacja pomiędzy częściami systemu powinna minimalizować narzut danych celem ograniczenia kosztów transmisji, co motywuje zastosowanie architektury REST wykorzystującej lekki format JSON \emph{(JavaScript Object Notation)}\cite{json}.
 
 Detekcja połączenia sieciowego winna następować automatycznie wraz z przełączeniem się systemu na tryb offline/online.
 

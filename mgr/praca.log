@@ -1,24 +1,24 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.11.5)  23 SEP 2014 14:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.23)  23 SEP 2014 17:45
 entering extended mode
 **praca.tex
-(C:\Users\freak\Dropbox\offcalendar\mgr\praca.tex
+(D:\Dropbox\offcalendar\mgr\praca.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
 croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
-ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
-vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
-an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
-romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
-sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
-senglishmax, welsh, loaded.
-(C:\Users\freak\Dropbox\offcalendar\mgr\aghdpl.cls
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+(D:\Dropbox\offcalendar\mgr\aghdpl.cls
 *** [aghdpl.cls] --- (MSz, GJN) v2.0.1 <24.06.2014> ***
 Document Class: aghdpl 
-(D:\latex\tex\latex\base\report.cls
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\report.cls"
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
-(D:\latex\tex\latex\base\size11.clo
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -33,38 +33,42 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (D:\latex\tex\latex\psnfss\times.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\times.sty"
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
-(D:\latex\tex\latex\base\fontenc.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
- (D:\latex\tex\latex\base\t1enc.def
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(D:\latex\tex\latex\graphics\graphicx.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(D:\latex\tex\latex\graphics\keyval.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(D:\latex\tex\latex\graphics\graphics.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
- (D:\latex\tex\latex\graphics\trig.sty
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-) (D:\latex\tex\latex\00miktex\graphics.cfg
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(D:\latex\tex\latex\pdftex-def\pdftex.def
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(D:\latex\tex\generic\oberdiek\infwarerr.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(D:\latex\tex\generic\oberdiek\ltxcmds.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count88
@@ -72,18 +76,18 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(D:\latex\tex\latex\geometry\geometry.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(D:\latex\tex\generic\oberdiek\ifpdf.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(D:\latex\tex\generic\oberdiek\ifvtex.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(D:\latex\tex\generic\ifxetex\ifxetex.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count89
@@ -99,14 +103,16 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen112
 \Gm@dimlist=\toks15
 
-(D:\latex\tex\latex\geometry\geometry.cfg))
-(D:\latex\tex\latex\graphics\color.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
- (D:\latex\tex\latex\00miktex\color.cfg
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
-) (D:\latex\tex\latex\fancyhdr\fancyhdr.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
 \fancy@headwidth=\skip43
 \f@ncyO@elh=\skip44
 \f@ncyO@erh=\skip45
@@ -116,10 +122,12 @@ Package color Info: Driver file: pdftex.def on input line 130.
 \f@ncyO@erf=\skip49
 \f@ncyO@olf=\skip50
 \f@ncyO@orf=\skip51
-) (D:\latex\tex\latex\ltxmisc\url.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip10
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
-) (D:\latex\tex\latex\titlesec\titlesec.sty
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\titlesec\titlesec.sty"
 Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \ttl@box=\box26
 \beforetitleunit=\skip52
@@ -131,9 +139,9 @@ Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \titlewidthlast=\dimen116
 \titlewidthfirst=\dimen117
 )
-(D:\latex\tex\latex\tocloft\tocloft.sty
-Package: tocloft 2010/10/13 v2.3e parameterised ToC, etc., typesetting
-Package tocloft Info: The document has chapter divisions on input line 43.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tocloft\tocloft.sty"
+Package: tocloft 2013/05/02 v2.3f parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 44.
 \cftparskip=\skip54
 \cftbeforetoctitleskip=\skip55
 \cftaftertoctitleskip=\skip56
@@ -170,20 +178,23 @@ Package tocloft Info: The document has chapter divisions on input line 43.
 \cftbeforetabskip=\skip85
 \cfttabindent=\skip86
 \cfttabnumwidth=\skip87
-) (D:\latex\tex\latex\titlesec\block.tss
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\titlesec\block.tss"
 File: block.tss 2011/12/15
-)) (D:\latex\tex\generic\babel\babel.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
 Package: babel 2008/07/08 v3.8m The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(D:\latex\tex\latex\00miktex\bblopts.cfg
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-(D:\latex\tex\generic\babel\polish.ldf
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\polish.ldf"
 Language: polish 2005/03/31 v1.2l Polish support from the babel system
- (D:\latex\tex\generic\babel\babel.def
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
 File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count94
 \U@D=\dimen118
@@ -193,18 +204,20 @@ Package babel Info: Making " an active character on input line 83.
 \pl@down=\dimen120
 \pl@right=\dimen121
 \pl@temp=\dimen122
-)) (D:\latex\tex\latex\base\inputenc.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
- (D:\latex\tex\latex\base\utf8.def
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(D:\latex\tex\latex\base\t1enc.dfu
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.dfu"
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -353,7 +366,8 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
- (D:\latex\tex\latex\base\ot1enc.dfu
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ot1enc.dfu"
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -384,7 +398,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(D:\latex\tex\latex\base\omsenc.dfu
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omsenc.dfu"
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -407,10 +421,12 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-)) (D:\latex\tex\latex\tools\enumerate.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\enumerate.sty"
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 \@enLab=\toks19
-) (D:\latex\tex\latex\listings\listings.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.sty"
 \lst@mode=\count95
 \lst@gtempboxa=\box27
 \lst@token=\toks20
@@ -424,29 +440,30 @@ Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 \lst@lineno=\count100
 \lst@maxwidth=\dimen126
 
-(D:\latex\tex\latex\listings\lstmisc.sty
-File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 \c@lstnumber=\count101
 \lst@skipnumbers=\count102
 \lst@framebox=\box28
 )
-(D:\latex\tex\latex\listings\listings.cfg
-File: listings.cfg 2007/02/22 1.4 listings configuration
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
-Package: listings 2007/02/22 1.4 (Carsten Heinz)
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
 
-(D:\latex\tex\latex\listings\lstlang1.sty
-File: lstlang1.sty 2004/09/05 1.3 listings language file
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
-(D:\latex\tex\latex\listings\lstlang2.sty
-File: lstlang2.sty 2004/09/05 1.3 listings language file
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang2.sty"
+File: lstlang2.sty 2014/09/06 1.5e listings language file
 )
-(D:\latex\tex\latex\listings\lstlang3.sty
-File: lstlang3.sty 2004/09/05 1.3 listings language file
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang3.sty"
+File: lstlang3.sty 2014/09/06 1.5e listings language file
 )
-(D:\latex\tex\latex\psnfss\courier.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\courier.sty"
 Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
-) (D:\latex\tex\latex\float\float.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count103
 \float@exts=\toks21
@@ -458,11 +475,10 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 LaTeX Warning: Unused global option(s):
     [11pt].
 
-(C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux
+(D:\Dropbox\offcalendar\mgr\praca.aux (D:\Dropbox\offcalendar\mgr\rozdzial1.aux
+) (D:\Dropbox\offcalendar\mgr\rozdzial2.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial3.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial4.aux
 
 LaTeX Warning: Label `amb' multiply defined.
 
@@ -532,7 +548,7 @@ LaTeX Warning: Label `amb' multiply defined.
 
 LaTeX Warning: Label `amb' multiply defined.
 
-) (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux
+) (D:\Dropbox\offcalendar\mgr\rozdzial5.aux
 
 LaTeX Warning: Label `amb' multiply defined.
 
@@ -542,7 +558,7 @@ LaTeX Warning: Label `amb' multiply defined.
 
 LaTeX Warning: Label `amb' multiply defined.
 
-) (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.aux))
+) (D:\Dropbox\offcalendar\mgr\rozdzial6.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
@@ -557,9 +573,10 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 65.
 
-(D:\latex\tex\latex\psnfss\t1ptm.fd
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd"
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
-) (D:\latex\tex\context\base\supp-pdf.mkii
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count104
 \scratchdimen=\dimen127
@@ -615,7 +632,7 @@ Package pdftex.def Info: agh.jpg used on input line 67.
 (pdftex.def)             Requested size: 87.88098pt x 170.8476pt.
 LaTeX Font Info:    Try loading font information for T1+phv on input line 67.
 
-(D:\latex\tex\latex\psnfss\t1phv.fd
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1phv.fd"
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
@@ -636,8 +653,8 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 67.
  [1
 
-{C:/Users/freak/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/fr
-eak/Dropbox/offcalendar/mgr/agh.jpg>]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/Dropbox/offcalendar/mg
+r/agh.jpg>]
 Underfull \hbox (badness 2903) in paragraph at lines 67--67
 []\T1/ptm/m/it/12 O±wiadczamy, ±wia-domi od-po-wie-dzial-no-±ci kar-nej za po-±
 wiad-cze-nie nie-prawdy, »e
@@ -659,12 +676,12 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 69.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 69.
- (C:\Users\freak\Dropbox\offcalendar\mgr\praca.toc [5
+ (D:\Dropbox\offcalendar\mgr\praca.toc [5
 
 ])
 \tf@toc=\write3
  [6]
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.tex
+(D:\Dropbox\offcalendar\mgr\rozdzial1.tex
 Rozdzia\l  1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
@@ -676,7 +693,7 @@ Underfull \vbox (badness 6859) has occurred while \output is active []
 
 
 ])
-[8] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.tex
+[8] (D:\Dropbox\offcalendar\mgr\rozdzial2.tex
 Rozdzia\l  2.
 [9
 
@@ -717,7 +734,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-[24]) [25] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.tex
+[24]) [25] (D:\Dropbox\offcalendar\mgr\rozdzial3.tex
 Rozdzia\l  3.
 [26
 
@@ -725,10 +742,10 @@ Rozdzia\l  3.
 
 ] [27]
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 54.
- (D:\latex\tex\latex\psnfss\t1pcr.fd
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd"
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [28] [29] [30] [31]) [32]
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.tex
+)
+[28] [29] [30] [31]) [32] (D:\Dropbox\offcalendar\mgr\rozdzial4.tex
 Rozdzia\l  4.
 [33
 
@@ -746,16 +763,15 @@ File: register.png Graphic file (type png)
 <use register.png>
 Package pdftex.def Info: register.png used on input line 145.
 (pdftex.def)             Requested size: 227.62206pt x 213.9502pt.
- [37 <C:/Users/freak/Dropbox/offcalendar/mgr/signin.png> <C:/Users/freak/Dropbo
-x/offcalendar/mgr/register.png>]
-<add_event.png, id=130, 694.84593pt x 613.54219pt>
+ [37 <D:/Dropbox/offcalendar/mgr/signin.png> <D:/Dropbox/offcalendar/mgr/regist
+er.png>] <add_event.png, id=130, 694.84593pt x 613.54219pt>
 File: add_event.png Graphic file (type png)
- <use add_event.png>
+
+<use add_event.png>
 Package pdftex.def Info: add_event.png used on input line 166.
 (pdftex.def)             Requested size: 409.71692pt x 361.77144pt.
- [38 <C:/Users/freak/Dropbox/offcalendar/mgr/add_event.png>] [39] [40] [41] [42
-]
-[43] [44] [45] [46]
+ [38 <D:/Dropbox/offcalendar/mgr/add_event.png>] [39]
+[40] [41] [42] [43] [44] [45] [46]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [47]
@@ -770,11 +786,11 @@ File: isOffline.png Graphic file (type png)
  <use isOffline.png>
 Package pdftex.def Info: isOffline.png used on input line 532.
 (pdftex.def)             Requested size: 409.71692pt x 80.5384pt.
- [48 <C:/Users/freak/Dropbox/offcalendar/mgr/isOnline.png> <C:/Users/freak/Drop
-box/offcalendar/mgr/isOffline.png>]
+ [48 <D:/Dropbox/offcalendar/mgr/isOnline.png> <D:/Dropbox/offcalendar/mgr/isOf
+fline.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 565--566
-[]\T1/ptm/m/n/10.95 W przy-padku gdy pro-ces syn-chro-ni-za-cji jest w trak-cie
- wy-ko-na-nia (atry-but In-de-
+[][]\T1/ptm/m/n/10.95 W przy-padku gdy pro-ces syn-chro-ni-za-cji jest w trak-c
+ie wy-ko-na-nia (atry-but In-de-
  []
 
 [49]
@@ -788,7 +804,7 @@ Underfull \vbox (badness 3557) has occurred while \output is active []
 Underfull \vbox (badness 6842) has occurred while \output is active []
 
  [55]
-[56] [57]) [58] [59] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.tex
+[56] [57]) [58] [59] (D:\Dropbox\offcalendar\mgr\rozdzial5.tex
 Rozdzia\l  5.
 [60
 
@@ -796,69 +812,77 @@ Rozdzia\l  5.
 
 ]
 Underfull \hbox (badness 1924) in paragraph at lines 50--51
-[]\T1/ptm/m/n/10.95 Do po-praw-nego po-ª¡-cze-nia z baz¡ da-nych ko-nieczna jes
-t edy-cja da-nych znaj-du-j¡-cych si¦
+[][]\T1/ptm/m/n/10.95 Do po-praw-nego po-ª¡-cze-nia z baz¡ da-nych ko-nieczna j
+est edy-cja da-nych znaj-du-j¡-cych si¦
  []
 
-[61] [62] [63]) [64] (C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.tex
+[61] [62] [63]) [64] (D:\Dropbox\offcalendar\mgr\rozdzial6.tex
 Rozdzia\l  6.
 ) [65
 
 
 
-] (C:\Users\freak\Dropbox\offcalendar\mgr\praca.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 38--43
-$\T1/pcr/m/n/10.95 pl / 2012 / 07 / 29 / rest-[]ciekawszy-[]sposob-[]na-[]komun
-ikacje-[]client-[]server /$
+] (D:\Dropbox\offcalendar\mgr\praca.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 69--74
+\T1/pcr/m/n/10.95 pl / 2012 / 07 / 29 / rest-[]ciekawszy-[]sposob-[]na-[]komuni
+kacje-[]client-[]server /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--49
-[]\T1/ptm/m/n/10.95 Cezary So-ba-niec Je-rzy Brze-zi«-ski.  Usªugi sie-ciowe re
-st.  $\T1/pcr/m/n/10.95 https :$
+Underfull \hbox (badness 10000) in paragraph at lines 76--80
+[][]\T1/ptm/m/n/10.95 Cezary So-ba-niec Je-rzy Brze-zi«-ski.  Usªugi sie-ciowe 
+rest.  $\T1/pcr/m/n/10.95 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--49
-$\T1/pcr/m/n/10.95 / / www . soa . edu . pl / c / document _ library / get _ fi
-le ? uuid =$
- []
-
-
-Underfull \hbox (badness 1789) in paragraph at lines 51--54
-[]\T1/ptm/m/n/10.95 Architektura REST.  $\T1/pcr/m/n/10.95 http : / / www . sli
-deshare . net / GeekGirlsCarrotsPoznan /$
+Underfull \hbox (badness 10000) in paragraph at lines 76--80
+\T1/pcr/m/n/10.95 / / www . soa . edu . pl / c / document _ library / get _ fil
+e ? uuid =
  []
 
 [66
 
 
-]) [67] (C:\Users\freak\Dropbox\offcalendar\mgr\praca.aux
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial1.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial2.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial3.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial4.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial5.aux)
-(C:\Users\freak\Dropbox\offcalendar\mgr\rozdzial6.aux))
+]
+Underfull \hbox (badness 1789) in paragraph at lines 82--85
+[][]\T1/ptm/m/n/10.95 Architektura REST.  $\T1/pcr/m/n/10.95 http : / / www . s
+lideshare . net / GeekGirlsCarrotsPoznan /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--110
+[][]\T1/ptm/m/n/10.95 Active re-cord class.  $\T1/pcr/m/n/10.95 https : / / ell
+islab . com / codeigniter / user-[]guide /
+ []
+
+) [67] (D:\Dropbox\offcalendar\mgr\praca.aux
+(D:\Dropbox\offcalendar\mgr\rozdzial1.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial2.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial3.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial4.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial5.aux)
+(D:\Dropbox\offcalendar\mgr\rozdzial6.aux))
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5413 strings out of 494045
- 69381 string characters out of 3156044
- 239632 words of memory out of 3000000
- 8540 multiletter control sequences out of 15000+200000
+ 5433 strings out of 493921
+ 71747 string characters out of 3144861
+ 239887 words of memory out of 3000000
+ 8561 multiletter control sequences out of 15000+200000
  80237 words of font info for 79 fonts, out of 3000000 for 9000
- 715 hyphenation exceptions out of 8191
+ 841 hyphenation exceptions out of 8191
  36i,12n,45p,840b,1814s stack positions out of 5000i,500n,10000p,200000b,50000s
-{D:/latex/fonts/enc/dvips/fontname/8r.enc}<D:/latex/fonts/type1/urw/courier/u
-crr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/latex/fonts/type1/u
-rw/helvetic/uhvr8a.pfb><D:/latex/fonts/type1/urw/helvetic/uhvro8a.pfb><D:/latex
-/fonts/type1/urw/times/utmb8a.pfb><D:/latex/fonts/type1/urw/times/utmr8a.pfb><D
-:/latex/fonts/type1/urw/times/utmr8a.pfb><D:/latex/fonts/type1/urw/times/utmri8
-a.pfb>
-Output written on praca.pdf (67 pages, 413437 bytes).
+{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/urw/helvetic/uhvro8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/ti
+mes/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on praca.pdf (67 pages, 414592 bytes).
 PDF statistics:
  259 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
