@@ -8,11 +8,11 @@ Ponadto, w rozdziale zostaną przedstawione założenia systemu oraz wymagania k
 \section{Lokalne przechowywanie danych}
 \label{sec:lokPrzechDanych}
 
-Głównym wymogiem technicznym web aplikacji wspierającej tryb offline jest możlwość użytkowania jej bez konieczności połączenia z serwerem. Do realizacji tego wymogu niezbędne jest przechowywanie danych po stronie klienta - przeglądarki internetowej.
+Głównym wymogiem technicznym web aplikacji wspierającej tryb offline jest możliwość użytkowania jej bez konieczności połączenia z serwerem. Do realizacji tego wymogu niezbędne jest przechowywanie danych po stronie klienta - przeglądarki internetowej.
 
 Przechowywanie danych po stronie klienta zawsze było mocną stroną aplikacji desktopowych. W przypadku web aplikacji, przez bardzo długi okres czasu ta funkcjonalność była ograniczona do tworzenia ciasteczek (cookie).
 
-Cookie to niewielkie ilości danych każdorazowo przesyłane do serwera przy przeglądaniu danej witryny. Wsparcie przeglądarek dla plików cookie rozpoczęło się w 1995 roku i do drugiej dekady XXI wieku pliki cookie były jedyną szeroko wspieraną metodą przechowywania danych po stronie klienta. Pliki cookie posiadają kilka zasadniczych wad:
+Cookie\cite{cookie} to niewielkie ilości danych każdorazowo przesyłane do serwera przy przeglądaniu danej witryny. Wsparcie przeglądarek dla plików cookie rozpoczęło się w 1995 roku i do drugiej dekady XXI wieku pliki cookie były jedyną szeroko wspieraną metodą przechowywania danych po stronie klienta. Pliki cookie posiadają kilka zasadniczych wad:
 
 
 \begin{itemize}
@@ -195,9 +195,9 @@ Filesystem API jest bardzo dobrym rozwiązaniem dla aplikacji, które wymagają 
 \section{Aplikacje webowe trybu offline}
 \label{sec:appWebOff}
 
-Tryb offline (w wolnym tłumaczeniu: "bez dostępu do sieci Internet") nie był dotychczas kojarzony z przeglądarkami internetowymi - programami z definicji służącymi do przeglądania zasobów WWW (\emph{World Wide Web}). Aplikacje pracujące w tym trybie mogły być wywoływane jedynie poprzez ścieżkę rozpoczynającą się od \textbf{file://} i odwoływać się do danych znajdujących się na dysku twardym, flash lub płycie CD/DVD. Przykładem mogą być prezentacje korzystające z przeglądarki celem uruchomienia animacji napisanych za pomocą języka JavaScript.
+Tryb offline\cite{whatOffline} (w wolnym tłumaczeniu: "bez dostępu do sieci Internet") nie był dotychczas kojarzony z przeglądarkami internetowymi - programami z definicji służącymi do przeglądania zasobów WWW (\emph{World Wide Web}). Aplikacje pracujące w tym trybie mogły być wywoływane jedynie poprzez ścieżkę rozpoczynającą się od \textbf{file://} i odwoływać się do danych znajdujących się na dysku twardym, flash lub płycie CD/DVD. Przykładem mogą być prezentacje korzystające z przeglądarki celem uruchomienia animacji napisanych za pomocą języka JavaScript.
 
-Tryb offline pojawia się obecnie również w tak zwanych \textbf{Single-page applications}. Ich działanie polega na wykorzystaniu funkcji przeglądarki internetowej do interakcji z użytkownikiem i zapisania danych lokalnie. Przykład stanowić może TiddlyWiki - osobiste wiki umożliwiające tworzenie i edytowanie treści poprzez uruchomienie pojedynczej strony w przeglądarce bez dostępu do sieci Internet. Cel ten może zostać osiągnięty dzięki dobrodziejstwom oferowanym przez specyfikację HTML5.
+Tryb offline pojawia się obecnie również w tak zwanych \textbf{Single-page applications}. Ich działanie polega na wykorzystaniu funkcji przeglądarki internetowej do interakcji z użytkownikiem i zapisania danych lokalnie. Przykład stanowić może TiddlyWiki\footnote{http://tiddlywiki.com/} - osobiste wiki umożliwiające tworzenie i edytowanie treści poprzez uruchomienie pojedynczej strony w przeglądarce bez dostępu do sieci Internet. Cel ten może zostać osiągnięty dzięki dobrodziejstwom oferowanym przez specyfikację HTML5.
 
 Dochodzimy wreszcie do aplikacji wspierających zarówno tryb offline jak i online. Koncepcja ta wykorzystana jest w niniejszej pracy.
 
@@ -210,14 +210,14 @@ Poniżej przedstawimy główne prawidłowości działania trybu offline przez pr
 \subsection{Pamięć cache}
 \label{sec:pamiecCache}
 
-Pamięć podręczna przeglądarki (ang. \emph{cache}) obejmuje miejsce na dysku twardym przeznaczone do przechowywania odwiedzonych stron WWW lub ich fragmentów. Najczęściej dotyczy to arkuszy stylów CSS, grafik a także skryptów w języku JavaScript. Wyróżniamy dwa główne powody stosowania cache-owania:
+Pamięć podręczna przeglądarki\cite{pamiecPodreczna} (ang. \emph{cache}) obejmuje miejsce na dysku twardym przeznaczone do przechowywania odwiedzonych stron WWW lub ich fragmentów. Najczęściej dotyczy to arkuszy stylów CSS, grafik a także skryptów w języku JavaScript. Wyróżniamy dwa główne powody stosowania cache-owania:
 
 \begin{itemize}
-\item \textbf{redukcja czasu dostępu do zasobów:} pamięć cache jest znacznie “bliżej” klienta, niż serwer oryginalny, dzięki czemu w krótszym czasie uzyskiwany jest dostęp do konkretnego zasobu i jego prezentacja,
+\item \textbf{redukcja czasu dostępu do zasobów:} pamięć cache jest znacznie "bliżej" klienta, niż serwer oryginalny, dzięki czemu w krótszym czasie uzyskiwany jest dostęp do konkretnego zasobu i jego prezentacja,
 \item \textbf{redukcja ruchu sieciowego:} przechowywane w pamięci podręcznej zasoby mogą zostać użyte ponownie, co zmniejsza rozmiar pasma niezbędnego do uzyskania dostępu i oszczędza koszty ponoszone przez użytkownika.
 \end{itemize}
 
-Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz na sesję (za rozpoczęcie sesji przyjmujemy uruchomienie przeglądarki) tak, by użytkownik był na bieżąco ze zmianami treści. Poniżej przedstawiono ogólne zasady działania Web Cache:
+Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz na sesję (za rozpoczęcie sesji przyjmujemy uruchomienie przeglądarki) tak, by użytkownik był na bieżąco ze zmianami treści. Poniżej przedstawiono ogólne zasady działania Web Cache\cite{cache}:
 
 \begin{enumerate}
 \item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania "świeżej" porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
@@ -240,9 +240,9 @@ Wymogiem działania aplikacji jest automatyczna detekcja połączenia internetow
 
 Specyfikacja HTML5 oferuje różne mechanizmy wykrywania połączenia sieciowego. Różnią się one poziomem wsparcia w przeglądarkach.
 
-Jednym z nich jest skorzystanie z tzw. Obserwatora Zdarzeń (\emph{EventListener}). HTML5 udostępnia obserwatory \textbf{online} oraz \textbf{offline}.
+Jednym z nich jest skorzystanie z tzw. Obserwatora Zdarzeń (\emph{EventListener})\cite{html5off}. HTML5 udostępnia obserwatory \textbf{online} oraz \textbf{offline}.
 
-Połączenie internetowe może także zostać zweryfikowane za pomocą obiektu \textbf{XMLHttpRequest (XHR)}. Jest to obiekt języków skryptowych (jak np. JavaScript) umożliwiający wykonanie żądań po załadowaniu się dokumentu HTML. Są one realizowane asynchronicznie (w tle) i nie przerywają interakcji użytkownika ze stroną. Badanie dostępu do Internetu ogranicza się do sprawdzenia odpowiedzi z serwera.
+Połączenie internetowe może także zostać zweryfikowane za pomocą obiektu \textbf{XMLHttpRequest (XHR)}\cite{xhr}. Jest to obiekt języków skryptowych (jak np. JavaScript) umożliwiający wykonanie żądań po załadowaniu się dokumentu HTML. Są one realizowane asynchronicznie (w tle) i nie przerywają interakcji użytkownika ze stroną. Badanie dostępu do Internetu ogranicza się do sprawdzenia odpowiedzi z serwera.
 
 Biblioteką również wykorzystującą technologię AJAX (\emph{Asynchronous JavaScript and XML}) w detekcji połączenia jest Offline.js. Umożliwia ona wykrycie utraconego połączenia oraz ponowne wykonanie żądań, które w wyniku owej utraty nie doszły do skutku. Dodatkowo oferuje szablony służące do wyświetlenia odpowiednich informacji dla użytkownika.
 

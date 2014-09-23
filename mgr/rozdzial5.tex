@@ -1,36 +1,116 @@
 \chapter{Instrukcja użytkownika}
 \label{cha:instrUzytk}
 
+W rozdziale tym szczegółowo opisany został sposób instalacji oraz konfiguracji aplikacji OffCalendar. Ponadto rozdział zawiera kompletną instrukcję obsługi aplikacji obejmującą zarządzanie kontami oraz wydarzeniami użytkownika.
 
 \section{Instalacja i konfiguracja}
-\label{sec:apKli}
+\label{sec:instKonf}
 
+Do poprawnego działania aplikacji OffCalendar wymagane jest posiadanie następujących komponentów:
 
+\begin{itemize}
+\item Apache HTTP Server w wersji 2.2 lub nowszej
+\item PHP w wersji 5.5 lub nowszej
+\item MySQL w wersji 5.6 lub nowszej
+\end{itemize}
 
-\subsection{Aplikacja kliencka}
-\label{sec:instrApKli}
+Najprostszą formą zainstalowania trzech powyższych komponentów jest skorzystanie z gotowych paczek oprogramowania zawierających zarówno serwer Apache jak i PHP oraz MySQL. W przypadku systemu Windows jedną z takich paczek jest to XAMPP, natomiast dla systemu Unix jest to Tasksel.
 
+Po pomyślnej instalacji wszystkich komponentów konieczna jest odpowiednia konfiguracja aplikacji. Pierwszym z kroków jest dodatkowy wpis VirtualHost dla serwera Apache. Dla systemu Windows oraz domyślnej instalacji ścieżka do pliku konfiguracyjnego to \url{C:\xampp\apache\conf\extra\httpd-vhosts.conf}. Dla systemów Unix jest to \url{/etc/httpd/conf/httpd.conf}.
 
+\begin{lstlisting}[caption=Konfiguracja serwera Apache., label=amb, captionpos=b]
 
-\subsection{Aplikacja serwerowa}
-\label{sec:intrApSerw}
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot __PATH__
+    ServerName __HOST__
 
+    <Directory "__PATH__">
+   	 AllowOverride All
+   	 Order allow,deny
+   	 Allow from all
+            	Require all granted
+    </Directory>
+</VirtualHost>
 
+\end{lstlisting}
+
+Zmienna \_\_PATH\_\_ powinna zostać zastąpiona przez ścieżkę do projektu OffCalendar znajdującego się w \url{/projekt magisterski/offcalendar/}. Zmienna \_\_HOST\_\_ powinna zostać zastąpiona przez nazwę domeny która będzie używana do dostępu do aplikacji. W przypadku chęci skorzystania z domyślnej domeny zmienna powinna przyjąć wartość localhost.
+
+Projekt OffCalendar musi posiadać wiedzę o domenie pod którą jest dostępny. W tym celu należy dokonać edycji pliku \url{/projekt magisterski/offcalendar/application/config/config.php}. Wymagana jest edycja zmiennej \_\_URL\_\_ na adres URL pod którym dostępna będzie aplikacja OffCalendar. Przy korzystaniu z domyślnej domeny zmienna \_\_URL\_\_ powinna mieć wartość \url{http://localhost/}.
+
+\begin{lstlisting}[caption=Konfiguracja adresu URL dla projektu OffCalendar., label=amb, captionpos=b]
+
+$config['base_url'] = '__URL__';
+
+\end{lstlisting}
+
+Kolejnym krokiem jest konfiguracja bazy danych. Po utworzeniu nowej bazy danych na serwerze MySQL konieczne jest wykonanie kwerend tworzących w niej odpowiednie struktury. Kwerendy znajdują się w pliku \url{/projekt magisterski/komponenty/mysql/offcalendar.sql}.
+
+Do poprawnego połączenia z bazą danych konieczna jest edycja danych znajdujących się w \url{/projekt magisterski/offcalendar/application/config/database.php}. Pola wymagające edycji to \_\_HOST\_\_, \_\_USER\_\_, \_\_PASSWORD\_\_ oraz \_\_DATABASE\_\_.
+
+\begin{lstlisting}[caption=Konfiguracja dostępu do bazy danych., label=amb, captionpos=b]
+
+$db['default']['hostname'] = '__HOST__';
+$db['default']['username'] = '__USER__';
+$db['default']['password'] = '__PASSWORD__';
+$db['default']['database'] = '__DATABASE__';
+
+\end{lstlisting}
+
+Po wykonaniu powyższych kroków aplikacja powinna być dostępna z poziomu przeglądarki internetowej (adres strony zgodny ze zmienną \_\_URL\_\_).
 
 \section{Obsługa aplikacji}
 \label{sec:obslAp}
 
-
+Ogół akcji realizowanych w ramach aplikacji odbywa się wyłącznie za pomocą przeglądarki internetowej. Prosty i przejrzysty interfejs ułatwia korzystanie z pogramu, a ograniczona liczba widoku przyśpiesza wykonywanie podstawowych zadań.
 
 \subsection{Zarządzanie wydarzeniami}
 \label{sec:instrZarzWyd}
 
+Wszystkie czynności wykonywane są w widoku przestrzeni roboczej (\url{__URL__/welcome/dashboard}) który dostępny jest po poprawnej autoryzacji. Podstawową funkcjonalnością aplikacji OffCalendar jest oczywiście zarządzanie wydarzeniami. Obejmuje ono:
 
+\begin{itemize}
+\item dodawanie nowych wydarzeń,
+\item edycję wydarzeń istniejących,
+\item usuwanie wydarzeń,
+\item przeszukiwanie wydarzeń,
+\item przeglądanie wydarzeń.
+\end{itemize}
 
-\subsection{Tryb offline}
-\label{sec:instrTrybOff}
+\textbf{Dodawanie} odbywa się poprzez przejście do widoku dziennego (przycisk "Add event" lub "Day"). Formularz wyświetlany jest po kliknięciu w belkę reprezentującą godzinę dnia (odstęp 30 minut). Po prawej stronie widoku przestrzeni roboczej pojawia się okno wraz z polami tekstowymi. Oznaczają one kolejno: godzinę rozpoczęcia wydarzenia (domyślnie wypełniona), godzinę zakończenia wydarzenia, opis wydarzenia, zewnętrzny adres url (opcjonalne), typ wydarzenia (do wyboru: regular, important, celebration, warning, party) oraz flaga dotycząca wysyłania notyfikacji e-mail. Po poprawnym dodaniu wydarzenia użytkownik zostaje przekierowany na stronę główną do widoku miesięcznego, który w postaci graficznej reprezentuje dodane wydarzenia.
 
+\textbf{Edycja} przedstawia się analogicznie do dodawania; jedyną różnicę stanowi fakt, iż w momencie przejścia do odpowiedniego formularza wszystkie pola są wypełnione wartościami zapisanymi uprzednio w pamięci lokalnej przeglądarki. Formularz edycji wyświetlany jest po kliknięciu w przycisk "edit" znajdujący się w prawym górnym rogu wydarzenia w widoku dziennym.
 
+\textbf{Usuwanie} realizowane jest poprzez kliknięcie przycisku "delete" w widoku dziennym dla danego wydarzenia.
 
-\subsection{Tryb online}
-\label{sec:instrTrybOn}
+\textbf{Przeszukiwanie} wywoływane jest w dowolnym widoku po podaniu szukanej frazy i zatwierdzeniu przyciskiem lupy. Z uwagi na ograniczenia mechanizmu IndexedDB efektywne wyszukiwanie odbywa się po podaniu pierwszych wyrazów (lub ich części) opisu wydarzenia.
+
+\textbf{Przeglądanie} możliwe jest z wykorzystaniem kilku widoków:
+
+\begin{itemize}
+\item rocznego z liczbą wydarzeń przypadających na dany miesiąc,
+\item miesięcznego (widok domyślny) z graficznym oznaczeniem wydarzeń w poszczególnych dniach miesiąca,
+\item tygodniowego z podziałem na wydarzenia przypadające na poszczególne dni tygodnia,
+\item dziennego z podziałem na godziny dnia.
+\end{itemize}
+
+Ponadto użytkownik ma możliwość przejrzenia wydarzeń z przeszłości, obecnie trwających oraz nadchodzących wybierając odpowiednią sekcję z menu po lewej stronie obszaru przestrzeni roboczej. W sekcji \textbf{Your Profile} znajdzie także informacje na temat liczby dodanych wydarzeń oraz otrzymywanych notyfikacji obok informacji dotyczących danych logowania.
+
+\subsection{Zarządzanie kontami}
+\label{sec:zarzKont}
+
+Widokiem startowym aplikacji OffCalendar jest widok logowania. Aby dokonać pomyślnej autoryzacji należy założyć konto użytkownika. W tym celu wystarczy przejść do sekcji \textbf{Sign up}, która zawiera ekran rejestracji.
+
+Aby utworzyć konto w serwisie wystarczy podać nazwę użytkownika, adres e-mail (niezbędny do przesyłania notyfikacji dotyczących wydarzeń) oraz hasło (8 do 20 znaków). Po utworzeniu konta użytkownik ponownie zostanie przekierowany do ekranu logowania, za pomocą którego może dostać się do ekranu głównego systemu.
+
+Celem zakończenia pracy z aplikacją wystarczy kliknąć przycisk \textbf{Logout} znajdujący się w prawym górnym rogu widoku dashboard.
+
+\subsection{Tryb offline/online}
+\label{sec:instrTrybOffOn}
+
+Przełączanie pomiędzy trybami offline i online odbywa się automatycznie i bazuje na stanie połączenia internetowego. 
+
+Ogół operacji związanych z autoryzacją wymaga dostępu do sieci Internet z uwagi na konieczność wykonania zapytań do API wystawionego przez część serwerową. Składa się na to stworzenie nowego konta oraz logowanie. Weryfikacja praw dostępu do widoku głównego odbywa się w oparciu o stan obiektu localStorage (obecność danych zapisanych w trakcie logowania). Także proces wylogowania użytkownika pomija część serwerową.
+
+Proces synchronizacji również wymaga dostępu do sieci Internet. W sytuacji jego braku proces ów zostaje zawieszony, jednak zarządzanie wydarzeniami jest nadal w pełni dostępne dla użytkownika.
