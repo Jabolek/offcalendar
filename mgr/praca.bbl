@@ -1,32 +1,32 @@
 \begin{thebibliography}{10}
 
 \bibitem{html5}
-Html5.
+{HTML5}.
 \newblock \url{http://www.w3.org/TR/html5/}.
 
 \bibitem{cookie}
-Http cookie.
+{HTTP} cookie.
 \newblock \url{http://en.wikipedia.org/wiki/HTTP_cookie}.
 
 \bibitem{webSqlDb}
-Web sql database.
+Web {SQL} {Database}.
 \newblock \url{http://www.w3.org/TR/webdatabase/}.
 
 \bibitem{webStorage}
-Web storage.
+Web {Storage}.
 \newblock \url{http://www.w3.org/TR/webstorage/}.
 
 \bibitem{indexedDb}
-Indexed database api.
+Indexed {Database} {API}.
 \newblock \url{http://www.w3.org/TR/IndexedDB/}.
 
 \bibitem{filesystemApi}
-File api: Directories and system.
+File {API}: {Directories} and {System}.
 \newblock \url{http://www.w3.org/TR/file-system-api/}.
 
 \bibitem{whatOffline}
 Michael Mahemoff.
-\newblock Offline: What does it mean and why should i care?
+\newblock Offline: {What} does it mean and why should {I} care?
 \newblock \url{http://www.html5rocks.com/en/tutorials/offline/whats-offline/},
   October 2013.
 
@@ -40,12 +40,12 @@ Mark Nottingham.
 \newblock \url{https://www.mnot.net/cache_docs/}, May 2013.
 
 \bibitem{https}
-Http secure.
+{HTTP} {Secure}.
 \newblock \url{http://en.wikipedia.org/wiki/HTTP_Secure}.
 
 \bibitem{html5off}
 Paul Kinlan.
-\newblock Working off the grid with {HTML5} {Offline}.
+\newblock Working {Off} the {Grid} with {HTML5} {Offline}.
 \newblock \url{http://www.html5rocks.com/en/mobile/workingoffthegrid/}, June
   2011.
 
@@ -55,7 +55,7 @@ Xml{Http}{Request}.
 
 \bibitem{json}
 Jason Lengstorf.
-\newblock Json: What it is, how it works, \& how to use it.
+\newblock {JSON}: What it is, how it works, how to use it.
 \newblock
   \url{http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/},
   June 2009.
@@ -67,14 +67,14 @@ Dr.~M. Elkstein.
 
 \bibitem{rest2}
 Patryk Jar.
-\newblock Rest – ciekawszy sposób na komunikację client-server.
+\newblock {REST} – ciekawszy sposób na komunikację client-server.
 \newblock
   \url{http://www.yarpo.pl/2012/07/29/rest-ciekawszy-sposob-na-komunikacje-client-server/#more-1626},
   July 2012.
 
 \bibitem{rest3}
 Cezary~Sobaniec Jerzy~Brzeziński.
-\newblock Usługi sieciowe rest.
+\newblock Usługi sieciowe {REST}.
 \newblock
   \url{https://www.soa.edu.pl/c/document_library/get_file?uuid=46b0faf6-6743-4184-ab16-dbddfd413685&groupId=10122}.
 
@@ -88,7 +88,7 @@ Html: {HTML5} {Form} {Validation} {Examples}.
 \newblock \url{http://www.the-art-of-web.com/html/html5-form-validation/}.
 
 \bibitem{codeigniterUserGuide}
-Codeigniter user guide.
+Codeigniter {User} {Guide}.
 \newblock \url{https://ellislab.com/codeigniter/user-guide/}.
 
 \bibitem{bootstrap}
@@ -104,7 +104,7 @@ Same-origin policy.
 \newblock \url{http://en.wikipedia.org/wiki/Same-origin_policy}.
 
 \bibitem{ciActiveRecord}
-CodeIgniter: ActiveRecord class.
+Active {Record} {Class}.
 \newblock
   \url{https://ellislab.com/codeigniter/user-guide/database/active_record.html}.
 
