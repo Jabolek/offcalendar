@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.23)  23 SEP 2014 17:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.23)  23 SEP 2014 17:51
 entering extended mode
 **praca.tex
 (D:\Dropbox\offcalendar\mgr\praca.tex
@@ -656,15 +656,15 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/Dropbox/offcalendar/mg
 r/agh.jpg>]
 Underfull \hbox (badness 2903) in paragraph at lines 67--67
-[]\T1/ptm/m/it/12 Oï¿½wiadczamy, ï¿½wia-domi od-po-wie-dzial-no-ï¿½ci kar-nej za po-ï¿½
-wiad-cze-nie nie-prawdy, ï¿½e
+[]\T1/ptm/m/it/12 O±wiadczamy, ±wia-domi od-po-wie-dzial-no-±ci kar-nej za po-±
+wiad-cze-nie nie-prawdy, »e
  []
 
 [2
 
 ]
 Underfull \hbox (badness 4013) in paragraph at lines 67--67
-[]\T1/ptm/m/it/14.4 Skï¿½adamy ser-deczne po-dziï¿½-ko-wa-nia Panu dr
+[]\T1/ptm/m/it/14.4 Skªadamy ser-deczne po-dzi¦-ko-wa-nia Panu dr
  []
 
 [1
@@ -778,17 +778,17 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <isOnline.png, id=162, 307.1475pt x 60.225pt>
 File: isOnline.png Graphic file (type png)
  <use isOnline.png>
-Package pdftex.def Info: isOnline.png used on input line 526.
+Package pdftex.def Info: isOnline.png used on input line 525.
 (pdftex.def)             Requested size: 409.71692pt x 80.34174pt.
 
 <isOffline.png, id=163, 306.39468pt x 60.225pt>
 File: isOffline.png Graphic file (type png)
  <use isOffline.png>
-Package pdftex.def Info: isOffline.png used on input line 532.
+Package pdftex.def Info: isOffline.png used on input line 531.
 (pdftex.def)             Requested size: 409.71692pt x 80.5384pt.
  [48 <D:/Dropbox/offcalendar/mgr/isOnline.png> <D:/Dropbox/offcalendar/mgr/isOf
 fline.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 [][]\T1/ptm/m/n/10.95 W przy-padku gdy pro-ces syn-chro-ni-za-cji jest w trak-c
 ie wy-ko-na-nia (atry-but In-de-
  []
@@ -812,8 +812,8 @@ Rozdzia\l  5.
 
 ]
 Underfull \hbox (badness 1924) in paragraph at lines 50--51
-[][]\T1/ptm/m/n/10.95 Do po-praw-nego po-ï¿½ï¿½-cze-nia z bazï¿½ da-nych ko-nieczna j
-est edy-cja da-nych znaj-du-jï¿½-cych siï¿½
+[][]\T1/ptm/m/n/10.95 Do po-praw-nego po-ª¡-cze-nia z baz¡ da-nych ko-nieczna j
+est edy-cja da-nych znaj-du-j¡-cych si¦
  []
 
 [61] [62] [63]) [64] (D:\Dropbox\offcalendar\mgr\rozdzial6.tex
@@ -830,7 +830,7 @@ kacje-[]client-[]server /
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 76--80
-[][]\T1/ptm/m/n/10.95 Cezary So-ba-niec Je-rzy Brze-ziï¿½-ski.  Usï¿½ugi sie-ciowe 
+[][]\T1/ptm/m/n/10.95 Cezary So-ba-niec Je-rzy Brze-zi«-ski.  Usªugi sie-ciowe 
 rest.  $\T1/pcr/m/n/10.95 https :
  []
 
@@ -851,8 +851,8 @@ lideshare . net / GeekGirlsCarrotsPoznan /
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 107--110
-[][]\T1/ptm/m/n/10.95 Active re-cord class.  $\T1/pcr/m/n/10.95 https : / / ell
-islab . com / codeigniter / user-[]guide /
+[][]\T1/ptm/m/n/10.95 CodeIgniter: Ac-ti-ve-Re-cord class.  $\T1/pcr/m/n/10.95 
+https : / / ellislab . com / codeigniter /
  []
 
 ) [67] (D:\Dropbox\offcalendar\mgr\praca.aux
@@ -882,7 +882,7 @@ fonts/type1/urw/helvetic/uhvro8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
 ype1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/ti
 mes/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on praca.pdf (67 pages, 414592 bytes).
+Output written on praca.pdf (67 pages, 414580 bytes).
 PDF statistics:
  259 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
