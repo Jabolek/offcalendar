@@ -178,7 +178,7 @@ Inicjacja kalendarza odbywa się w momencie załadowania widoku dashboard poprze
 \item ścieżka do katalogu zawierającego szablony widoków etc.
 \end{itemize}
 
-Kontekst definiowany jest przez element kodu HTML o określonym identyfikatorze (np. <div id="kalendarz"></div>) w którym umieszczony zostanie kalendarz.
+Kontekst definiowany jest przez element kodu HTML o określonym identyfikatorze (np. <div id=''kalendarz''></div>) w którym umieszczony zostanie kalendarz.
 
 Widoki kalendarza ładowane są asynchroniczne. Zostały skonstruowane w HTML z zastosowaniem silnika szablonów JavaScript o nazwie \textbf{Underscore.js}\cite{underscore}. Separuje on warstwę danych od warstwy prezentacji i dostarcza wielu funkcji pozwalających operować na przekazanych do widoku zmiennych. Poniższy fragment uproszczonego kodu z widoku dziennego obrazuje prostą pętlę wyświetlającą wydarzenia.
 
@@ -448,7 +448,7 @@ Zarówno dodawanie, usuwanie jak i edycja wydarzenia kończy się przekierowanie
 
 W związku z faktem, że aplikacja OffCalendar oferuje również wsparcie dla trybu online, automatyczna detekcja stanu połączenia internetowego jest kluczowa. Posiadanie dostępu do sieci Internet umożliwia autoryzację oraz, co najważniejsze, synchronizację danych lokalnych z główną bazą będącą częścią części serwerowej projektu.
 
-W aplikacji zastosowano bibliotekę Offline.js \footnote{\url{http://github.hubspot.com/offline/docs/welcome/}}). Oferuje ona automatyczną detekcję połączenia wraz z powiadomieniami o jego stanie oraz możliwość wykonania próby jego ponowienia. Wraz z logiką biblioteki twórcy zaproponowali szablony komunikatów podlegające pełnej personalizacji.
+W aplikacji zastosowano bibliotekę Offline.js \footnote{\url{http://github.hubspot.com/offline/docs/welcome/}}. Oferuje ona automatyczną detekcję połączenia wraz z powiadomieniami o jego stanie oraz możliwość wykonania próby jego ponowienia. Wraz z logiką biblioteki twórcy zaproponowali szablony komunikatów podlegające pełnej personalizacji.
 
 Działanie biblioteki opiera się na cyklicznym wykonywaniu żądania AJAX pobrania niewielkiego zasobu graficznego (1x1 pikseli) w formacie png o rozmiarze 110 bajtów. Wybór ten umożliwia odwołanie do zasobu znajdującego się pod innym adresem, ponieważ koncepcja \textbf{Same-origin policy}\footnote{Same-origin policy, inaczej zasada tożsamego pochodzenia, zezwala na dostęp do zasobów stron, których adres wyróżnia się takim samym protokołem, nazwą domeny serwera i numerem portu\cite{sameOrigin}} nie odnosi się do obiektów graficznych.
 
@@ -479,7 +479,7 @@ Offline.options = {
 Żądanie opiera się na właściwościach obiektu \textbf{XMLHttpRequest} zapewniających asynchroniczne wykonanie, czyli bez przeładowania strony. Poniżej kod głównej metody checkXHR(xhr, onUp, onDown) sprawdzającej stan połączenia internetowego w oparciu o opcje obiektu XMLHttpRequest (xhr) ustawione w momencie inicjalizacji biblioteki i wywołującego funkcje callback.
 
 \begin{lstlisting}[caption=Metoda checkXHR() wykonująca żądanie AJAX załadowania zasobu graficznego., label=amb, captionpos=b]
-	checkXHR = function(xhr, onUp, onDown) {
+checkXHR = function(xhr, onUp, onDown) {
         var checkStatus, _onerror, _onload, _onreadystatechange, _ontimeout;
         checkStatus = function() {
             if (xhr.status && xhr.status < 12000) {
@@ -514,8 +514,7 @@ Offline.options = {
                 }
                 return typeof _onreadystatechange === "function" ? _onreadystatechange.apply(null, arguments) : void 0;
             };
-        }
-    };
+        }};
 \end{lstlisting}
 
 Tylko w sytuacji, w której połączenie internetowe jest aktywne wykonywana jest synchronizacja wydarzeń. Poniżej wygląd komunikatów informujących o pracy w trybie online/offline.
@@ -683,7 +682,7 @@ Pierwszym z elementów, który musiał zostać wykonany w części serwerowej ap
 \end{itemize}
 \end{enumerate}
 
-Wydarzenia (Event) są tworzone po stronie aplikacji klienckiej i każdemu z nich jest przypisywana unikalna wartość lokalnego klucza głównego. Dodatkowo, każde wydarzenie przechowywane w bazie danych posiada również klucz główny generowany przez bazę danych. Z tego względu, przy inicjalizacji oraz zapisie do bazy danych obiektów wydarzeń, powyższe różnice musiały zostać odpowiednio obsłużone.
+Wydarzenia (Event) są tworzone po stronie aplikacji klienckiej i każdemu z nich jest przypisywana unikalna wartość lokalnego klucza głównego. Dodatkowo każde wydarzenie przechowywane w bazie danych posiada również klucz główny generowany przez bazę danych. Z tego względu, przy inicjalizacji oraz zapisie do bazy danych obiektów wydarzeń, powyższe różnice musiały zostać odpowiednio obsłużone.
 
 Dobrym przykładem jest kod konstruktora klasy Event, który sprawdza obecność obydwu kluczy głównych i na ich podstawie odpowiednio inicjuje obiekt.
 

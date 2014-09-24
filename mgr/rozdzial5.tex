@@ -10,11 +10,11 @@ Do poprawnego działania aplikacji OffCalendar wymagane jest posiadanie następu
 
 \begin{itemize}
 \item Apache HTTP Server w wersji 2.2 lub nowszej
-\item PHP w wersji 5.5 lub nowszej
-\item MySQL w wersji 5.6 lub nowszej
+\item PHP x64 w wersji 5.5 lub nowszej
+\item MySQL w wersji 5.6 lub nowszej.
 \end{itemize}
 
-Najprostszą formą zainstalowania trzech powyższych komponentów jest skorzystanie z gotowych paczek oprogramowania zawierających zarówno serwer Apache jak i PHP oraz MySQL. W przypadku systemu Windows jedną z takich paczek jest to XAMPP, natomiast dla systemu Unix jest to Tasksel.
+Najprostszą formą zainstalowania trzech powyższych komponentów jest skorzystanie z gotowych paczek oprogramowania zawierających zarówno serwer Apache jak i PHP oraz MySQL. W przypadku systemu Windows jedną z takich paczek jest XAMPP, natomiast dla systemu Unix jest to Tasksel.
 
 Po pomyślnej instalacji wszystkich komponentów konieczna jest odpowiednia konfiguracja aplikacji. Pierwszym z kroków jest dodatkowy wpis VirtualHost dla serwera Apache. Dla systemu Windows oraz domyślnej instalacji ścieżka do pliku konfiguracyjnego to \url{C:\xampp\apache\conf\extra\httpd-vhosts.conf}. Dla systemów Unix jest to \url{/etc/httpd/conf/httpd.conf}.
 
@@ -78,11 +78,11 @@ Wszystkie czynności wykonywane są w widoku przestrzeni roboczej (\url{__URL__/
 \item przeglądanie wydarzeń.
 \end{itemize}
 
-\textbf{Dodawanie} odbywa się poprzez przejście do widoku dziennego (przycisk "Add event" lub "Day"). Formularz wyświetlany jest po kliknięciu w belkę reprezentującą godzinę dnia (odstęp 30 minut). Po prawej stronie widoku przestrzeni roboczej pojawia się okno wraz z polami tekstowymi. Oznaczają one kolejno: godzinę rozpoczęcia wydarzenia (domyślnie wypełniona), godzinę zakończenia wydarzenia, opis wydarzenia, zewnętrzny adres url (opcjonalne), typ wydarzenia (do wyboru: regular, important, celebration, warning, party) oraz flaga dotycząca wysyłania notyfikacji e-mail. Po poprawnym dodaniu wydarzenia użytkownik zostaje przekierowany na stronę główną do widoku miesięcznego, który w postaci graficznej reprezentuje dodane wydarzenia.
+\textbf{Dodawanie} odbywa się poprzez przejście do widoku dziennego (przycisk ''Add event'' lub ''Day''). Formularz wyświetlany jest po kliknięciu w belkę reprezentującą godzinę dnia (odstęp 30 minut). Po prawej stronie widoku przestrzeni roboczej pojawia się okno wraz z polami tekstowymi. Oznaczają one kolejno: godzinę rozpoczęcia wydarzenia (domyślnie wypełniona), godzinę zakończenia wydarzenia, opis wydarzenia, zewnętrzny adres url (opcjonalne), typ wydarzenia (do wyboru: regular, important, celebration, warning, party) oraz flaga dotycząca wysyłania notyfikacji e-mail. Po poprawnym dodaniu wydarzenia użytkownik zostaje przekierowany na stronę główną do widoku miesięcznego, który w postaci graficznej reprezentuje dodane wydarzenia.
 
-\textbf{Edycja} przedstawia się analogicznie do dodawania; jedyną różnicę stanowi fakt, iż w momencie przejścia do odpowiedniego formularza wszystkie pola są wypełnione wartościami zapisanymi uprzednio w pamięci lokalnej przeglądarki. Formularz edycji wyświetlany jest po kliknięciu w przycisk "edit" znajdujący się w prawym górnym rogu wydarzenia w widoku dziennym.
+\textbf{Edycja} przedstawia się analogicznie do dodawania; jedyną różnicę stanowi fakt, iż w momencie przejścia do odpowiedniego formularza wszystkie pola są wypełnione wartościami zapisanymi uprzednio w pamięci lokalnej przeglądarki. Formularz edycji wyświetlany jest po kliknięciu w przycisk ''edit'' znajdujący się w prawym górnym rogu wydarzenia w widoku dziennym.
 
-\textbf{Usuwanie} realizowane jest poprzez kliknięcie przycisku "delete" w widoku dziennym dla danego wydarzenia.
+\textbf{Usuwanie} realizowane jest poprzez kliknięcie przycisku "delete"{} w widoku dziennym dla danego wydarzenia.
 
 \textbf{Przeszukiwanie} wywoływane jest w dowolnym widoku po podaniu szukanej frazy i zatwierdzeniu przyciskiem lupy. Z uwagi na ograniczenia mechanizmu IndexedDB efektywne wyszukiwanie odbywa się po podaniu pierwszych wyrazów (lub ich części) opisu wydarzenia.
 
