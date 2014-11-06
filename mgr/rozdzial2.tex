@@ -10,15 +10,15 @@ Ponadto, w rozdziale zostaną przedstawione założenia systemu oraz wymagania k
 
 Głównym wymogiem technicznym web aplikacji wspierającej tryb offline jest możliwość użytkowania jej bez konieczności połączenia z serwerem. Do realizacji tego wymogu niezbędne jest przechowywanie danych po stronie klienta - przeglądarki internetowej.
 
-Przechowywanie danych po stronie klienta zawsze było mocną stroną aplikacji desktopowych. W przypadku web aplikacji, przez bardzo długi okres czasu ta funkcjonalność była ograniczona do tworzenia ciasteczek (cookie).
+Przechowywanie danych po stronie klienta zawsze było mocną stroną aplikacji desktopowych. W przypadku web aplikacji, przez bardzo długi okres czasu ta funkcjonalność była ograniczona do tworzenia ciasteczek (cookie\cite{cookie}).
 
-Cookie\cite{cookie} to niewielkie ilości danych każdorazowo przesyłane do serwera przy przeglądaniu danej witryny. Wsparcie przeglądarek dla plików cookie rozpoczęło się w 1995 roku i do drugiej dekady XXI wieku pliki cookie były jedyną szeroko wspieraną metodą przechowywania danych po stronie klienta. Pliki cookie posiadają kilka zasadniczych wad:
+Cookie to niewielkie ilości danych każdorazowo przesyłane do serwera przy przeglądaniu danej witryny. Wsparcie przeglądarek dla plików cookie rozpoczęło się w 1995 roku i do drugiej dekady XXI wieku pliki cookie były jedyną szeroko wspieraną metodą przechowywania danych po stronie klienta. Pliki cookie posiadają kilka zasadniczych wad:
 
 
 \begin{itemize}
-\item Są przesyłane przy każdym zapytaniu HTTP kierowanym do serwera - niepotrzebnie zwiększenie transferu danych,
-\item Pliki cookie są przesyłane do serwera niezależnie od użycia protokołu SSL - ryzyko podsłuchania ruchu sieciowego i wycieku danych,
-\item Rozmiar pliku cookie nie może przekraczać 4KB - brak możliwości przechowywania większych ilości informacji.
+\item są przesyłane przy każdym zapytaniu HTTP kierowanym do serwera - niepotrzebnie zwiększenie transferu danych,
+\item pliki cookie są przesyłane do serwera niezależnie od użycia protokołu SSL - ryzyko podsłuchania ruchu sieciowego i wycieku danych,
+\item rozmiar pliku cookie nie może przekraczać 4KB - brak możliwości przechowywania większych ilości informacji.
 \end{itemize}
 
 W przypadku potrzeby uniknięcia ograniczeń cechujących ciasteczka, programista ma do wyboru kilka nowoczesnych metod przechowywania danych po stronie klienta, bazujących na specyfikacji HTML5: WebSQL, Web Storage, IndexedDB, File API. Metody te pozwalają na przechowywanie znacznie większych ilości danych oraz są manualnie przesyłane do serwera, co pozwala na optymalizację zapytań oraz większe bezpieczeństwo danych.
@@ -36,12 +36,12 @@ Aby budowa aplikacji www wspierającej tryb offline była możliwa, konieczny je
 WebSQL Database\cite{webSqlDb} jest mechanizmem, który do przechowywania, odczytu oraz aktualizacji danych po stronie klienta wykorzystuje strukturalny język zapytań SQL. Metoda działania mechanizmu bazuje na specyfikacji bazy SQLite. Mechanizm WebSQL posiada zarówno zalety przypisywane relacyjnym bazom danych oraz kilka zalet cechujących metody lokalnego zapisu danych:
 
 \begin{itemize}
-\item Transakcyjność,
-\item Łatwość w utrzymaniu integralności danych,
-\item Dobra wydajność w przypadku wyszukiwania zbioru elementów,
-\item Szerokie spektrum zastosowań,
-\item Rozmiar bazy danych ograniczony jedynie dostępną przestrzenią dyskową klienta,
-\item Asynchroniczne wykonywanie zapytań - interfejs użytkownika nie jest blokowany do czasu zwróceniu rezultatu przez bazę danych.
+\item transakcyjność,
+\item łatwość w utrzymaniu integralności danych,
+\item dobra wydajność w przypadku wyszukiwania zbioru elementów,
+\item szerokie spektrum zastosowań,
+\item rozmiar bazy danych ograniczony jedynie dostępną przestrzenią dyskową klienta,
+\item asynchroniczne wykonywanie zapytań - interfejs użytkownika nie jest blokowany do czasu zwróceniu rezultatu przez bazę danych.
 \end{itemize}
 
 Mechanizm WebSQL sprawdzi się dobrze w przypadku z góry zdefiniowanych struktur danych, które nie muszą być często zmieniane. W przypadku konieczności zmiany struktury danych, wymagane jest każdorazowe napisanie skryptu wykonującego zapytania SQL które pozwolą na aktualizację struktury bazy danych.
@@ -87,7 +87,7 @@ Web Storage udostępnia dwa obszary składowania danych różniące się zasięg
 \item \emph{sessionStorage} - dane dostępne w obrębie jednej karty przeglądarki, usuwane po jej zamknięciu.
 \end{itemize}
 
-Największymi zaletami mechanizmu Web Storage jest kompleksowe wsparcie na wszystkich obecnie popularnych przeglądarkach internetowych, jak również łatwość jego obsługi - pobranie wartości danego elementu następuje synchronicznie poprzez odwołanie się do globalnego obiektu localStorage lub sessionStorage wraz z podaniem w notacji tablicowej klucza - ciągu znakowego - identyfikującego dany element.
+Największymi zaletami mechanizmu Web Storage jest kompleksowe wsparcie na wszystkich obecnie popularnych przeglądarkach internetowych, jak również łatwość jego obsługi. Pobranie wartości danego elementu następuje synchronicznie poprzez odwołanie się do globalnego obiektu localStorage lub sessionStorage wraz z podaniem w notacji tablicowej klucza (ciągu znakowego) identyfikującego dany element.
 
 \begin{table}[h]
 \centering
@@ -405,12 +405,12 @@ Kaskadowe arkusze stylów (\emph{CSS - Cascading Style Sheets}) to nieodłączny
 
 Reguły w kaskadowych arkuszach stylów mogą zostać załączane warunkowo. Typowym zastosowaniem są tutaj odrębne style dla drukowanych dokumentów. Bardziej zaawansowane reguły pozwalają na zastosowanie odrębnych zestawów reguł w zależności od rozdzielczości ekranu czy też rozmiaru okna przeglądarki. Umożliwia to tworzenie responsywnych interfejsów, zachowujących ergonomię niezależnie od urządzenia na jakim interfejs jest wyświetlony.
 
-\subsection{JavaScript - skryptowy język programowania}
+\subsection{Skryptowy język programowania JavaScript}
 \label{sec:js}
 
 Język JavaScript jest nieodłącznym elementem interaktywnych aplikacji webowych. Szczególnie dużą rolę pełni on w aplikacjach wspierających tryb offline, jako że jest to jedyna technologia która pozwala zastąpić dynamiczną treść generowaną na zdalnym serwerze. Dzieje się to poprzez monitorowanie akcji wykonywanych przez użytkownika aplikacji oraz ich obsługę po stronie przeglądarki internetowej.
 
-Mechanizmy lokalnego przechowywania danych są silnie uzależnione od języka JavaScript. Wszystkie operacje zapisu, odczytu oraz modyfikacji danych obdywają się za jego pośrednictwem, poprzez odwołanie się do obiektów oraz metod wyszczególniowych z specyfikacji danej metody lokalnego przechowywania danych.
+Mechanizmy lokalnego przechowywania danych są silnie uzależnione od języka JavaScript. Wszystkie operacje zapisu, odczytu oraz modyfikacji danych obdywają się za jego pośrednictwem, poprzez odwołanie się do obiektów oraz metod wyszczególnionych z specyfikacji danej metody lokalnego przechowywania danych.
 
 W ostatnich latach nastąpił znaczny rozwój frameworków oraz bibliotek języka JavaScript. Udostępniane przez nie narzędzia znacznie ułatwiają pracę nad tworzeniem dynamicznych elementów aplikacji www.
 

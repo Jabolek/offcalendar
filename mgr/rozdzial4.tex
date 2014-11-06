@@ -157,7 +157,7 @@ Główną część widoku zajmuje kalendarz wraz z przyciskami nawigacyjnymi. Ut
 \item w widoku dziennym obrazującym wydarzenia wraz z godzinami rozpoczęcia oraz zakończenia.
 \end{itemize}
 
-W projekcie wykorzystano plugin \textbf{bootstrap-calendar}\footnote{\url{https://github.com/Serhioromano/bootstrap-calendar}}. Został on rozszerzony i zmodyfikowany na potrzeby projektu.
+W projekcie wykorzystano plugin \textbf{bootstrap-calendar}\footnote{\url{https://github.com/Serhioromano/bootstrap-calendar}}. Został on na potrzeby projektu rozszerzony o kompletny mechanizm dodawania, edycji oraz usuwania wydarzeń.
 
 Oprócz przycisków nawigacyjnych, przenoszących pomiędzy widokami, w przestrzeni roboczej umieszczono przycisk \textbf{Add event} kierujący do widoku dziennego, gdzie istnieje możliwość dodawania nowych wydarzeń i edycji/usuwania istniejących. Poniższy zrzut ekranu obrazuje formularz dodawania nowego wydarzenia wraz z wcześniej utworzonym wydarzeniem w widoku dziennym.
 
@@ -686,33 +686,43 @@ Wydarzenia (Event) są tworzone po stronie aplikacji klienckiej i każdemu z nic
 
 Dobrym przykładem jest kod konstruktora klasy Event, który sprawdza obecność obydwu kluczy głównych i na ich podstawie odpowiednio inicjuje obiekt.
 
+\definecolor{dkgreen}{rgb}{0,.6,0}
+
+\lstset{
+  language        = php,
+  basicstyle      = \small\ttfamily,
+  keywordstyle    = \color{blue},
+  stringstyle     = \color{orange},
+  identifierstyle = \color{dkgreen},
+  commentstyle    = \color{gray},
+  emph            =[1]{php},
+  emphstyle       =[1]\color{black},
+  emph            =[2]{__construct,int,string,public,private,function,try,throw,catch,\$this,return,if,and,or,else,foreach},
+  emphstyle       =[2]\color{blue},
+  showstringspaces=false
+}
+
 \begin{lstlisting}[caption=Fragment konstruktora klasy Event., label=amb, captionpos=b]
 
 public function __construct($properties = array()) {
-    	if ($properties) {
+    if ($properties) {
+        if (isset($properties['id']) && $properties['id']) {
+            $this->id = (int) $properties['id'];
+        }
 
-        	if (isset($properties['id']) && $properties['id']) {
-            		$this->id = (int) $properties['id'];
-        	}
+        if (isset($properties['remote_id']) && $properties['remote_id']) {
+            $this->remoteId = (int) $properties['remote_id'];
+        }
 
-        	if (isset($properties['remote_id']) && $properties['remote_id']) {
-            		$this->remoteId = (int) $properties['remote_id'];
-        	}
-
-        	$this->userId = (int) $properties['user_id'];
-
-        	$this->startTimestamp = (int) $properties['start_timestamp'];
-        	$this->endTimestamp = (int) $properties['end_timestamp'];
-
-        	$this->description = (string) $properties['description'];
-
-        	$this->sendNotification = (int) $properties['send_notification'];
-
-        	$this->voided = (int) $properties['voided'];
-
-        	$this->remoteTimestamp = (int) $properties['remote_timestamp'];
-        	$this->lastUpdateTimestamp = (int) $properties['last_update_timestamp'];
-    	}
+        $this->userId = (int) $properties['user_id'];
+        $this->startTimestamp = (int) $properties['start_timestamp'];
+        $this->endTimestamp = (int) $properties['end_timestamp'];
+        $this->description = (string) $properties['description'];
+        $this->sendNotification = (int) $properties['send_notification'];
+        $this->voided = (int) $properties['voided'];
+        $this->remoteTimestamp = (int) $properties['remote_timestamp'];
+        $this->lastUpdateTimestamp = (int) $properties['last_update_timestamp'];
+    }
 }
 
 \end{lstlisting}
@@ -722,32 +732,30 @@ W zależności czy dane wydarzenie ma zostać zapisane w bazie danych czy też z
 \begin{lstlisting}[caption=Serializacja obiektu Event., label=amb, captionpos=b]
 
 public function toDbArray() {
-
-    	return array(
-        	'user_id' => $this->userId,
-        	'start_timestamp' => $this->startTimestamp,
-        	'end_timestamp' => $this->endTimestamp,
-        	'description' => $this->description,
-        	'send_notification' => $this->sendNotification,
-        	'voided' => $this->voided,
-        	'remote_timestamp' => $this->remoteTimestamp,
-        	'last_update_timestamp' => $this->lastUpdateTimestamp,
-    	);
+    return array(
+        'user_id' => $this->userId,
+        'start_timestamp' => $this->startTimestamp,
+        'end_timestamp' => $this->endTimestamp,
+        'description' => $this->description,
+        'send_notification' => $this->sendNotification,
+        'voided' => $this->voided,
+        'remote_timestamp' => $this->remoteTimestamp,
+        'last_update_timestamp' => $this->lastUpdateTimestamp,
+    );
 }
 
 public function toApiArray() {
+    $arr = $this->toDbArray();
 
-    	$arr = $this->toDbArray();
+    $additional = array(
+    	'id' => $this->id,
+    );
 
-    	$additional = array(
-        	'id' => $this->id,
-    	);
+    if ($this->remoteId) {
+    	$additional['remote_id'] = $this->remoteId;
+    }
 
-    	if ($this->remoteId) {
-        	$additional['remote_id'] = $this->remoteId;
-    	}
-
-    	return array_merge($additional, $arr);
+    return array_merge($additional, $arr);
 }
 
 \end{lstlisting}
@@ -757,14 +765,13 @@ Dla wydarzeń posiadających klucz główny wygenerowany w bazie danych, aktuali
 \begin{lstlisting}[caption=Aktualizacja obiektu Event w bazie danych., label=amb, captionpos=b]
 
 function persist() {
+   	if ($this->id) {
+       		$this->_ci->events_model->updateEvent($this->id, $this->toDbArray());
+   	} else {
+       		$this->id = $this->_ci->events_model->addEvent($this->toDbArray());
+   	}
 
-    	if ($this->id) {
-        	$this->_ci->events_model->updateEvent($this->id, $this->toDbArray());
-    	} else {
-        	$this->id = $this->_ci->events_model->addEvent($this->toDbArray());
-    	}
-
-    	return $this;
+   	return $this;
 }
 
 \end{lstlisting}
@@ -774,24 +781,24 @@ Klasa Events\_model bezpośrednio odpowiada za manipulację rekordami znajdując
 \begin{lstlisting}[caption=Przykładowe metody klasy Events\_model odpowiedzialne za komunikację z bazą danych., label=amb, captionpos=b]
 
 function getEventById($eventId) {
+	
+   $query = $this->db->get_where('events', array('id' => $eventId));
 
-    	$query = $this->db->get_where('events', array('id' => $eventId));
-
-    	return $query->row_array();
+   return $query->row_array();
 }
 
 function updateEvent($eventId, $toUpdate) {
 
-    	$this->db->update('events', $toUpdate, array('id' => $eventId));
+   $this->db->update('events', $toUpdate, array('id' => $eventId));
 
-    	return $this->db->affected_rows();
+   return $this->db->affected_rows();
 }
 
 function addEvent($event) {
+   	
+   $this->db->insert('events', $event);
 
-    	$this->db->insert('events', $event);
-
-    	return $this->db->insert_id();
+   return $this->db->insert_id();
 }
 
 \end{lstlisting}
@@ -808,34 +815,33 @@ Większość metod używanych przez interfejsy wymaga wcześniejszej autentykacj
 \begin{lstlisting}[caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
 
 function register() {
-    	try {
+  try {
+      if (!$this->input->post()) {
+      	throw new Exception('Please fill required fields');
+      }
 
-        	if (!$this->input->post()) {
-            		throw new Exception('Please fill required fields');
-        	}
+      $fields = $this->users->getFieldsValidationRules(array('name', 'email', 'password'));
 
-        	$fields = $this->users->getFieldsValidationRules(array('name', 'email', 'password'));
+      $this->form_validation->set_rules($fields);
 
-        	$this->form_validation->set_rules($fields);
+      if (!$this->form_validation->run()) {
+      	throw new Exception(strip_tags(validation_errors()));
+      }
 
-        	if (!$this->form_validation->run()) {
-            		throw new Exception(strip_tags(validation_errors()));
-        	}
+      $vals = array();
 
-        	$vals = array();
+      foreach (array_keys($fields) as $f) {
+      	$vals[] = $this->form_validation->set_value($f);
+      }
 
-        	foreach (array_keys($fields) as $f) {
-            		$vals[] = $this->form_validation->set_value($f);
-        	}
+      list($name, $email, $password) = $vals;
 
-        	list($name, $email, $password) = $vals;
+      $user = $this->users->register($name, $email, $password);
 
-        	$user = $this->users->register($name, $email, $password);
-
-        	return $this->jsonResponse($user->toApiResponse());
-    	} catch (Exception $e) {
-        	return $this->jsonError($e->getMessage());
-    	}
+      return $this->jsonResponse($user->toApiResponse());
+  } catch (Exception $e) {
+      return $this->jsonError($e->getMessage());
+  }
 }
 
 \end{lstlisting}
@@ -847,19 +853,17 @@ Wspólną dla wszystkich interfejsów programowania jest funkcja odpowiadająca 
 \begin{lstlisting}[caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
 
 private function authenticateUser() {
-    	try {
+  try {
+	$email = (string) $this->input->post('email');
 
-        	$email = (string) $this->input->post('email');
+	$password = (string) $this->input->post('password');
 
-        	$password = (string) $this->input->post('password');
+	$user = $this->users->login($email, $password);
 
-        	$user = $this->users->login($email, $password);
-
-        	return $user;
-    	} catch (Exception $e) {
-
-        	throw new Exception('Authentication failed.');
-    	}
+    return $user;
+  } catch (Exception $e) {
+	throw new Exception('Authentication failed.');
+  }
 }
 
 \end{lstlisting}
@@ -873,39 +877,37 @@ Najbardziej złożonym procesem wykonywanym w aplikacji OffCalendar jest synchro
 
 \begin{lstlisting}[caption=Metoda synchronize interfejsu programowania Events\_api., label=amb, captionpos=b]
 function synchronize() {
+   	try {
+	   $user = $this->authenticateUser();
 
-    	try {
+       $userId = $user->getId();
 
-        	$user = $this->authenticateUser();
+       $lastSyncTimestamp = (int)$this->input->post('last_sync_timestamp');
+       $currTimestamp = time();
 
-        	$userId = $user->getId();
+       $dbEvents = $this->events->getDbEventsForSynchronization($userId, $lastSyncTimestamp);       	 
+       $postEvents = $this->input->post('events');
 
-        	$lastSyncTimestamp = (int)$this->input->post('last_sync_timestamp');
-        	$currTimestamp = time();
+       $remoteEvents = $this->events->getEventsFromPostData($postEvents, $user);
+      	 
+       $eventsToUpdate = $this->events->synchronize($remoteEvents, $dbEvents, $currTimestamp);
 
-        	$dbEvents = $this->events->getDbEventsForSynchronization($userId, $lastSyncTimestamp);       	 
-        	$postEvents = $this->input->post('events');
-
-        	$remoteEvents = $this->events->getEventsFromPostData($postEvents, $user);
+       $toUpdate = array();
        	 
-        	$eventsToUpdate = $this->events->synchronize($remoteEvents, $dbEvents, $currTimestamp);
+       foreach($eventsToUpdate as $e){
+          $toUpdate[] = $e->toApiArray();
+       }
 
-        	$toUpdate = array();
-       	 
-        	foreach($eventsToUpdate as $e){
-            		$toUpdate[] = $e->toApiArray();
-        	}
+       $response = array(
+          'sync_timestamp' => $currTimestamp,
+          'events_to_update' => $toUpdate,
+       );
 
-        	$response = array(
-            		'sync_timestamp' => $currTimestamp,
-            		'events_to_update' => $toUpdate,
-        	);
+       return $this->jsonResponse($response);
+    } catch (Exception $e) {
 
-        	return $this->jsonResponse($response);
-    	} catch (Exception $e) {
-
-        	return $this->jsonError($e->getMessage());
-    	}
+      return $this->jsonError($e->getMessage());
+  }
 }
 
 \end{lstlisting}
@@ -915,47 +917,46 @@ Powyższa metoda sprawdza poprawność przesłanych przez część kliencką dan
 \begin{lstlisting}[caption=Modyfikacja wydarzeń w metodzie synchronize komponentu Events., label=amb, captionpos=b]
 
 public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
+   	$toUpdate = array();
 
-    	$toUpdate = array();
+   	foreach ($remoteEvents as $remoteEvent) {
 
-    	foreach ($remoteEvents as $remoteEvent) {
+      if (!$remoteEvent->hasId()) {
 
-	        if (!$remoteEvent->hasId()) {
+	      $remoteEvent->setLastUpdateTimestamp($currTimestamp);
 
-            	$remoteEvent->setLastUpdateTimestamp($currTimestamp);
+          $remoteEvent->persist();
 
-            	$remoteEvent->persist();
+          $toUpdate[] = $remoteEvent;
 
-            	$toUpdate[] = $remoteEvent;
+          continue;
+      }
 
-            	continue;
-        	}
+      $eventId = $remoteEvent->getId();
 
-        	$eventId = $remoteEvent->getId();
+      if (isset($dbEvents[$eventId])) {
 
-        	if (isset($dbEvents[$eventId])) {
+          $dbEvent = $dbEvents[$eventId];
 
-            	$dbEvent = $dbEvents[$eventId];
+          if ($dbEvent->getRemoteTimestamp() > $remoteEvent->getRemoteTimestamp()) {
+          	$dbEvent->setRemoteId($remoteEvent->getRemoteId());
+            $toUpdate[] = $dbEvent;
+          } else {
+            $remoteEvent->setLastUpdateTimestamp($currTimestamp);
+            $remoteEvent->persist();
+            $toUpdate[] = $remoteEvent;
+          }
 
-            	if ($dbEvent->getRemoteTimestamp() > $remoteEvent->getRemoteTimestamp()) {
-                	$dbEvent->setRemoteId($remoteEvent->getRemoteId());
-                	$toUpdate[] = $dbEvent;
-            	} else {
-                	$remoteEvent->setLastUpdateTimestamp($currTimestamp);
-                	$remoteEvent->persist();
-                	$toUpdate[] = $remoteEvent;
-            	}
+          unset($dbEvents[$eventId]);
+      }
+    }
 
-            	unset($dbEvents[$eventId]);
-        	}
-    	}
+    foreach ($dbEvents as $dbEvent) {
 
-    	foreach ($dbEvents as $dbEvent) {
+       	$toUpdate[] = $dbEvent;
+    }
 
-        	$toUpdate[] = $dbEvent;
-    	}
-
-    	return $toUpdate;
+   	return $toUpdate;
 }
 
 \end{lstlisting}
