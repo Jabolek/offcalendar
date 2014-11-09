@@ -46,7 +46,7 @@ WebSQL Database\cite{webSqlDb}, jest mechanizmem, który do przechowywania, odcz
 
 Mechanizm WebSQL sprawdzi się dobrze w przypadku z góry zdefiniowanych struktur danych, które nie muszą być często zmieniane. W przypadku konieczności zmiany struktury danych, wymagane jest każdorazowe napisanie skryptu wykonującego zapytania SQL które pozwolą na aktualizację struktury bazy danych.
 
-WebSQL jest metodą posiadającą umiarkowane wsparcie wśród popularnych przeglądarek internetowych. Poniżej znajduje się tabela przedstawiające wsparcie przeglądarek dla mechanizmu WebSQL zarówno na systemach desktopowych jak i mobilnych:
+WebSQL jest metodą posiadającą umiarkowane wsparcie wśród popularnych przeglądarek internetowych. Tablica 2.1 przedstawia wsparcie przeglądarek dla mechanizmu WebSQL zarówno na systemach desktopowych jak i mobilnych:
 
 \begin{table}[h]
 \centering
@@ -87,7 +87,7 @@ Web Storage udostępnia dwa obszary składowania danych różniące się zasięg
 \item \emph{sessionStorage} - dane dostępne w obrębie jednej karty przeglądarki, usuwane po jej zamknięciu.
 \end{itemize}
 
-Największymi zaletami mechanizmu Web Storage jest kompleksowe wsparcie na wszystkich obecnie popularnych przeglądarkach internetowych, jak również łatwość jego obsługi. Pobranie wartości danego elementu następuje synchronicznie poprzez odwołanie się do globalnego obiektu localStorage lub sessionStorage wraz z podaniem w notacji tablicowej klucza (ciągu znakowego) identyfikującego dany element.
+Największymi zaletami mechanizmu Web Storage jest kompleksowe wsparcie na wszystkich obecnie popularnych przeglądarkach internetowych (Tablica 2.2), jak również łatwość jego obsługi. Pobranie wartości danego elementu następuje synchronicznie poprzez odwołanie się do globalnego obiektu localStorage lub sessionStorage wraz z podaniem w notacji tablicowej klucza (ciągu znakowego) identyfikującego dany element.
 
 \begin{table}[h]
 \centering
@@ -131,7 +131,7 @@ Podobnie jak w przypadku mechanizmu WebSQL, IndexedDB wykonuje zapytania asynchr
 
 Ilość miejsca, jaka może zostać przeznaczona na zasoby przechowywane w IndexedDB jest nieograniczona. W przypadku przekroczenia granicznego rozmiaru bazy danych, indywidualnie ustalanego dla danej przeglądarki internetowej, użytkownik musi wyrazić zgodę na zniesienie ograniczenia ilości miejsca przeznaczonego na magazyny obiektów.
 
-Indexed Database posiada dobre wsparcie wśród nowszych wersji popularnych przeglądarek internetowych.
+Indexed Database posiada dobre wsparcie wśród nowszych wersji popularnych przeglądarek internetowych (Tablica 2.3).
 
 \begin{table}[h]
 \centering
@@ -165,7 +165,7 @@ Filesystem API\cite{filesystemApi} jest mechanizmem który umożliwia operacje n
 
 Lista funkcji udostępnianych przez Filesystem API obejmuje zarówno operacje na plikach - zapis, odczyt pliku, odczyt metadanych pliku, kopia do wskazanej lokacji, oraz narzędzia do tworzenia drzewa katalogów oraz ich przeszukiwania. Pliki przechowywane na wydzielonej przestrzeni dyskowej mogą później zostać osadzone jako elementy strony www - jedna z metod Filesystem API zwraca pełny adres URL do danego zasobu.
 
-Pomimo wysokiej użyteczności mechanizmu Filesystem API, wsparcie przeglądarkek ograniczna się do Google Chrome oraz Chrome for Android. W związku z niskim zainteresowaniem innych firm zajmujących się rozwijaniem przeglądarek internetowych, organizacja W3C zawiesiła prace nad tym standardem.
+Pomimo wysokiej użyteczności mechanizmu Filesystem API, wsparcie przeglądarkek ograniczna się do Google Chrome oraz Chrome for Android (Tablica 2.4). W związku z niskim zainteresowaniem innych firm zajmujących się rozwijaniem przeglądarek internetowych, organizacja W3C zawiesiła prace nad tym standardem.
 
 \begin{table}[h]
 \centering
