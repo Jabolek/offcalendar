@@ -18,8 +18,7 @@ Najprostszą formą zainstalowania trzech powyższych komponentów jest skorzyst
 
 Po pomyślnej instalacji wszystkich komponentów konieczna jest odpowiednia konfiguracja aplikacji. Pierwszym z kroków jest dodatkowy wpis VirtualHost dla serwera Apache. Dla systemu Windows oraz domyślnej instalacji ścieżka do pliku konfiguracyjnego to \url{C:\xampp\apache\conf\extra\httpd-vhosts.conf}. Dla systemów Unix jest to \url{/etc/httpd/conf/httpd.conf}.
 
-\begin{lstlisting}[caption=Konfiguracja serwera Apache., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=html5, caption=Konfiguracja serwera Apache., label=amb, captionpos=b]
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot __PATH__
@@ -32,30 +31,25 @@ Po pomyślnej instalacji wszystkich komponentów konieczna jest odpowiednia konf
             	Require all granted
     </Directory>
 </VirtualHost>
-
 \end{lstlisting}
 
 Zmienna \_\_PATH\_\_ powinna zostać zastąpiona przez ścieżkę do projektu OffCalendar znajdującego się w \url{/projekt magisterski/offcalendar/}. Zmienna \_\_HOST\_\_ powinna zostać zastąpiona przez nazwę domeny która będzie używana do dostępu do aplikacji. W przypadku chęci skorzystania z domyślnej domeny zmienna powinna przyjąć wartość localhost.
 
 Projekt OffCalendar musi posiadać wiedzę o domenie pod którą jest dostępny. W tym celu należy dokonać edycji pliku \url{/projekt magisterski/offcalendar/application/config/config.php}. Wymagana jest edycja zmiennej \_\_URL\_\_ na adres URL pod którym dostępna będzie aplikacja OffCalendar. Przy korzystaniu z domyślnej domeny zmienna \_\_URL\_\_ powinna mieć wartość \url{http://localhost/}.
 
-\begin{lstlisting}[caption=Konfiguracja adresu URL dla projektu OffCalendar., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Konfiguracja adresu URL dla projektu OffCalendar., label=amb, captionpos=b]
 $config['base_url'] = '__URL__';
-
 \end{lstlisting}
 
 Kolejnym krokiem jest konfiguracja bazy danych. Po utworzeniu nowej bazy danych na serwerze MySQL konieczne jest wykonanie kwerend tworzących w niej odpowiednie struktury. Kwerendy znajdują się w pliku \url{/projekt magisterski/komponenty/mysql/offcalendar.sql}.
 
 Do poprawnego połączenia z bazą danych konieczna jest edycja danych znajdujących się w \url{/projekt magisterski/offcalendar/application/config/database.php}. Pola wymagające edycji to \_\_HOST\_\_, \_\_USER\_\_, \_\_PASSWORD\_\_ oraz \_\_DATABASE\_\_.
 
-\begin{lstlisting}[caption=Konfiguracja dostępu do bazy danych., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Konfiguracja dostępu do bazy danych., label=amb, captionpos=b]
 $db['default']['hostname'] = '__HOST__';
 $db['default']['username'] = '__USER__';
 $db['default']['password'] = '__PASSWORD__';
 $db['default']['database'] = '__DATABASE__';
-
 \end{lstlisting}
 
 Po wykonaniu powyższych kroków aplikacja powinna być dostępna z poziomu przeglądarki internetowej (adres strony zgodny ze zmienną \_\_URL\_\_).

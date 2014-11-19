@@ -34,10 +34,8 @@ Przed przystąpieniem do korzystania z aplikacji konieczne jest utworzenie konta
 
 Poniżej (Listing 4.1) przykład pola, które narzuca konieczność jego uzupełnienia oraz wyświetla wskazany komunikat, jeśli wprowadzona wartość posiada liczbę znaków spoza zakresu 8-20.
 
-\begin{lstlisting}[caption=Przykład pola "hasło" w widoku rejestracji., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=html5, caption=Przykład pola "hasło" w widoku rejestracji., label=amb, captionpos=b]
 <input type="password" pattern=".{8,20}" required title="Password must contain 8 to 20 characters" class="form-control" placeholder="Password" required="" name="password" />
-
 \end{lstlisting}
 
 Na potrzeby aplikacji pobierana jest wyłącznie nazwa użytkownika, jego adres e-mail oraz hasło dostępu do konta.
@@ -48,8 +46,7 @@ Poniżej (Listing 4.2) przedstawiono funkcję \textbf{initRegister()} odpowiedzi
 
 Jeśli żądanie zakończy się powodzeniem użytkownik przekierowany zostanie do startowego widoku (okno logowania) wraz z informacją o pomyślnym utworzeniu konta, w przypadku błędu również wyświetlony zostanie odpowiedni komunikat. Dodatkowo na czas wykonywania żądania wyświetlana jest grafika - spinner informująca o trwającej operacji.
 
-\begin{lstlisting}[caption=Kod metody initRegister odpowiedzialnej za rejestrację użytkownika z wykorzystaniem API., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Kod metody initRegister odpowiedzialnej za rejestrację użytkownika z wykorzystaniem API., label=amb, captionpos=b]
 OffCalendar.initRegister = function () {
 
     $('#register_form').submit(function (event) {
@@ -100,13 +97,11 @@ OffCalendar.initRegister = function () {
         return false;
     });
 };
-
 \end{lstlisting}
 
 Operacja logowania \textbf{initLogin()} prezentuje się analogicznie. Jedyne różnice, to brak pola email oraz inna metoda, do której wysyłane jest żądanie (\url{apis/users_api/login}). Ponadto w pamięci lokalnej przeglądarki zapisane zostają dane użytkownika. Jest to konieczne z uwagi na późniejszy proces synchronizacji. Ze względu na prostotę zapisywanych danych zrezygnowano ze stosowania mechanizmu IndexedDB. Wykorzystano obiekt \textbf{localStorage} przechowujący pary string, string. Poniższa (Listing 4.3) prosta metoda obrazuje proces zapisu.
 
-\begin{lstlisting}[caption=Zapis danych logowania do obiektu localStorage w pamięci podręcznej przeglądarki., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Zapis danych logowania do obiektu localStorage w pamięci podręcznej przeglądarki., label=amb, captionpos=b]
 OffCalendar.saveCredentialsToLocalStorage = function (apiData) {
 
 var userId = apiData.id;
@@ -127,7 +122,6 @@ if (typeof userName !== undefined)
     localStorage.setItem('user_name', userName);
 
 };
-
 \end{lstlisting}
 
 Również widok \textbf{login} jest bardzo zbliżony do widoku \textbf{register}.
@@ -151,6 +145,7 @@ Po pomyślnym utworzeniu konta i autoryzacji użytkownik zostaje przekierowany d
 Główną część widoku zajmuje kalendarz wraz z przyciskami nawigacyjnymi. Utworzone wydarzenia możemy przeglądać na kilka określonych sposobów:
 
 \begin{itemize}
+\setlength\itemsep{1em}
 \item w widoku rocznym z liczbą wydarzeń przypadających na dany miesiąc,
 \item w widoku miesięcznym z graficzną reprezentacją wydarzeń z podziałem na dni miesiąca,
 \item w widoku tygodniowym obrazującym harmonogram wraz z czasami trwania danych wydarzeń,
@@ -182,15 +177,13 @@ Kontekst definiowany jest przez element kodu HTML o określonym identyfikatorze 
 
 Widoki kalendarza ładowane są asynchroniczne. Zostały skonstruowane w HTML z zastosowaniem silnika szablonów JavaScript o nazwie \textbf{Underscore.js}\cite{underscore}. Separuje on warstwę danych od warstwy prezentacji i dostarcza wielu funkcji pozwalających operować na przekazanych do widoku zmiennych. Poniższy (Listing 4.4) fragment uproszczonego kodu z widoku dziennego obrazuje prostą pętlę wyświetlającą wydarzenia.
 
-\begin{lstlisting}[caption=Fragment kodu prezentujący składnię Underscore.js., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=html5, caption=Fragment kodu prezentujący składnię Underscore.js., label=amb, captionpos=b]
 <% _.each(after_time, function(event){ %>
 <div class="day-highlight dh-<%= event.class %>">
        		<span class="cal-hours"><%= event.start_hour %></span>
               	<%= event.description %></a>
        </div>
 <% }); %>
-
 \end{lstlisting}
 
 Prócz głównego widoku kalendarza użytkownik ma możliwość przejścia do następujących sekcji:
@@ -204,8 +197,7 @@ Prócz głównego widoku kalendarza użytkownik ma możliwość przejścia do na
 
 Dodatkowo zaimplementowano uproszczony mechanizm wyszukiwania wydarzeń po treści. Kod funkcji \textbf{initSearch()} przedstawiono na listingu 4.5.
 
-\begin{lstlisting}[caption=Wyszukiwanie wydarzeń w oparciu o treść., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Wyszukiwanie wydarzeń w oparciu o treść., label=amb, captionpos=b]
 OffCalendar.initSearch = function () {
 
     $(document).ready(function () {
@@ -236,7 +228,6 @@ OffCalendar.initSearch = function () {
         });
     });
 };
-
 \end{lstlisting}
 
 Po zakończeniu pracy z aplikacją OffCalendar następuje wylogowanie (\textbf{Logout}), co w praktyce wiąże się z usunięciem zapisanych w obiekcie localStorage danych logowania.
@@ -246,8 +237,7 @@ Po zakończeniu pracy z aplikacją OffCalendar następuje wylogowanie (\textbf{L
 
 Ogół operacji związanych z manipulacją wydarzeniami (dodawanie, edycja oraz usuwanie) spoczywa na mechanizmie \textbf{IndexedDB}. Inicjacja obiektu bazy lokalnej następuje w momencie każdorazowego ładowania widoku dashboard. Listing 4.6 obrazuje otwarcie połączenia z bazą danych.
 
-\begin{lstlisting}[caption=Otwarcie połączenia z lokalną bazą danych., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Otwarcie połączenia z lokalną bazą danych., label=amb, captionpos=b]
 IndexedDB.open = function (callback) {
 
     var request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -281,15 +271,13 @@ IndexedDB.open = function (callback) {
         callback(false);
     };
 };
-
 \end{lstlisting}
 
 Baza lokalna zostaje otwarta z dwoma parametrami: nazwą bazy oraz jej wersją. Następnie tworzone są indeksy niezbędne do przeszukiwania po nazwach pól np. indeks o nazwie \textbf{search} wyszukuje pola \textbf{user\_id} oraz \textbf{description} i akceptuje duplikaty. Zarówno w przypadku pomyślnego jak i błędnego wykonania żądania wykonywana jest funkcja określona w parametrze callback. 
 
 W aplikacji OffCalendar po otwarciu połączenia do bazy danych wykonywane jest pobranie wydarzeń dla danego użytkownika (Listing 4.7) a następnie zainicjowanie synchronizacji
 
-\begin{lstlisting}[caption=Pobranie wydarzeń użytkownika., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Pobranie wydarzeń użytkownika., label=amb, captionpos=b]
 IndexedDB.getUserEvents = function (userId, callback) {
 
     var resultSet = [];
@@ -322,15 +310,13 @@ IndexedDB.getUserEvents = function (userId, callback) {
         callback(null);
     };
 };
-
 \end{lstlisting}
 
 Flaga DB\_STORE\_NAME oznacza nazwę tabeli, natomiast DB\_TRANS\_MODE\_ONLY tryb dostępu (w tym przypadku wyłącznie odczyt). Następnie wykorzystywany jest indeks tworzony wraz z nową wersją bazy danych. Obiekt \textbf{cursorRequest} pozwala przeszukiwać tabelę i zapisywać rekordy (spełniające warunki określone w indeksie) do tablicy wynikowej \textbf{resultSet} wykorzystanej następnie w funkcji callback.
 
 Pobrane wydarzenia zostają zapisane w opcjach kalendarza, po czym następuje jego renderowanie. Strukturę obiektu reprezentującego przykładowe wydarzenie przedstawia listing 4.8:
 
-\begin{lstlisting}[caption=Struktura obiektu reprezentującego wydarzenie., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Struktura obiektu reprezentującego wydarzenie., label=amb, captionpos=b]
 class: "event-important"
 start_timestamp: 1411349400000
 end_timestamp: 1411380720000
@@ -342,15 +328,13 @@ description: "test"
 url: ""
 user_id: 4
 voided: 0
-
 \end{lstlisting}
 
 Poszczególne pola oznaczają kolejno: klasę wydarzenia (kolor), stempel czasowy rozpoczęcia wydarzenia, stempel czasowy zakończenia wydarzenia, stempel czasowy ostatniej synchronizacji (0 oznacza nowo dodane wydarzenie), identyfikator rekordu, stempel czasowy ostatniej aktualizacji wydarzenia przez użytkownika, flagę informującą o wysyłaniu powiadomień \mbox{e-mail}, opis wydarzenia, zewnętrzny adres url, id użytkownika oraz flagę informującą o usunięciu danego wydarzenia (ustawiona na wartość 1 oznacza, że użytkownik usunął wydarzenie).
 
 Dodawanie, edycja oraz usuwanie wydarzeń odbywa się widoku dziennym. Przedstawia on godziny dnia w odstępie 30 minutowym. Kliknięcie na każdą z nich otwiera okno dodawania nowego wydarzenia z odpowiednio uzupełnioną datą rozpoczęcia. W przypadku edycji wydarzenia to samo okno zostaje uzupełnione również o wszystkie pozostałe dane wydarzenia. Poniższy kod (Listing 4.9) obrazuje operację edycji.
 
-\begin{lstlisting}[caption=Edycja wydarzenia cz. 1., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Edycja wydarzenia cz. 1., label=amb, captionpos=b]
 IndexedDB.updateEvent = function (eventRemoteId, eventPropertiesToUpdate, callback) {
 
     var trans = IndexedDB.db.transaction([DB_STORE_NAME], DB_TRANS_MODE_READ_WRITE);
@@ -380,13 +364,11 @@ IndexedDB.updateEvent = function (eventRemoteId, eventPropertiesToUpdate, callba
         };
     };
 };
-
 \end{lstlisting}
 
 W przypadku poprawnego dodania wydarzenia wykonywana jest funkcja callback. W aplikacji \mbox{OffCalendar} użytkownik zostanie poinformowany o efekcie żądania i przekierowany na stronę główną. Następny listing (4.10) obrazuje operację pobrania danych z formularza edycji wydarzenia i przekazania ich do powyższej funkcji oraz przekierowanie realizowane z użyciem odpowiedniej funkcji zwrotnej.
 
-\begin{lstlisting}[caption=Edycja wydarzenia cz. 2., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Edycja wydarzenia cz. 2., label=amb, captionpos=b]
 OffCalendar.initEventUpdate = function () {
 
     var $form = $('form[name=offcalendar_update_event]');
@@ -434,7 +416,6 @@ OffCalendar.initEventUpdate = function () {
     });
 
 };
-
 \end{lstlisting}
 
 Dodawanie wydarzenia wykonywane jest analogicznie. Z kolei operacja usuwania polega na zmianie atrybutu \textbf{voided} na wartość 1. Jest to konieczne z uwagi na synchronizację wydarzeń pomiędzy różnymi urządzeniami: całkowite usunięcie konkretnego obiektu z bazy lokalnej mogłoby prowadzić do konfliktów.
@@ -454,8 +435,7 @@ Działanie biblioteki opiera się na cyklicznym wykonywaniu żądania AJAX pobra
 
 Inicjacja biblioteki wykonywana jest w momencie załadowania widoku głównego. Polega ona na podaniu kilku opcji przedstawionych na listingu 4.11.
 
-\begin{lstlisting}[caption=Inicjalizacja biblioteki Offline.js badającej stan połączenia internetowego., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Inicjalizacja biblioteki Offline.js badającej stan połączenia internetowego., label=amb, captionpos=b]
 Offline.options = {
 	checks: {
    	   image: {
@@ -466,7 +446,6 @@ Offline.options = {
     reconnect: false,
     checkOnLoad: true
 };
-
 \end{lstlisting}
 
 \begin{itemize}
@@ -478,7 +457,7 @@ Offline.options = {
 
 Żądanie opiera się na właściwościach obiektu \textbf{XMLHttpRequest} zapewniających asynchroniczne wykonanie, czyli bez przeładowania strony. Poniżej (Listing 4.12) kod głównej metody checkXHR(xhr, onUp, onDown) sprawdzającej stan połączenia internetowego w oparciu o opcje obiektu XMLHttpRequest (xhr) ustawione w momencie inicjalizacji biblioteki i wywołującego funkcje callback.
 
-\begin{lstlisting}[caption=Metoda checkXHR() wykonująca żądanie AJAX załadowania zasobu graficznego., label=amb, captionpos=b]
+\begin{lstlisting}[style=js, caption=Metoda checkXHR() wykonująca żądanie AJAX załadowania zasobu graficznego., label=amb, captionpos=b]
 checkXHR = function(xhr, onUp, onDown) {
         var checkStatus, _onerror, _onload, _onreadystatechange, _ontimeout;
         checkStatus = function() {
@@ -536,7 +515,7 @@ Tylko w sytuacji, w której połączenie internetowe jest aktywne wykonywana jes
 
 Proces synchronizacji danych jest uruchamiany co 3 minuty, a także po dodaniu, edycji lub usunięciu wydarzenia. Proces rozpoczyna się w momencie wywołania metody synchronize (Listing 4.13). Do funkcji przekazane są dane użytkownika, adres URL interfejsu programowania odpowiedzialnego za proces po stronie serwerowej aplikacji oraz funkcja, która zostanie wywołana po zakończeniu synchronizacji.
 
-\begin{lstlisting}[caption=Funkcja synchronize rozpoczynająca proces synchronizacji., label=amb, captionpos=b]
+\begin{lstlisting}[style=js, caption=Funkcja synchronize rozpoczynająca proces synchronizacji., label=amb, captionpos=b]
 IndexedDB.synchronize = function(userId, userEmail, userPassword, eventsSyncApiUrl, callback) {
 
 	if (IndexedDB.sync.inProgress === true) {
@@ -564,8 +543,7 @@ W przypadku gdy proces synchronizacji jest w trakcie wykonania (atrybut  Indexed
 
 Po pomyślnym pobraniu wydarzeń tworzone jest zapytanie AJAX wysyłające je do części serwerowej w celu ich synchronizacji (Listing 4.14).
 
-\begin{lstlisting}[caption=Wysłanie żądania synchronizacji do części serwerowej., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Wysłanie żądania synchronizacji do części serwerowej., label=amb, captionpos=b]
 IndexedDB.sync.eventsFetched = function(events) {
 
 	if (events === null) {
@@ -587,9 +565,7 @@ IndexedDB.sync.eventsFetched = function(events) {
 	});
 
 	request.done(function(response, textStatus, jqXHR) {
-
     	IndexedDB.sync.processData(response);
-
 	});
 
 	request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -605,14 +581,12 @@ IndexedDB.sync.eventsFetched = function(events) {
     	IndexedDB.sync.failed(msg);
 
 	});
-
 };
 \end{lstlisting}
 
 Część serwerowa zwraca zsynchronizowaną listę wydarzeń. Wydarzenia te zostają zaktualizowane w lokalnej bazie danych. Poniżej (Listing 4.15) przedstawiona jest funkcja dokonująca aktualizacji.
 
-\begin{lstlisting}[caption=Aktualizacja wydarzeń przechowywanych w lokalnej bazie danych., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Aktualizacja wydarzeń przechowywanych w lokalnej bazie danych., label=amb, captionpos=b]
 IndexedDB.sync.updateEvents = function() {
 
 	if (IndexedDB.sync.eventsToUpdate.length > 0) {
@@ -634,13 +608,11 @@ IndexedDB.sync.updateEvents = function() {
 	}
 
 };
-
 \end{lstlisting}
 
 Po zakończeniu aktualizacji proces synchronizacji dobiega końca (Listing 4.16). Przed zakończeniem konieczne jest zaktualizowanie stempli czasowych - zarówno wygenerowanego po stronie klienta jak i serwera.
 
-\begin{lstlisting}[caption=Kod finalizujący proces synchronizacji., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=js, caption=Kod finalizujący proces synchronizacji., label=amb, captionpos=b]
 IndexedDB.sync.success = function() {
 
 	IndexedDB.sync.inProgress = false;
@@ -652,7 +624,6 @@ IndexedDB.sync.success = function() {
 	IndexedDB.sync.callback(IndexedDB.sync.itemsSynced);
 
 };
-
 \end{lstlisting}
 
 Po wykonaniu aktualizacji stempli oraz zaktualizowaniu flagi wskazującej na to, że proces synchronizacji jest w toku wywoływana jest, przekazana na początku procesu, funkcja. Jej argumentem jest ilość wydarzeń które zostały zsynchronizowane.
@@ -686,24 +657,7 @@ Wydarzenia (Event) są tworzone po stronie aplikacji klienckiej i każdemu z nic
 
 Dobrym przykładem jest kod konstruktora klasy Event (Listing 4.17), który sprawdza obecność obydwu kluczy głównych i na ich podstawie odpowiednio inicjuje obiekt.
 
-\definecolor{dkgreen}{rgb}{0,.6,0}
-
-\lstset{
-  language        = php,
-  basicstyle      = \small\ttfamily,
-  keywordstyle    = \color{blue},
-  stringstyle     = \color{orange},
-  identifierstyle = \color{dkgreen},
-  commentstyle    = \color{gray},
-  emph            =[1]{php},
-  emphstyle       =[1]\color{black},
-  emph            =[2]{__construct,int,string,public,private,function,try,throw,catch,\$this,return,if,and,or,else,foreach},
-  emphstyle       =[2]\color{blue},
-  showstringspaces=false
-}
-
-\begin{lstlisting}[caption=Fragment konstruktora klasy Event., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Fragment konstruktora klasy Event., label=amb, captionpos=b]
 public function __construct($properties = array()) {
     if ($properties) {
         if (isset($properties['id']) && $properties['id']) {
@@ -724,13 +678,11 @@ public function __construct($properties = array()) {
         $this->lastUpdateTimestamp = (int) $properties['last_update_timestamp'];
     }
 }
-
 \end{lstlisting}
 
 W zależności czy dane wydarzenie ma zostać zapisane w bazie danych czy też zwrócone do aplikacji klienckiej, musi ono zawierać odpowiedni zestaw atrybutów. Do tego celu stworzone zostały poniższe metody klasy Event (Listing 4.18).
 
-\begin{lstlisting}[caption=Serializacja obiektu Event., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Serializacja obiektu Event., label=amb, captionpos=b]
 public function toDbArray() {
     return array(
         'user_id' => $this->userId,
@@ -757,13 +709,11 @@ public function toApiArray() {
 
     return array_merge($additional, $arr);
 }
-
 \end{lstlisting}
 
 Dla wydarzeń posiadających klucz główny wygenerowany w bazie danych, aktualizacja dokonywana jest na jego podstawie. W przeciwnym wypadku dla danego wydarzenia utworzony zostaje nowy rekord w bazie danych (kod z listingu 4.19).
 
-\begin{lstlisting}[caption=Aktualizacja obiektu Event w bazie danych., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Aktualizacja obiektu Event w bazie danych., label=amb, captionpos=b]
 function persist() {
    	if ($this->id) {
        		$this->_ci->events_model->updateEvent($this->id, $this->toDbArray());
@@ -773,13 +723,11 @@ function persist() {
 
    	return $this;
 }
-
 \end{lstlisting}
 
 Klasa Events\_model bezpośrednio odpowiada za manipulację rekordami znajdującymi się w bazie danych. Bogaty zbiór metod klasy ActiveRecord pozwala na łatwe wykonanie operacji tworzenia, pobierania oraz aktualizacji rekordów (Listing 4.20).
 
-\begin{lstlisting}[caption=Przykładowe metody klasy Events\_model odpowiedzialne za komunikację z bazą danych., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Przykładowe metody klasy Events\_model odpowiedzialne za komunikację z bazą danych., label=amb, captionpos=b]
 function getEventById($eventId) {
 	
    $query = $this->db->get_where('events', array('id' => $eventId));
@@ -800,7 +748,6 @@ function addEvent($event) {
 
    return $this->db->insert_id();
 }
-
 \end{lstlisting}
 
 Klasy User oraz Users\_model zostały stworzone analogicznie do klas Events oraz Events\_model. Różnicą jest tutaj brak klucza głównego generowanego po stronie klienta. Wynika to z faktu, iż konta użytkowników mogą być tworzone wyłącznie w trybie online. Pozwala to na uniknięcie narzutu spowodowanego koniecznością przechowywania podwójnych kluczy głównych.
@@ -812,8 +759,7 @@ W celu komunikacji z częścią kliencką stworzone zostały interfejsy programo
 
 Większość metod używanych przez interfejsy wymaga wcześniejszej autentykacji użytkownika. Wyjątkiem jest tutaj metoda register interfejsu Users\_api pozwalająca na rejestrację nowych użytkowników.
 
-\begin{lstlisting}[caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
 function register() {
   try {
       if (!$this->input->post()) {
@@ -843,15 +789,13 @@ function register() {
       return $this->jsonError($e->getMessage());
   }
 }
-
 \end{lstlisting}
 
 Metoda register (Listing 4.21) w pierwszej kolejności sprawdza poprawność danych przesłanych przez aplikację kliencką. W przypadku błędu do aplikacji klienckiej zwracana jest odpowiednia wiadomość oraz kod błędu. Po pomyślnym utworzeniu nowego konta, odpowiedź zawiera  dane użytkownika, w których znajduje się m. in. jego unikalny identyfikator, na podstawie którego można zidentyfikować przechowywane w lokalnej bazie danych rekordy do niego należące.
 
 Wspólną dla wszystkich interfejsów programowania jest funkcja odpowiadająca za autentykację użytkownika. Ze względu na bezstanowość, przy każdym żądaniu synchronizacji danych czy aktualizacji danych użytkownika, konieczne jest potwierdzenie jego tożsamości.
 
-\begin{lstlisting}[caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Rejestracja użytkowników przy użyciu metody register interfejsu Users\_api., label=amb, captionpos=b]
 private function authenticateUser() {
   try {
 	$email = (string) $this->input->post('email');
@@ -865,7 +809,6 @@ private function authenticateUser() {
 	throw new Exception('Authentication failed.');
   }
 }
-
 \end{lstlisting}
 
 Powyższa metoda (Listing 4.22) w przypadku pomyślnej autentykacji zwraca obiekt User, natomiast w przypadku niezgodności przesłanych danych rzucany jest odpowiedni wyjątek informujący, że proces autentykacji się nie powiódł.
@@ -875,11 +818,10 @@ Powyższa metoda (Listing 4.22) w przypadku pomyślnej autentykacji zwraca obiek
 
 Najbardziej złożonym procesem wykonywanym w aplikacji OffCalendar jest synchronizacja danych. Część serwerowa tego procesu rozpoczyna się w momencie przesłania przez część kliencką żądania synchronizacji. Żądanie musi zawierać dane wymagane do autentykacji użytkownika, stempel czasowy określający czas ostatniej synchronizacji oraz listę wydarzeń, które uległy modyfikacji od czasu ostatniej synchronizacji.
 
-\begin{lstlisting}[caption=Metoda synchronize interfejsu programowania Events\_api., label=amb, captionpos=b]
+\begin{lstlisting}[style=php, caption=Metoda synchronize interfejsu programowania Events\_api., label=amb, captionpos=b]
 function synchronize() {
-   	try {
-	   $user = $this->authenticateUser();
-
+  try {
+   	$user = $this->authenticateUser();
        $userId = $user->getId();
 
        $lastSyncTimestamp = (int)$this->input->post('last_sync_timestamp');
@@ -889,9 +831,7 @@ function synchronize() {
        $postEvents = $this->input->post('events');
 
        $remoteEvents = $this->events->getEventsFromPostData($postEvents, $user);
-      	 
        $eventsToUpdate = $this->events->synchronize($remoteEvents, $dbEvents, $currTimestamp);
-
        $toUpdate = array();
        	 
        foreach($eventsToUpdate as $e){
@@ -909,13 +849,11 @@ function synchronize() {
       return $this->jsonError($e->getMessage());
   }
 }
-
 \end{lstlisting}
 
 Powyższa metoda (Listing 4.23) sprawdza poprawność przesłanych przez część kliencką danych oraz przekazuje komponentowi Events dane potrzebne do poprawnej modyfikacji wydarzeń. Komponent Events zwraca listę zaktualizowanych wydarzeń, które zostaną przesłane do części klienckiej celem aktualizacji wydarzeń w lokalnej bazie danych. Do odpowiedzi zostaje dołączony również stempel czasowy synchronizacji.
 
-\begin{lstlisting}[caption=Modyfikacja wydarzeń w metodzie synchronize komponentu Events., label=amb, captionpos=b]
-
+\begin{lstlisting}[style=php, caption=Modyfikacja wydarzeń w metodzie synchronize komponentu Events., label=amb, captionpos=b]
 public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
    	$toUpdate = array();
 
@@ -958,7 +896,6 @@ public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
 
    	return $toUpdate;
 }
-
 \end{lstlisting}
 
 Metoda synchronize komponentu events, przedstawiona na listingu 4.24, dzieli wydarzenia na wyszczególnione na etapie projektu (3.3.3) kategorie. Wydarzenia przesłane przez część kliencką zawierają wartość klucza głównego wygenerowanego przez lokalną bazę danych co umożliwia wydajną aktualizację rekordów. W przypadku wydarzeń, które zostały zmodyfikowane na innym urządzeniu obecny jest jedynie klucz główny wygenerowany na serwerze. Na jego podstawie aplikacja kliencka musi zadecydować o stworzeniu nowego rekordu lub aktualizacji już istniejącego.
