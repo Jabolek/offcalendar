@@ -34,6 +34,7 @@
 \let\cleardoublepage\clearpage
 %--------------------------------------------------------------------------- custom listings styles
 \definecolor{dkgreen}{rgb}{0,.6,0}
+\definecolor{dkblue}{rgb}{0,0,.6}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 
 \lstdefinestyle{html5}{
@@ -68,12 +69,15 @@
 %---------------------------------------------------------------------------
 \lstdefinestyle{php}{
   language        = php,
-  keywordstyle    = [1]\color{dkgreen},
+  basicstyle      = \small\ttfamily,
+  keywordstyle    = \color{dkblue},
   stringstyle     = \color{orange},
   identifierstyle = \color{dkgreen},
   commentstyle    = \color{gray},
+  emph            =[1]{php},
+  emphstyle       =[1]\color{black},
   emph            =[2]{__construct,int,string,public,private,function,try,throw,catch,\$this,return,if,and,or,else,foreach},
-  emphstyle       =[2]\color{blue},
+  emphstyle       =[2]\color{dkblue},
   showstringspaces=false,
   numbers=left,
   frame=L,

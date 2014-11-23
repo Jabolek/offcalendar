@@ -855,9 +855,9 @@ Powyższa metoda (Listing 4.23) sprawdza poprawność przesłanych przez częś�
 
 \begin{lstlisting}[style=php, caption=Modyfikacja wydarzeń w metodzie synchronize komponentu Events., label=amb, captionpos=b]
 public function synchronize($remoteEvents, $dbEvents, $currTimestamp) {
-   	$toUpdate = array();
+  $toUpdate = array();
 
-   	foreach ($remoteEvents as $remoteEvent) {
+  foreach ($remoteEvents as $remoteEvent) {
 
       if (!$remoteEvent->hasId()) {
 
