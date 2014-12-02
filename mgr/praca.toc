@@ -18,41 +18,41 @@
 \contentsline {subsection}{\numberline {2.4.3}Replikacja danych w aplikacji www wspieraj\IeC {\k a}cej tryb offline}{19}
 \contentsline {section}{\numberline {2.5}Analiza wymaga\IeC {\'n}}{20}
 \contentsline {subsection}{\numberline {2.5.1}Wymagania funkcjonalne}{20}
-\contentsline {subsection}{\numberline {2.5.2}Wymagania niefunkcjonalne}{21}
-\contentsline {section}{\numberline {2.6}Wykorzystane technologie i narz\IeC {\k e}dzia}{22}
-\contentsline {subsection}{\numberline {2.6.1}Netbeans IDE}{22}
-\contentsline {subsection}{\numberline {2.6.2}Adobe Photoshop CS3}{22}
-\contentsline {subsection}{\numberline {2.6.3}HTML5}{23}
-\contentsline {subsection}{\numberline {2.6.4}Kaskadowe arkusze styl\IeC {\'o}w}{23}
-\contentsline {subsection}{\numberline {2.6.5}Skryptowy j\IeC {\k e}zyk programowania JavaScript}{24}
-\contentsline {subsection}{\numberline {2.6.6}Apache 2.4.9}{24}
-\contentsline {subsection}{\numberline {2.6.7}PHP 5.5}{25}
-\contentsline {subsection}{\numberline {2.6.8}MySQL 5.6.17}{25}
-\contentsline {chapter}{\numberline {3}Projekt aplikacji OffCalendar}{26}
-\contentsline {section}{\numberline {3.1}Architektura systemu}{26}
-\contentsline {subsection}{\numberline {3.1.1}Za\IeC {\l }o\IeC {\.z}enia}{27}
-\contentsline {subsection}{\numberline {3.1.2}Representational State Transfer (REST)}{28}
-\contentsline {section}{\numberline {3.2}Aplikacja kliencka}{29}
-\contentsline {subsection}{\numberline {3.2.1}Tryb offline}{29}
-\contentsline {subsection}{\numberline {3.2.2}Tryb online}{29}
-\contentsline {section}{\numberline {3.3}Aplikacja serwerowa}{30}
-\contentsline {subsection}{\numberline {3.3.1}Warstwa danych}{30}
-\contentsline {subsection}{\numberline {3.3.2}Bezstanowe interfejsy}{31}
-\contentsline {subsection}{\numberline {3.3.3}Synchronizacja danych}{32}
-\contentsline {chapter}{\numberline {4}Implementacja}{34}
-\contentsline {section}{\numberline {4.1}Aplikacja kliencka}{34}
-\contentsline {subsection}{\numberline {4.1.1}Interfejs graficzny}{34}
-\contentsline {subsection}{\numberline {4.1.2}Zarz\IeC {\k a}dzanie wydarzeniami}{41}
-\contentsline {subsection}{\numberline {4.1.3}Detekcja po\IeC {\l }\IeC {\k a}czenia internetowego}{46}
-\contentsline {subsection}{\numberline {4.1.4}Synchronizacja danych}{49}
-\contentsline {section}{\numberline {4.2}Aplikacja serwerowa}{52}
-\contentsline {subsection}{\numberline {4.2.1}Implementacja warstwy danych}{52}
-\contentsline {subsection}{\numberline {4.2.2}Bezstanowe interfejsy}{55}
-\contentsline {subsection}{\numberline {4.2.3}Synchronizacja danych}{57}
-\contentsline {chapter}{\numberline {5}Instrukcja u\IeC {\.z}ytkownika}{60}
-\contentsline {section}{\numberline {5.1}Instalacja i konfiguracja}{60}
-\contentsline {section}{\numberline {5.2}Obs\IeC {\l }uga aplikacji}{62}
-\contentsline {subsection}{\numberline {5.2.1}Zarz\IeC {\k a}dzanie wydarzeniami}{62}
-\contentsline {subsection}{\numberline {5.2.2}Zarz\IeC {\k a}dzanie kontami}{63}
-\contentsline {subsection}{\numberline {5.2.3}Tryb offline/online}{63}
-\contentsline {chapter}{\numberline {6}Podsumowanie}{65}
+\contentsline {subsection}{\numberline {2.5.2}Wymagania niefunkcjonalne}{29}
+\contentsline {section}{\numberline {2.6}Wykorzystane technologie i narz\IeC {\k e}dzia}{30}
+\contentsline {subsection}{\numberline {2.6.1}Netbeans IDE}{30}
+\contentsline {subsection}{\numberline {2.6.2}Adobe Photoshop CS3}{30}
+\contentsline {subsection}{\numberline {2.6.3}HTML5}{31}
+\contentsline {subsection}{\numberline {2.6.4}Kaskadowe arkusze styl\IeC {\'o}w}{31}
+\contentsline {subsection}{\numberline {2.6.5}Skryptowy j\IeC {\k e}zyk programowania JavaScript}{32}
+\contentsline {subsection}{\numberline {2.6.6}Apache 2.4.9}{32}
+\contentsline {subsection}{\numberline {2.6.7}PHP 5.5}{33}
+\contentsline {subsection}{\numberline {2.6.8}MySQL 5.6.17}{33}
+\contentsline {chapter}{\numberline {3}Projekt aplikacji OffCalendar}{34}
+\contentsline {section}{\numberline {3.1}Architektura systemu}{34}
+\contentsline {subsection}{\numberline {3.1.1}Za\IeC {\l }o\IeC {\.z}enia}{35}
+\contentsline {subsection}{\numberline {3.1.2}Representational State Transfer (REST)}{36}
+\contentsline {section}{\numberline {3.2}Aplikacja kliencka}{37}
+\contentsline {subsection}{\numberline {3.2.1}Tryb offline}{37}
+\contentsline {subsection}{\numberline {3.2.2}Tryb online}{37}
+\contentsline {section}{\numberline {3.3}Aplikacja serwerowa}{38}
+\contentsline {subsection}{\numberline {3.3.1}Warstwa danych}{38}
+\contentsline {subsection}{\numberline {3.3.2}Bezstanowe interfejsy}{39}
+\contentsline {subsection}{\numberline {3.3.3}Synchronizacja danych}{40}
+\contentsline {chapter}{\numberline {4}Implementacja}{42}
+\contentsline {section}{\numberline {4.1}Aplikacja kliencka}{42}
+\contentsline {subsection}{\numberline {4.1.1}Interfejs graficzny}{42}
+\contentsline {subsection}{\numberline {4.1.2}Zarz\IeC {\k a}dzanie wydarzeniami}{49}
+\contentsline {subsection}{\numberline {4.1.3}Detekcja po\IeC {\l }\IeC {\k a}czenia internetowego}{54}
+\contentsline {subsection}{\numberline {4.1.4}Synchronizacja danych}{57}
+\contentsline {section}{\numberline {4.2}Aplikacja serwerowa}{60}
+\contentsline {subsection}{\numberline {4.2.1}Implementacja warstwy danych}{60}
+\contentsline {subsection}{\numberline {4.2.2}Bezstanowe interfejsy}{63}
+\contentsline {subsection}{\numberline {4.2.3}Synchronizacja danych}{65}
+\contentsline {chapter}{\numberline {5}Instrukcja u\IeC {\.z}ytkownika}{68}
+\contentsline {section}{\numberline {5.1}Instalacja i konfiguracja}{68}
+\contentsline {section}{\numberline {5.2}Obs\IeC {\l }uga aplikacji}{70}
+\contentsline {subsection}{\numberline {5.2.1}Zarz\IeC {\k a}dzanie wydarzeniami}{70}
+\contentsline {subsection}{\numberline {5.2.2}Zarz\IeC {\k a}dzanie kontami}{71}
+\contentsline {subsection}{\numberline {5.2.3}Tryb offline/online}{71}
+\contentsline {chapter}{\numberline {6}Podsumowanie}{73}

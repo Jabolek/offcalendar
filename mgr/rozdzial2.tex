@@ -195,7 +195,7 @@ Filesystem API jest bardzo dobrym rozwiązaniem dla aplikacji, które wymagają 
 \section{Aplikacje webowe trybu offline}
 \label{sec:appWebOff}
 
-Tryb offline\cite{whatOffline} (w wolnym tłumaczeniu: "bez dostępu do sieci Internet") nie był dotychczas kojarzony z przeglądarkami internetowymi - programami z definicji służącymi do przeglądania zasobów WWW (\emph{World Wide Web}). Aplikacje pracujące w tym trybie mogły być wywoływane jedynie poprzez ścieżkę rozpoczynającą się od \textbf{file://} i odwoływać się do danych znajdujących się na dysku twardym, flash lub płycie CD/DVD. Przykładem mogą być prezentacje korzystające z przeglądarki celem uruchomienia animacji napisanych za pomocą języka JavaScript.
+Tryb offline\cite{whatOffline} (w wolnym tłumaczeniu: ,,bez dostępu do sieci Internet") nie był dotychczas kojarzony z przeglądarkami internetowymi - programami z definicji służącymi do przeglądania zasobów WWW (\emph{World Wide Web}). Aplikacje pracujące w tym trybie mogły być wywoływane jedynie poprzez ścieżkę rozpoczynającą się od \textbf{file://} i odwoływać się do danych znajdujących się na dysku twardym, flash lub płycie CD/DVD. Przykładem mogą być prezentacje korzystające z przeglądarki celem uruchomienia animacji napisanych za pomocą języka JavaScript.
 
 Tryb offline pojawia się obecnie również w tak zwanych \textbf{Single-page applications}. Ich działanie polega na wykorzystaniu funkcji przeglądarki internetowej do interakcji z użytkownikiem i zapisania danych lokalnie. Przykład stanowić może TiddlyWiki\footnote{http://tiddlywiki.com/} - osobiste wiki umożliwiające tworzenie i edytowanie treści poprzez uruchomienie pojedynczej strony w przeglądarce bez dostępu do sieci Internet. Cel ten może zostać osiągnięty dzięki dobrodziejstwom oferowanym przez specyfikację HTML5.
 
@@ -213,16 +213,16 @@ Poniżej przedstawimy główne prawidłowości działania trybu offline przez pr
 Pamięć podręczna przeglądarki\cite{pamiecPodreczna} (ang. \emph{cache}) obejmuje miejsce na dysku twardym przeznaczone do przechowywania odwiedzonych stron WWW lub ich fragmentów. Najczęściej dotyczy to arkuszy stylów CSS, grafik a także skryptów w języku JavaScript. Wyróżniamy dwa główne powody stosowania cache-owania:
 
 \begin{itemize}
-\item \textbf{redukcja czasu dostępu do zasobów:} pamięć cache jest znacznie "bliżej"{} klienta, niż serwer oryginalny, dzięki czemu w krótszym czasie uzyskiwany jest dostęp do konkretnego zasobu i jego prezentacja,
+\item \textbf{redukcja czasu dostępu do zasobów:} pamięć cache jest znacznie ,,bliżej"{} klienta, niż serwer oryginalny, dzięki czemu w krótszym czasie uzyskiwany jest dostęp do konkretnego zasobu i jego prezentacja,
 \item \textbf{redukcja ruchu sieciowego:} przechowywane w pamięci podręcznej zasoby mogą zostać użyte ponownie, co zmniejsza rozmiar pasma niezbędnego do uzyskania dostępu i oszczędza koszty ponoszone przez użytkownika.
 \end{itemize}
 
 Pamięć cache dokonuje aktualizacji przechowywanych treści najczęściej raz na sesję (za rozpoczęcie sesji przyjmujemy uruchomienie przeglądarki) tak, by użytkownik był na bieżąco ze zmianami treści. Poniżej przedstawiono ogólne zasady działania Web Cache\cite{cache}:
 
 \begin{enumerate}
-\item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania "świeżej"{} porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
+\item Działaniem cache sterują nagłówki HTTP. Użytkownik może zdecydować między innymi o czasie przechowywania ,,świeżej"{} porcji danych w pamięci, ich dostępności (private/public) lub nawet o wyłączeniu cache-owania danych.
 \item Żądania uwierzytelnienia lub żądania zabezpieczone (np. HTTPS\cite{https}) nie są cache-owane.
-\item Reprezentacja danych w cache jest uważana za "świeżą"{} (nie musi być sprawdzana z wersją danych na serwerze oryginalnym), jeśli ustawiono nagłówek HTTP odpowiadający za czas życia danych lub jeśli dane były cache-owane niedawno.
+\item Reprezentacja danych w cache jest uważana za ,,świeżą"{} (nie musi być sprawdzana z wersją danych na serwerze oryginalnym), jeśli ustawiono nagłówek HTTP odpowiadający za czas życia danych lub jeśli dane były cache-owane niedawno.
 \item Jeśli dane są nieaktualne do serwera zostanie wysłane zapytanie o walidację.
 \item W sytuacji utraty połączenia internetowego pamięć cache może wysyłać dane bez weryfikacji ich z danymi pochodzącymi z oryginalnego serwera.
 \end{enumerate}
@@ -307,9 +307,9 @@ Replikacja częściowa pozwala na wybór danych, które będą replikowane, przy
 \textbf{Replikacja synchroniczna - Replikacja asynchroniczna}
 \setlength{\parskip}{10pt plus 1pt minus 1pt}
 
-Replikacja synchroniczna, tzw. "gorliwa", stara się utrzymać zsynchronizowane dane pomiędzy wszystkimi węzłami wchodzącymi w skład systemu. W przypadku replikacji synchronicznej, w skład transakcji wchodzi propagacja danych do wszystkich węzłów - w przypadku wystąpienia konfliktu transakcja jest anulowana. Zapewnia to ochronę przed możliwymi niespójnościami w bazie danych, jednak ryzyko zakleszczenia znacząco wzrasta wraz ze wzrostem liczby transakcji.
+Replikacja synchroniczna, tzw. ,,gorliwa", stara się utrzymać zsynchronizowane dane pomiędzy wszystkimi węzłami wchodzącymi w skład systemu. W przypadku replikacji synchronicznej, w skład transakcji wchodzi propagacja danych do wszystkich węzłów - w przypadku wystąpienia konfliktu transakcja jest anulowana. Zapewnia to ochronę przed możliwymi niespójnościami w bazie danych, jednak ryzyko zakleszczenia znacząco wzrasta wraz ze wzrostem liczby transakcji.
 
-Replikacja asynchroniczna, tzn. "leniwa", pozwala na niezależne wykonywanie transakcji na każdym z węzłów. Po wykonaniu transakcji na jednym z węzłów, dane są asynchronicznie propagowane do pozostałych węzłów. Replikacja leniwa nie wymaga wysokiej dostępności węzłów, jednak może prowadzić do konfliktów.
+Replikacja asynchroniczna, tzn. ,,leniwa", pozwala na niezależne wykonywanie transakcji na każdym z węzłów. Po wykonaniu transakcji na jednym z węzłów, dane są asynchronicznie propagowane do pozostałych węzłów. Replikacja leniwa nie wymaga wysokiej dostępności węzłów, jednak może prowadzić do konfliktów.
 
 Przykładem obrazującym różnicę pomiędzy replikacją leniwą a replikacją gorliwą może być próba wykonania dwóch przelewów z dwóch różnych węzłów objętych replikacją, gdzie obciążenie rachunku przekracza dostępne saldo. W przypadku replikacji gorliwej, pierwsza z transakcji zostanie wykonana pomyślnie, druga zwróci komunikat błędu. W przypadku replikacji leniwej, obie transakcje zakończą się sukcesem, jednak w fazie synchronizacji danych dojdzie do konfliktu, który będzie musiał zostać obsłużony.
 
@@ -326,7 +326,7 @@ Replikacja optymistyczna nie ogranicza w żaden sposób dostępu do danych, niez
 
 Aplikacja www wspierająca tryb offline powinna minimalizować ilość danych przesyłanych pomiędzy poszczególnymi węzłami systemu. Ze względu na prywatność danych, lokalna replika powinna posiadać wyłącznie dane powiązane z konkretnym, zalogowanym w danym momencie do aplikacji, użytkownikiem. Dodatkowo, uwzględniając coraz większą aktywność użytkowników korzystających z urządzeń mobilnych, aplikacja powinna ograniczyć ilość przesyłanych danych do minimum. Z tego względu, replikacja częściowa jest w tym przypadku znacznie lepszym wyborem od replikacji całościowej.
 
-Z uwagi na wymagania aplikacji www oraz nacisk położony na pełną jej funkcjonalność w trybie offline, synchronizacja danych pomiędzy węzłami powinna odbywać się w sposób ''leniwy''. Przechowywanie danych w lokalnej replice oraz późniejsza asynchroniczna wymiana informacji pomiędzy węzłami powinna zapewnić bardzo płynną interakcję z interfejsem użytkownika, co jest jednym z wymagań aplikacji.  W przypadku użytkowników posiadających repliki danych na wielu urządzeniach które przez większość czasu są fizycznie wyłączone lub nie posiadają dostępu do sieci, zastosowanie replikacji ''gorliwej'' nie byłoby możliwe.
+Z uwagi na wymagania aplikacji www oraz nacisk położony na pełną jej funkcjonalność w trybie offline, synchronizacja danych pomiędzy węzłami powinna odbywać się w sposób ,,leniwy''. Przechowywanie danych w lokalnej replice oraz późniejsza asynchroniczna wymiana informacji pomiędzy węzłami powinna zapewnić bardzo płynną interakcję z interfejsem użytkownika, co jest jednym z wymagań aplikacji.  W przypadku użytkowników posiadających repliki danych na wielu urządzeniach które przez większość czasu są fizycznie wyłączone lub nie posiadają dostępu do sieci, zastosowanie replikacji ''gorliwej'' nie byłoby możliwe.
 
 Użytkownik korzystający z aplikacji na urządzeniu mobilnym może znaleźć się w rejonie o słabym zasięgu sieci telefonicznej. W celu oszczędności energii oraz minimalizacji transferu danych przez sieć mobilną, użytkownik może wyłączyć mobilny transfer danych. W przypadku zastosowania replikacji pesymistycznej, uniemożliwiłoby to komunikację z lokalną repliką danych ze względu na nieosiągalność pozostałych węzłów. Z tego względu w aplikacji www wspierającej tryb offline powinna zostać zastosowana replikacja optymistyczna.
 
@@ -348,6 +348,294 @@ Podane akcje mogą być wykonywane zarówno w trybie offline jak i przy aktywnym
 Krytycznym wymaganiem funkcjonalnym systemu jest zapewnienie integralności danych i zapewnienie ciągłości transakcji pomimo problemów z połączeniem sieciowym. Przejście pomiędzy trybami online/offline powinno być płynne i nie wpływać negatywnie na wydajność interfejsu użytkownika.
 
 Z uwagi na zastosowanie optymistycznej replikacji bazy danych należy zwrócić baczną uwagę na możliwość wystąpienia konfliktów pomiędzy żądaniami i ich obsługę.
+
+Ogół operacji realizowanych w ramach aplikacji przedstawia rysunek 2.1.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{offcalendar_usecase.png}
+\caption{Diagram przypadków użycia aplikacji OffCalendar.}
+\end{figure}
+
+Każdy z przypadków użycia (tabele 2.5 - 2.13) składa się z następujących sekcji:
+
+\begin{itemize}
+\item identyfikator,
+\item tytuł,
+\item aktorzy,
+\item warunki początkowe,
+\item warunki końcowe,
+\item cel główny,
+\item scenariusz główny,
+\item scenariusze alternatywne.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC1                                                                                                                                                                                                                                   	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Rejestracja użytkownika                                                                                                                                                                                                               	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}\\ 1. Użytkownik posiada aktywne połączenie internetowe\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\ brak\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\ Założenie nowego konta użytkownika w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik wpisuje adres URL prowadzący do widoku rejestracji w aplikacji OffCalendar.
+	\\2. Użytkownik wypełnia formularz rejestracji składający się z nazwy użytkownika,\\adresu e-mail oraz hasła.
+	\\3. Użytkownik przesyła formularz do aplikacji OffCalendar.
+	\\4. System wyświetla komunikat potwierdzający rejestrację.
+	\\5. System przekierowuje użytkownika do strony logowania.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\1.A Silnik walidujący dane stwierdził niedozwolone bądź niepoprawne wartości pól\\formularza rejestracyjnego.
+	\\\hspace{0.5cm}1.A.1 Aplikacja wyświetla informacje o błędach.
+	\\\hspace{0.5cm}1.A.2 Powrót do kroku 2.
+	\\1.B Podany w formularzu adres e-mail jest już w użyciu.
+	\\\hspace{0.5cm}1.B.1 Aplikacja wyświetla informacje o błędzie.
+	\\\hspace{0.5cm}1.B.2 Powrót do kroku 2.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC1: Rejestracja użytkownika.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC2
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Logowanie użytkownika                                                                                                                                                                                                               	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\1. Użytkownik posiada aktywne połączenie internetowe.
+	\\2. Użytkownik posiada konto w aplikacji OffCalendar.
+	\\3. Użytkownik posiada przeglądarkę kompatybilną z Web Storage oraz IndexedDB.
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                            
+ 	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}
+	\\1. Dane użytkownika są zapisane w Web Storage przeglądarki internetowej.\\\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\ Zalogowanie się danego użytkownika w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik przechodzi pod adres strony głównej aplikacji OffCalendar.
+	\\2. Użytkownik wypełnia formularz logowania składający się z adresu e-mail oraz hasła.
+	\\3. Użytkownik przesyła formularz do aplikacji OffCalendar.
+	\\4. System wyświetla komunikat o pomyślnej autoryzacji.
+	\\5. System przekierowuje użytkownika do głównego widoku aplikacji OffCalendar.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\2.A Silnik walidujący dane stwierdził niedozwolone bądź niepoprawne wartości pól formularza\\logowania.
+	\\\hspace{0.5cm}2.A.1 Aplikacja wyświetla informacje o błędach.
+	\\\hspace{0.5cm}2.A.2 Powrót do kroku 2.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC2: Logowanie użytkownika.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC3                                                                                                                                                                                                                                   	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Dodanie wydarzenia
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\ 1. Dane wydarzenia są zapisane w IndexedDB przeglądarki internetowej.\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\ Dodanie nowego wydarzenia w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik przechodzi do widoku dziennego z głównego okna aplikacji OffCalendar.
+	\\2. Użytkownik wypełnia formularz dodawania wydarzenia składający się z pól: data początkowa,\\data końcowa, treść wydarzenia, zewnętrzny adres URL, typ wydarzenia oraz ,,wysyłaj notyfikacje?".
+	\\3. Użytkownik przesyła formularz do aplikacji OffCalendar.
+	\\4. System wyświetla komunikat potwierdzający pomyślne dodanie nowego wydarzenia.
+	\\5. System przekierowuje użytkownika do strony głównej aplikacji OffCalendar i odświeża dashboard.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\3.A Silnik walidujący dane stwierdził niedozwolone bądź niepoprawne wartości pól formularza\\dodawania nowego wydarzenia.
+	\\\hspace{0.5cm}3.A.1 Aplikacja wyświetla informacje o błędach.
+	\\\hspace{0.5cm}3.A.2 Powrót do kroku 2.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC3: Dodanie wydarzenia.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC4                                                                                                                                                                                                                                   	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Modyfikacja wydarzenia
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.
+	\\ 2. Użytkownik dodał przynajmniej jedno wydarzenie w aplikacji OffCalendar.	
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\ 1. Dane wydarzenia są zapisane w IndexedDB przeglądarki internetowej.\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\ Modyfikacja wydarzenia w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik przechodzi do sekcji modyfikacji poprzez kliknięcie przycisku ,,edit" w polu\\modyfikowanego wydarzenia.
+	\\2. Użytkownik wypełnia formularz dodawania wydarzenia składający się z pól: data początkowa,\\data końcowa, treść wydarzenia, zewnętrzny adres URL, typ wydarzenia oraz ,,wysyłaj notyfikacje?".
+	\\3. Użytkownik przesyła formularz do aplikacji OffCalendar.
+	\\4. System wyświetla komunikat potwierdzający pomyślną modyfikację nowego wydarzenia.
+	\\5. System przekierowuje użytkownika do strony głównej aplikacji OffCalendar i odświeża dashboard.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\4.A Silnik walidujący dane stwierdził niedozwolone bądź niepoprawne wartości pól formularza\\modyfikacji wydarzenia.
+	\\\hspace{0.5cm}4.A.1 Aplikacja wyświetla informacje o błędach.
+	\\\hspace{0.5cm}4.A.2 Powrót do kroku 2.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC4: Modyfikacja wydarzenia.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC5
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Usunięcie wydarzenia
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.
+	\\ 2. Użytkownik dodał przynajmniej jedno wydarzenie w aplikacji OffCalendar.	
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\ 1. Dane o usuniętym wydarzeniu są zapisane w IndexedDB przeglądarki internetowej.\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\ Usunięcie wydarzenia z aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik przechodzi do sekcji usuwania wydarzenia poprzez kliknięcie przycisku ,,delete" w polu\\usuwanego wydarzenia.
+	\\2. System przekierowuje użytkownika do strony głównej aplikacji OffCalendar i odświeża dashboard.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\brak
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC5: Usunięcie wydarzenia.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC6
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Wyszukiwanie wydarzeń
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\brak\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\Wyszukiwanie wydarzeń w aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik wypełnia formularz wyszukiwania wydarzenia składający się z pola ,,treść wydarzenia".
+	\\2. Użytkownik wysyła formularz do aplikacji OffCalendar.
+	\\3. System wyświetla listę pasujących wydarzeń.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\6.A System nie odnalazł wydarzeń pasujących do podanej przez użytkownika frazy.
+	\\\hspace{0.5cm}6.A.1 Aplikacja wyświetla informacje o braku wyników wyszukiwania.
+	\\\hspace{0.5cm}6.A.2 Powrót do kroku 1.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC6: Wyszukiwanie wydarzeń.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC7
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Synchronizacja
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.
+	\\ 2. Użytkownik posiada aktywne połączenie internetowe.
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}
+	\\1. Stemple czasowe wydarzeń zostały zaktualizowane.
+	\\2. Stempel czasowy ostatniej synchronizacji został zaktualizowany.\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\Synchronizacja wydarzeń przechowywanych lokalnie z wydarzeniami przechowywanymi na serwerze.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Aplikacja kliencka wysyła do serwera wydarzenia posiadające nowszy stempel czasowy od\\stempla ostatniej synchronizacji.
+	\\2. Aplikacja serwerowa zwraca wydarzenia które wymagające synchronizacji po stonie klienta\\oraz stempel czasowy synchronizacji.
+	\\3. Aplikacja kliencka aktualizuje lokalnie przechowywane wydarzenia.
+	\\4. Aplikacja kliencka odświeża widok dashboard.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\7.A Autentykacja użytkownika nie powiodła się.
+	\\\hspace{0.5cm}7.A.1 Aplikacja kliencka wyświetla informacje o błędach.
+	\\\hspace{0.5cm}7.A.2 Koniec procesu.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC7: Synchronizacja.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC8
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Autentykacja
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik posiada aktywne połączenie internetowe.
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\brak\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\Potwierdzenie tożsamości użytkownika na podstawie przesłanych danych.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Aplikacja kliencka wysyła do serwera dane wymagane przy procesie autentykacji użytkownika.
+	\\2. Aplikacja serwerowa weryfikuje tożsamość użytkownika na podstawie przesłanych danych\\(adres e-mail oraz hasło).
+	\\3. Aplikacja serwerowa zwraca dane użytkownika.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\8.A Weryfikacja tożsamości użytkownika nie powiodła się.
+	\\\hspace{0.5cm}8.A.1 Aplikacja zwraca kod błędu.
+	\\\hspace{0.5cm}8.A.2 Koniec procesu.
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC8: Autentykacja.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Identyfikator}                                                                                                                                                                                                                	& UC9
+	\\ \hline
+	\textbf{Tytuł}                                                                                                                                                                                                                        	& Wylogowanie użytkownika
+	\\ \hline
+	\textbf{Aktorzy}                                                                                                                                                                                                                      	& Użytkownik                                                                                                                                                                                                                            	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki początkowe:}
+	\\ 1. Użytkownik jest zalogowany w aplikacji OffCalendar.	
+	\end{tabular}}                                                                                                                                                                                                                                                                                                                             	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Warunki końcowe:}\\1. Dane użytkownika zostają usunięte z Web Storage przeglądarki internetowej.\end{tabular}}                                                                                                                                                                                                                                                                                                                                         	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Cel główny:}\\Wylogowanie użytkownika z aplikacji OffCalendar.\end{tabular}}                                                                                                                                                                                                                                                                                                                                       	\\ \hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusz główny:}
+	\\1. Użytkownik klika przycisk ,,Logout"{} celem wylogowania z systemu.
+	\\2. System przekierowuje użytkownika do strony logowania i pozbywa się jego danych zapisanych\\w pamięci podręcznej przeglądarki.\end{tabular}} 
+	\\\hline
+	\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}\textbf{Scenariusze alternatywne:}
+	\\brak
+	\end{tabular}}                                                            
+	\\ \hline
+	\end{tabular}
+	\caption{Przypadek użycia UC9: Wylogowanie użytkownika.}
+\end{table}
 
 \subsection{Wymagania niefunkcjonalne}
 \label{sec:wymNieFunkcj}
